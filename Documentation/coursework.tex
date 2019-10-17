@@ -1,0 +1,28 @@
+\documentclass[12pt,twoside]{article}
+
+\newcommand{\reporttitle}{Title of Project}
+\newcommand{\reportauthor}{Name of first student, Name of second student,...}
+\newcommand{\scrummaster}{Name of Scrum master}
+\newcommand{\projectpartner}{Name of partner}
+
+% include files that load packages and define macros
+\input{includes} % various packages needed for maths etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+% front page
+\input{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+\section{Introduction}
+This is a short introduction to your project.
+
+\include{Student1/Student1}
+\include{Student2/Student2}
+
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
