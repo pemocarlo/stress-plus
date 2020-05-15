@@ -1,0 +1,37 @@
+.dialpad {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.dialpad button {
+  display: block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 100px; 
+  left: 100px;
+  border: none;
+  border-radius: 50%;
+  background-color: #cffafa;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.dialpad button:hover {
+  background-color: #8ffcfc;
+}
+
+.button0 { transform: rotate( -90deg) translate(100px) rotate(  90deg); }
+.button1 { transform: rotate( -54deg) translate(100px) rotate(  54deg); }
+.button2 { transform: rotate( -18deg) translate(100px) rotate(  18deg); }
+.button3 { transform: rotate(  18deg) translate(100px) rotate( -18deg); }
+.button4 { transform: rotate(  54deg) translate(100px) rotate( -54deg); }
+.button5 { transform: rotate(  90deg) translate(100px) rotate( -90deg); }
+.button6 { transform: rotate( 126deg) translate(100px) rotate(-126deg); }
+.button7 { transform: rotate( 162deg) translate(100px) rotate(-162deg); }
+.button8 { transform: rotate( 198deg) translate(100px) rotate(-198deg); }
+.button9 { transform: rotate( 234deg) translate(100px) rotate(-234deg); }
