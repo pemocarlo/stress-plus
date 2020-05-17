@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Dialpad from './components/dialpad/dialpad';
-import './stress-app.css';
+import Dialpad from 'components/dialpad/dialpad';
+import 'stress-app.css';
 
 export default function StressApp() {
   return (

@@ -18,3 +18,16 @@ Use `npm run lint` to run the checks and see your violations.
 ### ESLint with Visual Studio Code
 For [Visual Studio Code](https://code.visualstudio.com) users there exists an [ESLint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 which automatically shows code style and formatting violations inside Visual Studio Code. Just install the plugin, it should work out of the box.
+
+## Imports
+It is possible to use absolute imports with `src` as the base path.
+
+An example of a relative import is:
+``` jsx
+import ProgressBar from './../../progressBar/ProgressBar';
+```
+
+The following is the same version as an absolute import:
+``` jsx
+import ProgressBar from 'components/progressBar/ProgressBar';
+```

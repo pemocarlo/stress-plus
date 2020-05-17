@@ -28,9 +28,14 @@ module.exports = {
 
   settings: {
     react: {
-      version: 'detect',
+      version: "detect",
     },
-    'import/extensions': ['.js', '.jsx'],
+    "import/extensions": [".js", ".jsx"],
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+      },
+    },
   },
 
   rules: {
