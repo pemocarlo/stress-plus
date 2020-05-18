@@ -1,0 +1,18 @@
+.progress-bar {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  position: relative;
+  width: 80%;
+  height: 20px;
+  border-radius: 50px;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+.filler {
+  background: #1da598;
+  height: 100%;
+  border-radius: inherit;
+}
