@@ -14,7 +14,7 @@ export default function Arithmetic() {
       ];
   
       let randomMath = mathArray[Math.floor(Math.random() * mathArray.length)];
-      let res = randomMath.slice(-1);
+      let res = parseInt(randomMath.slice(-1));
       let math = randomMath.toString().slice(0, -1);
       return [math, res];
 }
