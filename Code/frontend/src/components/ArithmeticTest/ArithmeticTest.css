@@ -1,0 +1,66 @@
+.StressApp {
+  --totalHeight: 95vh;
+  --totalWidth: 95vw;
+
+  box-sizing: border-box;
+
+  position: relative;
+  width: var(--totalWidth);
+  height: var(--totalHeight);
+  padding: 10px;
+  margin: 5px;
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  border: 5px red solid;
+}
+
+.stressBar {
+  min-height: 15%;
+  min-width: 95%;
+  border: 2px #000000 solid;
+}
+
+.arithmetic {
+  min-height: 20%;
+  min-width: 90%;
+  width: 80%;
+  border: 2px #000000 solid;
+}
+
+.progress-bar {
+  min-width: 95%;
+  min-height: 15px;
+  height: calc(var(--totalHeight) * 0.035);
+}
+
+.lower-part {
+  --height: calc(var(--totalHeight) * 0.5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+  height: var(--height);
+  border: 2px #000000 solid;
+  padding: 0px 5px;
+  margin: 5px;
+  min-width: 95%;
+}
+
+.results {
+  height: 60%;
+  width: 50%;
+  border: 2px #000000 solid;
+}
+
+.dialpad {
+  --myDiameter: calc(var(--height) * 0.85);
+  --outerDiameter: var(--myDiameter);
+  /* border: 2px #000000 solid; */
+}
