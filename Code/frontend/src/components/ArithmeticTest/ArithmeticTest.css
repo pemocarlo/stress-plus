@@ -15,14 +15,11 @@
   align-content: center;
   justify-content: space-between;
   flex-direction: column;
-
-  border: 5px red solid;
 }
 
 .stressBar {
   min-height: 15%;
   min-width: 95%;
-  border: 2px #000000 solid;
 }
 
 .arithmetic {
@@ -47,7 +44,6 @@
 
   position: relative;
   height: var(--height);
-  border: 2px #000000 solid;
   padding: 0px 5px;
   margin: 5px;
   min-width: 95%;

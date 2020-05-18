@@ -4,5 +4,5 @@ import ArithmeticTest from "components/ArithmeticTest/ArithmeticTest";
 import "./stress-app.css";
 
 export default function StressApp() {
-  return <ArithmeticTest />;
+  return <ArithmeticTest seconds={5}/>;
 }
