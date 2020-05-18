@@ -8,6 +8,7 @@ export default function StressApp() {
     <div className="StressApp">
       <h1>Stress App</h1>
       <Dialpad callback={(c) => console.log(c)}/>
+      <ProgressBar percentage={60} />
     </div>
   );
 }
