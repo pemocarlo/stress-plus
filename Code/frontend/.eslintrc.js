@@ -42,7 +42,9 @@ module.exports = {
     'eol-last': ['warn', 'always'],
     'max-len': ['warn', {code: 120}],
     'no-duplicate-imports': 'warn',
+    'no-useless-concat': 'warn',
     'no-var': 'error',
+    'prefer-template': 'warn',
 
     'import/newline-after-import': ['warn', {'count': 1}],
 
