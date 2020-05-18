@@ -1,16 +1,25 @@
 .dialpad {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  --outerDiameter: 200px;
+  --buttonDiameter: calc(var(--outerDiameter) / 5);
+  --diameter: calc(var(--outerDiameter) - var(--buttonDiameter));
+  --moveRadius: calc(var(--diameter) / 2);
+
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: var(--outerDiameter);
+  height: var(--outerDiameter);
 }
 
 .dialpad button {
-  display: block;
   position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 100px; 
-  left: 100px;
+  width: var(--buttonDiameter);
+  height: var(--buttonDiameter);
+  margin: calc(0px - var(--buttonDiameter) / 2);
+  top: 50%;
+  left: 50%;
   border: none;
   border-radius: 50%;
   background-color: #cffafa;
@@ -25,13 +34,33 @@
   background-color: #8ffcfc;
 }
 
-.button0 { transform: rotate( -90deg) translate(100px) rotate(  90deg); }
-.button1 { transform: rotate( -54deg) translate(100px) rotate(  54deg); }
-.button2 { transform: rotate( -18deg) translate(100px) rotate(  18deg); }
-.button3 { transform: rotate(  18deg) translate(100px) rotate( -18deg); }
-.button4 { transform: rotate(  54deg) translate(100px) rotate( -54deg); }
-.button5 { transform: rotate(  90deg) translate(100px) rotate( -90deg); }
-.button6 { transform: rotate( 126deg) translate(100px) rotate(-126deg); }
-.button7 { transform: rotate( 162deg) translate(100px) rotate(-162deg); }
-.button8 { transform: rotate( 198deg) translate(100px) rotate(-198deg); }
-.button9 { transform: rotate( 234deg) translate(100px) rotate(-234deg); }
+.dialpad .button0 {
+  transform: rotate(-90deg) translate(var(--moveRadius)) rotate(90deg);
+}
+.dialpad .button1 {
+  transform: rotate(-54deg) translate(var(--moveRadius)) rotate(54deg);
+}
+.dialpad .button2 {
+  transform: rotate(-18deg) translate(var(--moveRadius)) rotate(18deg);
+}
+.dialpad .button3 {
+  transform: rotate(18deg) translate(var(--moveRadius)) rotate(-18deg);
+}
+.dialpad .button4 {
+  transform: rotate(54deg) translate(var(--moveRadius)) rotate(-54deg);
+}
+.dialpad .button5 {
+  transform: rotate(90deg) translate(var(--moveRadius)) rotate(-90deg);
+}
+.dialpad .button6 {
+  transform: rotate(126deg) translate(var(--moveRadius)) rotate(-126deg);
+}
+.dialpad .button7 {
+  transform: rotate(162deg) translate(var(--moveRadius)) rotate(-162deg);
+}
+.dialpad .button8 {
+  transform: rotate(198deg) translate(var(--moveRadius)) rotate(-198deg);
+}
+.dialpad .button9 {
+  transform: rotate(234deg) translate(var(--moveRadius)) rotate(-234deg);
+}
