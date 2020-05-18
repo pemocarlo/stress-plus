@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Dialpad from 'components/dialpad/dialpad';
+import ProgressBar from 'components/progressBar/ProgressBar';
 import 'stress-app.css';
 
 export default function StressApp() {
