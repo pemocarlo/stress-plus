@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progressBar/ProgressBar";
@@ -21,6 +21,20 @@ export default function ArithmeticTest(props) {
   const renderStepms = 50;
   const percentageStep = renderStepms / (10.0 * seconds);
 
+  const onCorrectAnswer = () => {
+    setDisplayResult('correct');
+    setTotalAnswers(answers => answers + 1);
+    setCorrectAnswers(answers => answers + 1);
+    displayNewMath();
+  }
+
+  //We need to use useCallback here, because onIncorrectAnswer is called from inside useEffect after the time is up
+  const onIncorrectAnswer = useCallback(() => {
+    setDisplayResult('incorrect');
+    setTotalAnswers(answers => answers + 1);
+    displayNewMath();
+  }, [])
+
   useEffect(() => {
     if (progressPercentage >= 100) {
       onIncorrectAnswer();
@@ -31,7 +45,7 @@ export default function ArithmeticTest(props) {
       renderStepms
     );
     return () => clearInterval(id);
-  }, [progressPercentage, percentageStep]);
+  }, [progressPercentage, percentageStep, onIncorrectAnswer]);
 
   const displayNewMath = () => {
     const [expression, result] = mathGenerator();
@@ -39,19 +53,6 @@ export default function ArithmeticTest(props) {
     setMathResult(result);
 
     setProgressPercentage(0);
-  }
-
-  const onCorrectAnswer = () => {
-    setDisplayResult('correct');
-    setTotalAnswers(answers => answers + 1);
-    setCorrectAnswers(answers => answers + 1);
-    displayNewMath();
-  }
-
-  const onIncorrectAnswer = () => {
-    setDisplayResult('incorrect');
-    setTotalAnswers(answers => answers + 1);
-    displayNewMath();
   }
 
   useEffect(() => {
