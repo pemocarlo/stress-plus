@@ -5,7 +5,7 @@ export default function Levelbar(props){
     return (
         <div className='Levelbar'>
             <div className='row'>
-                <div className='triangle_down' style={{'margin-left': `${props.average_score}%`}}>
+                <div className='triangle_down' style={{marginLeft: `${props.average_score}%`}}>
                     <span>Average</span>
                     <div className='triangle'></div>
                 </div>
@@ -16,7 +16,7 @@ export default function Levelbar(props){
                 <div className='meter_green'></div>
             </div>
             <div className='row'>
-            <div className='triangle_up' style={{'margin-left': `${props.your_score}%`}}>
+            <div className='triangle_up' style={{marginLeft: `${props.your_score}%`}}>
                 <div className='triangle'></div>
                 <span>You</span></div>
             </div>

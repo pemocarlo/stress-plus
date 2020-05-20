@@ -15,11 +15,9 @@ export default function ArithmeticTest(props) {
   const [yourScore, setYourScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [totalAnswers, setTotalAnswers] = useState(0);
+  const [finalTime, setFinalTime] = useState();
 
-  const {seconds} = props;
-
-  const renderStepms = 50;
-  const percentageStep = renderStepms / (10.0 * seconds);
+  const {renderStepProgressms, seconds} = props;
 
   const onCorrectAnswer = () => {
     setDisplayResult('correct');
@@ -33,19 +31,36 @@ export default function ArithmeticTest(props) {
     setDisplayResult('incorrect');
     setTotalAnswers(answers => answers + 1);
     displayNewMath();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    const currentTime = new Date();
+    currentTime.setSeconds(currentTime.getSeconds() + seconds);
+    setFinalTime(currentTime);
+  }, [seconds]);
 
   useEffect(() => {
     if (progressPercentage >= 100) {
       onIncorrectAnswer();
+      setProgressPercentage(0);
       return;
     }
-    const id = setInterval(
-      () => setProgressPercentage((prevPercentage) => prevPercentage + percentageStep),
-      renderStepms
-    );
+
+    const id = setTimeout(() => {
+      setProgressPercentage(
+        100 - (((finalTime - new Date()) / (seconds * 1000)) * 100)
+      );
+
+    }, renderStepProgressms);
+
     return () => clearInterval(id);
-  }, [progressPercentage, percentageStep, onIncorrectAnswer]);
+  }, [
+    progressPercentage,
+    finalTime,
+    onIncorrectAnswer,
+    seconds,
+    renderStepProgressms,
+  ]);
 
   const displayNewMath = () => {
     const [expression, result] = mathGenerator();
@@ -53,6 +68,10 @@ export default function ArithmeticTest(props) {
     setMathResult(result);
 
     setProgressPercentage(0);
+    const currentTime = new Date();
+    currentTime.setSeconds(currentTime.getSeconds() + seconds);
+    setFinalTime(currentTime);
+
   }
 
   useEffect(() => {
