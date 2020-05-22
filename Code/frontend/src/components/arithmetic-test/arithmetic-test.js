@@ -88,9 +88,10 @@ export default function ArithmeticTest() {
       return;
     }
     const renderStepProgressms = 50;
-    setTimeout(() => {
+    const id = setTimeout(() => {
       dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
+    return () => {clearTimeout(id)};
   }, [state.progressPercentage]);
 
   const onButtonClick = (num) => {
