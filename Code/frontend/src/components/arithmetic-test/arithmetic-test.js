@@ -2,10 +2,10 @@ import React, {useEffect, useReducer} from "react";
 import {useLocation} from "react-router-dom";
 
 import Dialpad from "components/dialpad/dialpad";
-import ProgressBar from "components/progressBar/ProgressBar";
+import ProgressBar from "components/progress-bar/progress-bar";
 import mathGenerator from "services/math-generator";
-import "./ArithmeticTest.css";
-import Levelbar from "components/levelbar/level-bar";
+import Levelbar from "components/level-bar/level-bar";
+import "./arithmetic-test.css";
 
 function setupNewQuestion(state) {
   const finalTime = new Date();

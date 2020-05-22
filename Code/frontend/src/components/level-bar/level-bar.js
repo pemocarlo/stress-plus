@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './level-bar.css'
 
 export default function Levelbar(props){
