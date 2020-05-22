@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer} from "react";
+import {useLocation} from "react-router-dom";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progressBar/ProgressBar";
@@ -60,7 +61,8 @@ function mainReducer(state, action) {
   }
 }
 
-export default function ArithmeticTest(props) {
+export default function ArithmeticTest() {
+  const location = useLocation();
   const initialState = {
     displayResult: "",
     expression: "",
@@ -69,7 +71,7 @@ export default function ArithmeticTest(props) {
     correctAnswers: 0,
     totalAnswers: 0,
     finalTime: 0,
-    seconds: props.seconds,
+    seconds: location.state.seconds,
     averageScore: 50,
     yourScore: 0,
   };
