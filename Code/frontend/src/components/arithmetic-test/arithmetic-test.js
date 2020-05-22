@@ -1,10 +1,11 @@
 import React, {useEffect, useReducer} from "react";
+import {useLocation} from "react-router-dom";
 
 import Dialpad from "components/dialpad/dialpad";
-import ProgressBar from "components/progressBar/ProgressBar";
+import ProgressBar from "components/progress-bar/progress-bar";
 import mathGenerator from "services/math-generator";
-import "./ArithmeticTest.css";
-import Levelbar from "components/levelbar/level-bar";
+import Levelbar from "components/level-bar/level-bar";
+import "./arithmetic-test.css";
 
 function setupNewQuestion(state) {
   const finalTime = new Date();
@@ -60,7 +61,8 @@ function mainReducer(state, action) {
   }
 }
 
-export default function ArithmeticTest(props) {
+export default function ArithmeticTest() {
+  const location = useLocation();
   const initialState = {
     displayResult: "",
     expression: "",
@@ -69,7 +71,7 @@ export default function ArithmeticTest(props) {
     correctAnswers: 0,
     totalAnswers: 0,
     finalTime: 0,
-    seconds: props.seconds,
+    seconds: location.state.seconds,
     averageScore: 50,
     yourScore: 0,
   };
@@ -86,9 +88,10 @@ export default function ArithmeticTest(props) {
       return;
     }
     const renderStepProgressms = 50;
-    setTimeout(() => {
+    const id = setTimeout(() => {
       dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
+    return () => {clearTimeout(id)};
   }, [state.progressPercentage]);
 
   const onButtonClick = (num) => {

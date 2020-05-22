@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from "react-router-dom";
 
 import './index.css';
 import StressApp from './stress-app';
@@ -7,7 +8,9 @@ import * as serviceWorker from './service-worker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StressApp />
+    <BrowserRouter>
+      <StressApp />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
