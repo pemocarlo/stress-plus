@@ -5,7 +5,6 @@ import "./settings.css";
 export default function Settings(props) {
   const testConfig = {
     seconds: 5,
-    renderStepProgressms: 50,
   };
 
   return (
