@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useEffect, useReducer} from "react";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progressBar/ProgressBar";
@@ -6,105 +6,113 @@ import mathGenerator from "services/math-generator";
 import "./ArithmeticTest.css";
 import Levelbar from "components/levelbar/level-bar";
 
-export default function ArithmeticTest(props) {
-  const [displayResult, setDisplayResult] = useState('');
-  const [expression, setExpression] = useState();
-  const [mathResult, setMathResult] = useState();
-  const [progressPercentage, setProgressPercentage] = useState(0);
-  const [averageScore, setAverageScore] = useState(50);
-  const [yourScore, setYourScore] = useState(0);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [totalAnswers, setTotalAnswers] = useState(0);
-  const [finalTime, setFinalTime] = useState();
+function setupNewQuestion(state) {
+  const finalTime = new Date();
+  finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
+  const [expression, result] = mathGenerator();
 
-  const {renderStepProgressms, seconds} = props;
+  return {
+    expression: expression,
+    mathResult: result,
+    progressPercentage: 0,
+    averageScore: Math.floor(Math.random() * 50 + 25),
+    finalTime: finalTime,
+  };
+}
 
-  const onCorrectAnswer = () => {
-    setDisplayResult('correct');
-    setTotalAnswers(answers => answers + 1);
-    setCorrectAnswers(answers => answers + 1);
-    displayNewMath();
+function mainReducer(state, action) {
+  switch (action.type) {
+    case "correct":
+      return {
+        ...state,
+        ...setupNewQuestion(state),
+        displayResult: "Correct",
+        correctAnswers: state.correctAnswers + 1,
+        totalAnswers: state.totalAnswers + 1,
+        yourScore: Math.floor(
+          ((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100
+        ),
+      };
+    case "incorrect":
+      return {
+        ...state,
+        ...setupNewQuestion(state),
+        displayResult: "Incorrect",
+        incorrectAnswers: state.incorrectAnswers + 1,
+        totalAnswers: state.totalAnswers + 1,
+        yourScore: Math.floor(
+          (state.correctAnswers / (state.totalAnswers + 1)) * 100
+        ),
+      };
+    case "firstUpdate":
+      return {
+        ...state,
+        ...setupNewQuestion(state),
+      };
+    case "updateProgressPercentage":
+      return {
+        ...state,
+        progressPercentage:
+          100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
+      };
+    default:
+      return state;
   }
+}
 
-  //We need to use useCallback here, because onIncorrectAnswer is called from inside useEffect after the time is up
-  const onIncorrectAnswer = useCallback(() => {
-    setDisplayResult('incorrect');
-    setTotalAnswers(answers => answers + 1);
-    displayNewMath();
+export default function ArithmeticTest(props) {
+  const initialState = {
+    displayResult: "",
+    expression: "",
+    mathResult: "",
+    progressPercentage: 0,
+    correctAnswers: 0,
+    totalAnswers: 0,
+    finalTime: 0,
+    seconds: props.seconds,
+    averageScore: 50,
+    yourScore: 0,
+  };
+
+  const [state, dispatch] = useReducer(mainReducer, initialState);
+
+  useEffect(() => {
+    dispatch({type: "firstUpdate"});
   }, []);
 
   useEffect(() => {
-    const currentTime = new Date();
-    currentTime.setSeconds(currentTime.getSeconds() + seconds);
-    setFinalTime(currentTime);
-  }, [seconds]);
-
-  useEffect(() => {
-    if (progressPercentage >= 100) {
-      onIncorrectAnswer();
-      setProgressPercentage(0);
+    if (state.progressPercentage >= 100) {
+      dispatch({type: "incorrect"});
       return;
     }
-
-    const id = setTimeout(() => {
-      setProgressPercentage(
-        100 - (((finalTime - new Date()) / (seconds * 1000)) * 100)
-      );
-
+    const renderStepProgressms = 50;
+    setTimeout(() => {
+      dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
-
-    return () => clearInterval(id);
-  }, [
-    progressPercentage,
-    finalTime,
-    onIncorrectAnswer,
-    seconds,
-    renderStepProgressms,
-  ]);
-
-  const displayNewMath = () => {
-    const [expression, result] = mathGenerator();
-    setExpression(expression);
-    setMathResult(result);
-
-    setProgressPercentage(0);
-    const currentTime = new Date();
-    currentTime.setSeconds(currentTime.getSeconds() + seconds);
-    setFinalTime(currentTime);
-
-  }
-
-  useEffect(() => {
-    if (totalAnswers !== 0) {
-      setYourScore(Math.floor(correctAnswers / totalAnswers * 100))
-      setAverageScore(Math.floor(Math.random() * 50 + 25));
-    }
-  }, [correctAnswers, totalAnswers]);
-
-  useEffect(() => {
-    displayNewMath();
-  }, []);
+  }, [state.progressPercentage]);
 
   const onButtonClick = (num) => {
-    if (mathResult === num) {
-      onCorrectAnswer();
-    } else{
-      onIncorrectAnswer();
+    if (state.mathResult === num) {
+      dispatch({type: "correct"});
+    } else {
+      dispatch({type: "incorrect"});
     }
-  }
+  };
 
   return (
     <div className="StressApp">
       <div className="stressBar">
-        <Levelbar average_score={averageScore} your_score={yourScore} />
+        <Levelbar
+          average_score={state.averageScore}
+          your_score={state.yourScore}
+        />
       </div>
-      <div className="display arithmetic">{expression}</div>
-      <ProgressBar percentage={progressPercentage} />
+      <div className="display arithmetic">{state.expression}</div>
+      <ProgressBar percentage={state.progressPercentage} />
       <div className="lower-part">
-        <div className="results">{displayResult}</div>
+        <div className="results">{state.displayResult}</div>
         <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
       </div>
     </div>
   );
 }
-
