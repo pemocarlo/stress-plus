@@ -1,104 +1,88 @@
-import React, {useEffect, useReducer} from "react";
+import React, {useEffect, useReducer, useRef} from "react";
 import {useLocation} from "react-router-dom";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progress-bar/progress-bar";
-import mathGenerator from "services/math-generator";
 import Levelbar from "components/level-bar/level-bar";
+import {mainReducer, getInitialState, RESULT_CORRECT, RESULT_WRONG, RESULT_TIMEOUT} from "./logic";
 import "./arithmetic-test.css";
 
-function setupNewQuestion(state) {
-  const finalTime = new Date();
-  finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
-  const [expression, result] = mathGenerator();
-
-  return {
-    expression: expression,
-    mathResult: result,
-    progressPercentage: 0,
-    averageScore: Math.floor(Math.random() * 50 + 25),
-    finalTime: finalTime,
-  };
-}
-
-function mainReducer(state, action) {
-  switch (action.type) {
-    case "correct":
-      return {
-        ...state,
-        ...setupNewQuestion(state),
-        displayResult: "Correct",
-        correctAnswers: state.correctAnswers + 1,
-        totalAnswers: state.totalAnswers + 1,
-        yourScore: Math.floor(
-          ((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100
-        ),
-      };
-    case "incorrect":
-      return {
-        ...state,
-        ...setupNewQuestion(state),
-        displayResult: "Incorrect",
-        incorrectAnswers: state.incorrectAnswers + 1,
-        totalAnswers: state.totalAnswers + 1,
-        yourScore: Math.floor(
-          (state.correctAnswers / (state.totalAnswers + 1)) * 100
-        ),
-      };
-    case "firstUpdate":
-      return {
-        ...state,
-        ...setupNewQuestion(state),
-      };
-    case "updateProgressPercentage":
-      return {
-        ...state,
-        progressPercentage:
-          100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
-      };
+function displayResult(result) {
+  switch(result) {
+    case RESULT_CORRECT:
+      return "Correct";
+    case RESULT_WRONG:
+      return "Incorrect";
+    case RESULT_TIMEOUT:
+      return "Timeout";
     default:
-      return state;
+      return "";
   }
 }
 
 export default function ArithmeticTest() {
   const location = useLocation();
-  const initialState = {
-    displayResult: "",
-    expression: "",
-    mathResult: "",
-    progressPercentage: 0,
-    correctAnswers: 0,
-    totalAnswers: 0,
-    finalTime: 0,
-    seconds: location.state.seconds,
-    averageScore: 50,
-    yourScore: 0,
-  };
 
-  const [state, dispatch] = useReducer(mainReducer, initialState);
+  const [state, dispatch] = useReducer(mainReducer, getInitialState(location.state));
+  const soundCorrectAnswer = useRef(null);
+  const soundWrongAnswer = useRef(null);
+  const soundBackground = useRef(null);
 
+  //if componnet is loaded start the test by showing the first question
   useEffect(() => {
-    dispatch({type: "firstUpdate"});
+    dispatch({type: "newQuestion"});
   }, []);
 
+  //Handles the periodic update for the progress bar and fires the timeout action
   useEffect(() => {
+    if (state.waiting) {
+      return;
+    }
     if (state.progressPercentage >= 100) {
-      dispatch({type: "incorrect"});
+      dispatch({type: "timeout"});
       return;
     }
     const renderStepProgressms = 50;
     const id = setTimeout(() => {
       dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
-    return () => {clearTimeout(id)};
-  }, [state.progressPercentage]);
+    return () => clearTimeout(id);
+  }, [state.progressPercentage, state.waiting]);
+
+  //Handles the waiting between two math questions
+  useEffect(() => {
+    if (!state.waiting) {
+      return;
+    }
+    const id = setTimeout(() => {
+      dispatch({type: "newQuestion"});
+    }, state.waitTime * 1000);
+    return () => clearTimeout(id);
+  }, [state.waitTime, state.waiting])
+
+  //This effect controls the sounds
+  useEffect(() => {
+    if (state.waiting) {
+      soundBackground.current.pause();
+      soundBackground.current.currentTime = 0;
+      switch(state.result) {
+        case RESULT_CORRECT:
+          soundCorrectAnswer.current.play();
+          break;
+        case RESULT_WRONG:
+        case RESULT_TIMEOUT:
+          soundWrongAnswer.current.play();
+          break;
+        default:
+      }
+    } else {
+      soundBackground.current.play();
+    }
+  }, [state.waiting, state.result]);
 
   const onButtonClick = (num) => {
-    if (state.mathResult === num) {
-      dispatch({type: "correct"});
-    } else {
-      dispatch({type: "incorrect"});
+    if (!state.waiting) {
+      dispatch({type: "userInput", input: num});
     }
   };
 
@@ -113,9 +97,12 @@ export default function ArithmeticTest() {
       <div className="display arithmetic">{state.expression}</div>
       <ProgressBar percentage={state.progressPercentage} />
       <div className="lower-part">
-        <div className="results">{state.displayResult}</div>
+        <div className="results">{displayResult(state.result)}</div>
         <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
       </div>
+      <audio ref={soundCorrectAnswer} src='/sound/correct_answer_sound.wav' />
+      <audio ref={soundWrongAnswer} src='/sound/wrong_answer_sound.wav' />
+      <audio ref={soundBackground} src='/sound/time_lapsing_sound.wav' />
     </div>
   );
 }
