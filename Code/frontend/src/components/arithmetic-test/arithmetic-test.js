@@ -83,9 +83,7 @@ export default function ArithmeticTest() {
   }, [state.enableSound, state.waiting, state.result]);
 
   const onButtonClick = (num) => {
-    if (!state.waiting) {
-      dispatch({type: "userInput", input: num});
-    }
+    dispatch({type: "userInput", input: num});
   };
 
   return (

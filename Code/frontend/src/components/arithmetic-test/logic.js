@@ -27,6 +27,10 @@ export function getInitialState(settings) {
 export function mainReducer(state, action) {
   switch (action.type) {
     case "userInput":
+      if (state.waiting) {
+        //Do not accept user input when waiting
+        return state;
+      }
       if (state.mathResult === action.input) {
         return {
           ...state,

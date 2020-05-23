@@ -15,7 +15,10 @@ export default function Settings(props) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    setTestConfig({...testConfig, [name]: value});
+    setTestConfig({
+      ...testConfig, 
+      [name]: value,
+    });
   }
 
   return (
