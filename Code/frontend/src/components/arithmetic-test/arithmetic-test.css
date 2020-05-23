@@ -27,6 +27,8 @@
   min-width: 90%;
   width: 80%;
   border: 2px #000000 solid;
+  font-size: 50px;
+  padding-top: 20px;
 }
 
 .progress-bar {
@@ -53,6 +55,8 @@
   height: 60%;
   width: 50%;
   border: 2px #000000 solid;
+  font-size: 50px;
+  padding-top: 50px;
 }
 
 .dialpad {
