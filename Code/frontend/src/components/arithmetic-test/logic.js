@@ -6,6 +6,7 @@ export const RESULT_WRONG = 2;
 export const RESULT_TIMEOUT = 3;
 
 export function getInitialState(settings) {
+  console.log(settings);
   return {
     result: RESULT_NONE,
     expression: "",
@@ -19,6 +20,7 @@ export function getInitialState(settings) {
     averageScore: 50,
     yourScore: 0,
     waiting: true,
+    enableSound: settings.enableSound,
   };
 }
 
@@ -32,6 +34,7 @@ export function mainReducer(state, action) {
           result: RESULT_CORRECT,
           correctAnswers: state.correctAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
+          averageScore: Math.floor(Math.random() * 50 + 25),
           yourScore: Math.floor(
             ((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100
           ),
@@ -43,6 +46,7 @@ export function mainReducer(state, action) {
           result: RESULT_WRONG,
           incorrectAnswers: state.incorrectAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
+          averageScore: Math.floor(Math.random() * 50 + 25),
           yourScore: Math.floor(
             (state.correctAnswers / (state.totalAnswers + 1)) * 100
           ),
@@ -55,6 +59,7 @@ export function mainReducer(state, action) {
         result: RESULT_TIMEOUT,
         incorrectAnswers: state.incorrectAnswers + 1,
         totalAnswers: state.totalAnswers + 1,
+        averageScore: Math.floor(Math.random() * 50 + 25),
         yourScore: Math.floor(
           (state.correctAnswers / (state.totalAnswers + 1)) * 100
         ),
@@ -71,7 +76,6 @@ export function mainReducer(state, action) {
         expression: expression,
         mathResult: result,
         progressPercentage: 0,
-        averageScore: Math.floor(Math.random() * 50 + 25),
         finalTime: finalTime,
       };
     case "updateProgressPercentage":

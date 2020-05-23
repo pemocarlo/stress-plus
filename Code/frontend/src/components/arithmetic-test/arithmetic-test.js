@@ -62,23 +62,25 @@ export default function ArithmeticTest() {
 
   //This effect controls the sounds
   useEffect(() => {
-    if (state.waiting) {
-      soundBackground.current.pause();
-      soundBackground.current.currentTime = 0;
-      switch(state.result) {
-        case RESULT_CORRECT:
-          soundCorrectAnswer.current.play();
-          break;
-        case RESULT_WRONG:
-        case RESULT_TIMEOUT:
-          soundWrongAnswer.current.play();
-          break;
-        default:
+    if (state.enableSound) {
+      if (state.waiting) {
+        soundBackground.current.pause();
+        soundBackground.current.currentTime = 0;
+        switch(state.result) {
+          case RESULT_CORRECT:
+            soundCorrectAnswer.current.play();
+            break;
+          case RESULT_WRONG:
+          case RESULT_TIMEOUT:
+            soundWrongAnswer.current.play();
+            break;
+          default:
+        }
+      } else {
+        soundBackground.current.play();
       }
-    } else {
-      soundBackground.current.play();
     }
-  }, [state.waiting, state.result]);
+  }, [state.enableSound, state.waiting, state.result]);
 
   const onButtonClick = (num) => {
     if (!state.waiting) {
