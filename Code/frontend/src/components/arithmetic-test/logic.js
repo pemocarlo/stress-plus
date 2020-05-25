@@ -6,7 +6,7 @@ export const RESULT_WRONG = 2;
 export const RESULT_TIMEOUT = 3;
 
 export function getInitialState(settings) {
-  console.log(settings);
+  // console.log(settings);
   return {
     result: RESULT_NONE,
     expression: "",
@@ -21,6 +21,7 @@ export function getInitialState(settings) {
     yourScore: 0,
     waiting: true,
     enableSound: settings.enableSound,
+    enableControl: settings.enableControl,
   };
 }
 
