@@ -27,7 +27,7 @@ export function getInitialState(settings) {
 
 export function mainReducer(state, action) {
   switch (action.type) {
-    case "userInput":
+    case "userInput": {
       if (state.waiting) {
         //Do not accept user input when waiting
         return state;
@@ -57,6 +57,7 @@ export function mainReducer(state, action) {
           ),
         };
       }
+    }
     case "timeout": {
       return {
         ...state,
@@ -70,7 +71,7 @@ export function mainReducer(state, action) {
         ),
       };
     }
-    case "newQuestion":
+    case "newQuestion": {
       const finalTime = new Date();
       finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
       const [expression, result] = mathGenerator();
@@ -82,14 +83,18 @@ export function mainReducer(state, action) {
         mathResult: result,
         progressPercentage: 0,
         finalTime: finalTime,
+        result: RESULT_NONE,
       };
-    case "updateProgressPercentage":
+    }
+    case "updateProgressPercentage": {
       return {
         ...state,
         progressPercentage:
           100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
       };
-    default:
+    }
+    default: {
       return state;
+    }
   }
 }
