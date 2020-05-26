@@ -48,6 +48,8 @@ module.exports = {
 
     'import/newline-after-import': ['warn', {'count': 1}],
 
+    'jsx-a11y/media-has-caption': 'off',
+
     'react/prop-types': 'off',
 
     'react-hooks/rules-of-hooks': 'error', 
