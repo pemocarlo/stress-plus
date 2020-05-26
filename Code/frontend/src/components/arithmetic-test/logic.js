@@ -22,6 +22,8 @@ export function getInitialState(settings) {
     waiting: true,
     enableSound: settings.enableSound,
     enableControl: settings.enableControl,
+    availableConditions: settings.availableConditions,
+    currentCondition: settings.availableConditions[0],
   };
 }
 
@@ -40,9 +42,7 @@ export function mainReducer(state, action) {
           correctAnswers: state.correctAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
           averageScore: Math.floor(Math.random() * 50 + 25),
-          yourScore: Math.floor(
-            ((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100
-          ),
+          yourScore: Math.floor(((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100),
         };
       } else {
         return {
@@ -52,9 +52,7 @@ export function mainReducer(state, action) {
           incorrectAnswers: state.incorrectAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
           averageScore: Math.floor(Math.random() * 50 + 25),
-          yourScore: Math.floor(
-            (state.correctAnswers / (state.totalAnswers + 1)) * 100
-          ),
+          yourScore: Math.floor((state.correctAnswers / (state.totalAnswers + 1)) * 100),
         };
       }
     }
@@ -66,16 +64,14 @@ export function mainReducer(state, action) {
         incorrectAnswers: state.incorrectAnswers + 1,
         totalAnswers: state.totalAnswers + 1,
         averageScore: Math.floor(Math.random() * 50 + 25),
-        yourScore: Math.floor(
-          (state.correctAnswers / (state.totalAnswers + 1)) * 100
-        ),
+        yourScore: Math.floor((state.correctAnswers / (state.totalAnswers + 1)) * 100),
       };
     }
     case "newQuestion": {
       const finalTime = new Date();
       finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
       const [expression, result] = mathGenerator();
-  
+
       return {
         ...state,
         waiting: false,
@@ -89,8 +85,7 @@ export function mainReducer(state, action) {
     case "updateProgressPercentage": {
       return {
         ...state,
-        progressPercentage:
-          100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
+        progressPercentage: 100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
       };
     }
     default: {

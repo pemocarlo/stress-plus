@@ -8,19 +8,35 @@ const defaultTestConfig = {
   answerTimeout: 5, //in seconds
   waitTime: 2, // in seconds
   enableSound: false,
-  enableControl: false,
+  availableConditions: ["enableExperimental"],
 };
 
 function getInputValue(element) {
   switch (element.type) {
-    case "checkbox": return element.checked;
-    case "number": return parseInt(element.value);
-    default: return element.value;
+    case "checkbox":
+      return element.checked;
+    case "number":
+      return parseInt(element.value);
+    default:
+      return element.value;
   }
 }
 
 export default function Settings(props) {
   const [testConfig, setTestConfig] = useState(defaultTestConfig);
+
+  const handleConditionInputChange = (event) => {
+    const conditionsParent = event.target.closest(".conditions");
+
+    const selectedConditions = Array.from(conditionsParent.querySelectorAll("input[type=checkbox]"))
+      .filter((element) => element.checked)
+      .map((element) => element.name);
+
+    setTestConfig({
+      ...testConfig,
+      availableConditions: selectedConditions,
+    });
+  };
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -43,12 +59,18 @@ export default function Settings(props) {
           onChange={handleInputChange}
         />
       </div>
-      <div>
+      <div className="conditions">
         <Checkbox
           name="enableControl"
           label="Control"
-          isChecked={testConfig.enableControl}
-          onChange={handleInputChange}
+          isChecked={testConfig.availableConditions.includes("enableControl")}
+          onChange={handleConditionInputChange}
+        />
+        <Checkbox
+          name="enableExperimental"
+          label="Experimental"
+          isChecked={testConfig.availableConditions.includes("enableExperimental")}
+          onChange={handleConditionInputChange}
         />
       </div>
       <div>
