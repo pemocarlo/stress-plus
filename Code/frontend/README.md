@@ -65,8 +65,10 @@ The corresponding `dialpad.css` would be:
 The documentation of all available CSS selectors can be found [here](https://www.w3schools.com/cssref/css_selectors.asp).
 
 ## Code style and formatting
-[ESLint](https://eslint.org) is configured to check for some code style and formatting rules.
-Use `npm run lint` to run the checks and see your violations.
+[Prettier](https://prettier.io) and [ESLint](https://eslint.org) are configured for this project to have a consistent code style and formatting.
+The code formatter prettier is executed while git is commiting your files. Therefore a well formatted file is always stored in git and you do not need to worry about code formatting.
+
+Some ESLint checks can not be fixed automatically and git will then reject the commit. You need to fix those issues manually. To check your files beforehand, you can use `npm run lint` to run the checks without changing any files.
 
 ### ESLint with Visual Studio Code
 For [Visual Studio Code](https://code.visualstudio.com) users there exists an [ESLint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
