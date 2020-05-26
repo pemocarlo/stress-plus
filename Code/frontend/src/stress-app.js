@@ -9,7 +9,7 @@ export default function StressApp() {
   const history = useHistory();
 
   const startTest = (testConfig) => {
-    history.push('/test', testConfig);
+    history.push("/test", testConfig);
   };
 
   return (
