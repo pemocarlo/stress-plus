@@ -1,0 +1,9 @@
+image: node:12-alpine
+
+lint:
+  tags:
+    - docker
+  script: 
+    - cd ./Code/frontend
+    - npm ci
+    - npm run lint
