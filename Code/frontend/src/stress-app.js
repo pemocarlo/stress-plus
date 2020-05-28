@@ -3,6 +3,7 @@ import {Route, Switch, useHistory} from "react-router-dom";
 
 import ArithmeticTest from "components/arithmetic-test/arithmetic-test";
 import Settings from "components/settings/settings";
+import TestEnd from "components/test-end/test-end";
 import "./stress-app.css";
 
 export default function StressApp() {
@@ -19,6 +20,9 @@ export default function StressApp() {
       </Route>
       <Route path="/test">
         <ArithmeticTest />
+      </Route>
+      <Route path="/end">
+        <TestEnd />
       </Route>
     </Switch>
   );

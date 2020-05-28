@@ -23,7 +23,9 @@ export function getInitialState(settings) {
     enableSound: settings.enableSound,
     enableControl: settings.enableControl,
     availableConditions: settings.availableConditions,
-    currentCondition: settings.availableConditions[0],
+    currentConditionIndex: 0,
+    currentCondition: Object.keys(settings.availableConditions)[0],
+    currentConditionTime: Object.values(settings.availableConditions)[0],
   };
 }
 
@@ -86,6 +88,27 @@ export function mainReducer(state, action) {
       return {
         ...state,
         progressPercentage: 100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
+      };
+    }
+    case "newCondition": {
+      const finalTime = new Date();
+      finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
+      const [expression, result] = mathGenerator();
+      return {
+        ...state,
+        currentConditionIndex: state.currentConditionIndex + 1,
+        currentCondition: Object.keys(state.availableConditions)[state.currentConditionIndex + 1],
+        currentConditionTime: Object.values(state.availableConditions)[state.currentConditionIndex + 1],
+        waiting: false,
+        expression: expression,
+        mathResult: result,
+        finalTime: finalTime,
+        result: RESULT_NONE,
+        progressPercentage: 0,
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+        totalAnswers: 0,
+        yourScore: 0,
       };
     }
     default: {

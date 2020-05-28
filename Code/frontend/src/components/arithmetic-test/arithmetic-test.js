@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, useRef} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useHistory} from "react-router-dom";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progress-bar/progress-bar";
@@ -22,6 +22,7 @@ function displayResult(result) {
 
 export default function ArithmeticTest() {
   const location = useLocation();
+  const history = useHistory();
 
   const [state, dispatch] = useReducer(mainReducer, getInitialState(location.state));
   const soundCorrectAnswer = useRef(null);
@@ -32,6 +33,18 @@ export default function ArithmeticTest() {
   useEffect(() => {
     dispatch({type: "newQuestion"});
   }, []);
+
+  //handles the current condition
+  useEffect(() => {
+    if (state.currentConditionIndex >= Object.keys(state.availableConditions).length) {
+      history.push("/end");
+      return;
+    }
+    const id = setTimeout(() => {
+      dispatch({type: "newCondition"});
+    }, state.currentConditionTime * 1000);
+    return () => clearTimeout(id);
+  }, [state.currentConditionIndex, state.availableConditions, state.currentConditionTime, history]);
 
   //Handles the periodic update for the progress bar and fires the timeout action
   useEffect(() => {
