@@ -8,7 +8,7 @@ const defaultTestConfig = {
   answerTimeout: 5, //in seconds
   waitTime: 2, // in seconds
   enableSound: false,
-  availableConditions: ["enableExperimental"],
+  availableConditions: {enableExperimental: 10},
 };
 
 function getInputValue(element) {
@@ -27,14 +27,24 @@ export default function Settings(props) {
 
   const handleConditionInputChange = (event) => {
     const conditionsParent = event.target.closest(".conditions");
+    const checkboxList = conditionsParent.querySelectorAll("input[type=checkbox]");
+    const inputNumberList = conditionsParent.querySelectorAll("input[type=number]");
 
-    const selectedConditions = Array.from(conditionsParent.querySelectorAll("input[type=checkbox]"))
+    const selectedConditions = Array.from(checkboxList)
       .filter((element) => element.checked)
       .map((element) => element.name);
 
+    inputNumberList.forEach((element) => (element.disabled = !selectedConditions.includes(element.name)));
+
+    const selectedInput = Array.from(inputNumberList)
+      .filter((element) => !element.disabled)
+      .map((element) => element.value);
+
     setTestConfig({
       ...testConfig,
-      availableConditions: selectedConditions,
+      availableConditions: Object.fromEntries(
+        selectedConditions.map((_, i) => [selectedConditions[i], selectedInput[i]])
+      ),
     });
   };
 
@@ -63,14 +73,28 @@ export default function Settings(props) {
         <Checkbox
           name="enableControl"
           label="Control"
-          isChecked={testConfig.availableConditions.includes("enableControl")}
+          isChecked={Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableControl")}
           onChange={handleConditionInputChange}
         />
         <Checkbox
           name="enableExperimental"
           label="Experimental"
-          isChecked={testConfig.availableConditions.includes("enableExperimental")}
+          isChecked={Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableExperimental")}
           onChange={handleConditionInputChange}
+        />
+        <NumberInput
+          name="enableControl"
+          label="Control time"
+          value={testConfig.availableConditions["enableControl"] || ""}
+          onChange={handleConditionInputChange}
+          disabled={!Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableControl")}
+        />
+        <NumberInput
+          name="enableExperimental"
+          label="Experimental time"
+          value={testConfig.availableConditions["enableExperimental"] || ""}
+          onChange={handleConditionInputChange}
+          disabled={!Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableExperimental")}
         />
       </div>
       <div>

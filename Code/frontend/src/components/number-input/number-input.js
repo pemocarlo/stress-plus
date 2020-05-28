@@ -5,7 +5,13 @@ export default function NumberInput(props) {
     <div className="number-input">
       <label>
         {props.label}
-        <input type="number" value={props.value} name={props.name} onChange={props.onChange} />
+        <input
+          type="number"
+          value={props.value}
+          name={props.name}
+          onChange={props.onChange}
+          disabled={props.disabled || false}
+        />
       </label>
     </div>
   );
