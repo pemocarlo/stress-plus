@@ -1,71 +1,70 @@
-.Levelbar {   
-    width: 100%;
-    height: 100%;
+.Levelbar {
+  width: 100%;
+  height: 100%;
 
-    top: -40px;
+  top: -40px;
 
-    --triangle_height: 20px;
-    --triangle_width: 10px;
+  --triangle_height: 20px;
+  --triangle_width: 10px;
 }
 
 .Levelbar .row {
-    width: 100%;
-    height: 33%;
+  width: 100%;
+  height: 40%;
 }
 
 .Levelbar .triangle {
-    width: 0;
-    height: 0;
-    border-left: var(--triangle_width) solid transparent;
-    border-right: var(--triangle_width) solid transparent;
-    border-top: var(--triangle_height) solid black;
-    position: relative;
+  width: 0;
+  height: 0;
+  border-left: var(--triangle_width) solid transparent;
+  border-right: var(--triangle_width) solid transparent;
+  border-top: var(--triangle_height) solid black;
+  position: relative;
 }
 
 .Levelbar .triangle_down {
-    width: 0;
-    left: -10px;
-    position: relative;
+  width: 0;
+  left: -10px;
+  position: relative;
 }
 
 .Levelbar .triangle_down span {
-    left: -20px;
-    position: relative;
+  left: -20px;
+  position: relative;
 }
 
 .Levelbar .triangle_up {
-    width: 0;
-    left: -10px;
-    position: relative;
+  width: 0;
+  left: -10px;
+  position: relative;
 }
 
 .Levelbar .triangle_up .triangle {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .Levelbar .triangle_up span {
-    left: -5px;
-    position: relative;
+  left: -5px;
+  position: relative;
 }
 
 .Levelbar .meter_red {
-    height: 100%;
-    width: 33%;
-    background: red;
-    float: left;
+  height: 100%;
+  width: 33%;
+  background: red;
+  float: left;
 }
 
-.Levelbar .meter_yellow{
-    height: 100%;
-    width: 34%;
-    background: yellow;
-    float: left;
+.Levelbar .meter_yellow {
+  height: 100%;
+  width: 34%;
+  background: yellow;
+  float: left;
 }
 
-.Levelbar .meter_green{
-    height: 100%;
-    width: 33%;
-    background: green;
-    float: left;
+.Levelbar .meter_green {
+  height: 100%;
+  width: 33%;
+  background: green;
+  float: left;
 }
-
