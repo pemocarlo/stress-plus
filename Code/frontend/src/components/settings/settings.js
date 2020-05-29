@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Button from "react-bootstrap/Button";
 
 import Checkbox from "components/checkbox/checkbox";
 import NumberInput from "components/number-input/number-input";
@@ -122,7 +123,7 @@ export default function Settings(props) {
           onChange={handleInputChange}
         />
       </div>
-      <button onClick={() => props.startTest(testConfig)}>Start</button>
+      <Button onClick={() => props.startTest(testConfig)}>Start</Button>
     </div>
   );
 }
