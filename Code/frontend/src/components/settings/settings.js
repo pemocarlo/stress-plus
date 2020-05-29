@@ -9,6 +9,7 @@ const defaultTestConfig = {
   waitTime: 2, // in seconds
   enableSound: false,
   availableConditions: {enableExperimental: 10},
+  difficulty: 0,
 };
 
 function getInputValue(element) {
@@ -110,6 +111,14 @@ export default function Settings(props) {
           name="waitTime"
           label="Time between questions"
           value={testConfig.waitTime}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <NumberInput
+          name="difficulty"
+          label="Difficulty (Easy: 0; Hard: 4)"
+          value={testConfig.difficulty}
           onChange={handleInputChange}
         />
       </div>

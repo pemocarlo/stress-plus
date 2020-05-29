@@ -26,6 +26,7 @@ export function getInitialState(settings) {
     currentConditionIndex: 0,
     currentCondition: Object.keys(settings.availableConditions)[0],
     currentConditionTime: Object.values(settings.availableConditions)[0],
+    difficulty: settings.difficulty,
   };
 }
 
@@ -72,7 +73,7 @@ export function mainReducer(state, action) {
     case "newQuestion": {
       const finalTime = new Date();
       finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
-      const [expression, result] = mathGenerator();
+      const [expression, result] = mathGenerator(state.difficulty);
 
       return {
         ...state,

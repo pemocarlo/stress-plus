@@ -1,10 +1,70 @@
-//import React from 'react';
+/**
+ * Generates a random integer in the range from start (inclusive) to end (exclusive)
+ * @param {number} start
+ * @param {number} end
+ */
+function randomInteger(start, end) {
+  return start + Math.floor(Math.random() * (end - start));
+}
+/*
+function randomBoolean() {
+  return Math.random() < 0.5;
+}
+*/
+function randomOneDigitNumber() {
+  return randomInteger(0, 10);
+}
+/*
+function randomTwoDigitNumber() {
+  return randomInteger(0, 100);
+}
+*/
 
-export default function Arithmetic() {
-  let mathArray = ["10-1=9", "8/2+1=5", "1*8-2*3=2", "4+5=9", "2*5-9+3=4", "9/3=3", "4*2-7=1", "2*7-8=6", "15/3-3=2"];
+/**
+ * Test if the given number is an integer
+ * @param {number} num
+ */
+function isInteger(num) {
+  return Math.floor(num) === num;
+}
 
-  let randomMath = mathArray[Math.floor(Math.random() * mathArray.length)];
-  let res = parseInt(randomMath.slice(-1));
-  let math = randomMath.toString().slice(0, -1);
-  return [math, res];
+function randomMathExpression(numbers, operators) {
+  if (numbers < 2) {
+    throw new Error("Can not generate math expression with less than 2 numbers");
+  }
+  if (!operators.every((op) => ["+", "-", "*", "/"].includes(op))) {
+    throw new Error(`Can not generate math expression with unknown operator: ${operators}`);
+  }
+
+  let expression = "";
+  let result;
+  do {
+    expression = `${randomOneDigitNumber()}`;
+    for (let i = 1; i < numbers; i++) {
+      const opIndex = randomInteger(0, operators.length);
+      expression += operators[opIndex];
+      expression += randomOneDigitNumber();
+    }
+    //We construct expression with only numbers and the operators "+", "-", "*", "/", so its save to use eval()
+    /* eslint-disable no-eval */
+    result = eval(expression);
+  } while (isNaN(result) || !isInteger(result) || result < 0 || result >= 10);
+
+  return [expression, result];
+}
+
+export default function MathGenerator(level) {
+  switch (level) {
+    case 4:
+      return randomMathExpression(4, ["+", "-", "*", "/"]);
+    case 3:
+      return randomMathExpression(4, ["+", "-", "*"]);
+    case 2:
+      return randomMathExpression(3, ["+", "-", "*"]);
+    case 1:
+      return randomMathExpression(3, ["+", "-"]);
+    case 0:
+    default:
+      return randomMathExpression(2, ["+", "-"]);
+  }
 }
