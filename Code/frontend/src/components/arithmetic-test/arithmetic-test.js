@@ -1,3 +1,4 @@
+import qs from "qs";
 import React, {useEffect, useReducer, useRef} from "react";
 import {useLocation, useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
@@ -26,7 +27,9 @@ export default function ArithmeticTest() {
   const history = useHistory();
   const {t} = useTranslation();
 
-  const [state, dispatch] = useReducer(mainReducer, getInitialState(location.state));
+  const settings = qs.parse(location.search, {allowDots: true, ignoreQueryPrefix: true});
+
+  const [state, dispatch] = useReducer(mainReducer, getInitialState(settings));
   const soundCorrectAnswer = useRef(null);
   const soundWrongAnswer = useRef(null);
   const soundBackground = useRef(null);
