@@ -15,8 +15,8 @@ export function getInitialState(settings) {
     correctAnswers: 0,
     totalAnswers: 0,
     finalTime: 0,
-    seconds: settings.answerTimeout,
-    waitTime: settings.waitTime,
+    seconds: parseInt(settings.answerTimeout),
+    waitTime: parseInt(settings.waitTime),
     averageScore: 50,
     yourScore: 0,
     waiting: true,
@@ -25,7 +25,7 @@ export function getInitialState(settings) {
     availableConditions: settings.availableConditions,
     currentConditionIndex: 0,
     currentCondition: Object.keys(settings.availableConditions)[0],
-    currentConditionTime: Object.values(settings.availableConditions)[0],
+    currentConditionTime: parseInt(Object.values(settings.availableConditions)[0]),
     difficulty: settings.difficulty,
   };
 }

@@ -1,3 +1,4 @@
+import qs from "qs";
 import React from "react";
 import {Route, Switch, useHistory} from "react-router-dom";
 
@@ -10,7 +11,8 @@ export default function StressApp() {
   const history = useHistory();
 
   const startTest = (testConfig) => {
-    history.push("/test", testConfig);
+    const str = qs.stringify(testConfig, {allowDots: true});
+    history.push(`/test?${str}`);
   };
 
   return (
