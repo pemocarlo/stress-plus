@@ -1,13 +1,15 @@
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 import "./level-bar.css";
 
 export default function Levelbar(props) {
+  const {t} = useTranslation();
   return (
     <div className="Levelbar">
       <div className="row">
         <div className="triangle_down" style={{marginLeft: `${props.average_score}%`}}>
-          <span>Average</span>
+          <span>{t("levelBar.average")}</span>
           <div className="triangle"></div>
         </div>
       </div>
@@ -19,7 +21,7 @@ export default function Levelbar(props) {
       <div className="row">
         <div className="triangle_up" style={{marginLeft: `${props.your_score}%`}}>
           <div className="triangle"></div>
-          <span>You</span>
+          <span>{t("levelBar.you")}</span>
         </div>
       </div>
     </div>
