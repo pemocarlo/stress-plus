@@ -1,0 +1,74 @@
+.StressApp {
+  --totalHeight: 95vh;
+  --totalWidth: 95vw;
+
+  box-sizing: border-box;
+  width: var(--totalWidth);
+  height: var(--totalHeight);
+  margin: 5px;
+
+  .row {
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .stressBar {
+    min-width: 100%;
+    min-height: 70px;
+    height: calc(var(--totalHeight) * 0.2);
+    margin-bottom: 30px;
+  }
+
+  .arithmetic {
+    border: 2px #000000 solid;
+    font-size: 50px;
+    justify-content: center;
+  }
+
+  .progress-bar {
+    min-width: 100%;
+    min-height: 15px;
+    height: calc(var(--totalHeight) * 0.035);
+  }
+
+  .lower-part {
+    --height: calc(var(--totalHeight) * 0.5);
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: var(--height);
+    padding: 0px 5px;
+    margin: 5px;
+    min-width: 95%;
+  }
+
+  .results {
+    min-width: 100%;
+    min-height: 100%;
+    height: calc(var(--totalHeight) * 0.1);
+    justify-content: center;
+    border: 2px #000000 solid;
+    font-size: 50px;
+  }
+
+  .recorded {
+    margin-top: 20px;
+    min-width: 100%;
+    min-height: 100%;
+    height: calc(var(--totalHeight) * 0.1);
+    justify-content: center;
+    border: 2px #000000 solid;
+    font-size: 50px;
+  }
+
+  .dialpad {
+    --myDiameter: calc(var(--height) * 0.85);
+    --outerDiameter: var(--myDiameter);
+    /* border: 2px #000000 solid; */
+  }
+
+  .dial {
+    display: flex;
+    justify-content: center;
+  }
+}

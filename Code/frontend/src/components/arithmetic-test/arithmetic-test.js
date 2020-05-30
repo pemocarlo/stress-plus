@@ -6,7 +6,7 @@ import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progress-bar/progress-bar";
 import Levelbar from "components/level-bar/level-bar";
 import {mainReducer, getInitialState, RESULT_CORRECT, RESULT_WRONG, RESULT_TIMEOUT} from "./logic";
-import "./arithmetic-test.css";
+import "./arithmetic-test.scss";
 
 function displayResult(result, t) {
   switch (result) {
@@ -118,22 +118,52 @@ export default function ArithmeticTest() {
 
   return (
     <div className="StressApp">
-      <div className="stressBar">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="stressBar">
+              {state.currentCondition !== "enableControl" && (
+                <Levelbar average_score={state.averageScore} your_score={state.yourScore} />
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <div className="display arithmetic">{state.expression}</div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12 ">
+            <div className="progressBar">
+              {state.currentCondition !== "enableControl" && <ProgressBar percentage={state.progressPercentage} />}
+            </div>
+          </div>
+        </div>
+
+        <div className="lower-part">
+          <div className="col-6">
+            <div>
+              <div className="results">{displayResult(state.result, t)}</div>
+              <div className="recorded"></div>
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="dial">
+              <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
+            </div>
+          </div>
+        </div>
+
+        <audio ref={soundCorrectAnswer} src="/sound/correct_answer_sound.wav" />
+        <audio ref={soundWrongAnswer} src="/sound/wrong_answer_sound.wav" />
         {state.currentCondition !== "enableControl" && (
-          <Levelbar average_score={state.averageScore} your_score={state.yourScore} />
+          <audio ref={soundBackground} src="/sound/time_lapsing_sound.wav" />
         )}
       </div>
-      <div className="display arithmetic">{state.expression}</div>
-      {state.currentCondition !== "enableControl" && <ProgressBar percentage={state.progressPercentage} />}
-      <div className="lower-part">
-        <div className="results">{displayResult(state.result, t)}</div>
-        <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
-      </div>
-      <audio ref={soundCorrectAnswer} src="/sound/correct_answer_sound.wav" />
-      <audio ref={soundWrongAnswer} src="/sound/wrong_answer_sound.wav" />
-      {state.currentCondition !== "enableControl" && (
-        <audio ref={soundBackground} src="/sound/time_lapsing_sound.wav" />
-      )}
     </div>
   );
 }
