@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer, useRef} from "react";
 import {useLocation, useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 import Dialpad from "components/dialpad/dialpad";
 import ProgressBar from "components/progress-bar/progress-bar";
@@ -7,14 +8,14 @@ import Levelbar from "components/level-bar/level-bar";
 import {mainReducer, getInitialState, RESULT_CORRECT, RESULT_WRONG, RESULT_TIMEOUT} from "./logic";
 import "./arithmetic-test.css";
 
-function displayResult(result) {
+function displayResult(result, t) {
   switch (result) {
     case RESULT_CORRECT:
-      return "Correct";
+      return t("arithmeticTest.correct");
     case RESULT_WRONG:
-      return "Incorrect";
+      return t("arithmeticTest.wrong");
     case RESULT_TIMEOUT:
-      return "Timeout";
+      return t("arithmeticTest.timeout");
     default:
       return "";
   }
@@ -23,6 +24,7 @@ function displayResult(result) {
 export default function ArithmeticTest() {
   const location = useLocation();
   const history = useHistory();
+  const {t} = useTranslation();
 
   const [state, dispatch] = useReducer(mainReducer, getInitialState(location.state));
   const soundCorrectAnswer = useRef(null);
@@ -124,7 +126,7 @@ export default function ArithmeticTest() {
       <div className="display arithmetic">{state.expression}</div>
       {state.currentCondition !== "enableControl" && <ProgressBar percentage={state.progressPercentage} />}
       <div className="lower-part">
-        <div className="results">{displayResult(state.result)}</div>
+        <div className="results">{displayResult(state.result, t)}</div>
         <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
       </div>
       <audio ref={soundCorrectAnswer} src="/sound/correct_answer_sound.wav" />

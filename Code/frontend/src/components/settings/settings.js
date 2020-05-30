@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
+import {useTranslation} from "react-i18next";
 
 import Checkbox from "components/checkbox/checkbox";
 import NumberInput from "components/number-input/number-input";
@@ -25,6 +26,7 @@ function getInputValue(element) {
 }
 
 export default function Settings(props) {
+  const {t} = useTranslation();
   const [testConfig, setTestConfig] = useState(defaultTestConfig);
 
   const handleConditionInputChange = (event) => {
@@ -62,11 +64,11 @@ export default function Settings(props) {
 
   return (
     <div className="Settings">
-      <h1>Setup your Stress Test</h1>
+      <h1>{t("settings.title")}</h1>
       <div>
         <Checkbox
           name="enableSound"
-          label="Enable sound"
+          label={t("settings.enableSound")}
           isChecked={testConfig.enableSound}
           onChange={handleInputChange}
         />
@@ -74,26 +76,26 @@ export default function Settings(props) {
       <div className="conditions">
         <Checkbox
           name="enableControl"
-          label="Control"
+          label={t("settings.enableControl")}
           isChecked={Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableControl")}
           onChange={handleConditionInputChange}
         />
         <Checkbox
           name="enableExperimental"
-          label="Experimental"
+          label={t("settings.enableExperimental")}
           isChecked={Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableExperimental")}
           onChange={handleConditionInputChange}
         />
         <NumberInput
           name="enableControl"
-          label="Control time"
+          label={t("settings.controlTime")}
           value={testConfig.availableConditions["enableControl"] || ""}
           onChange={handleConditionInputChange}
           disabled={!Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableControl")}
         />
         <NumberInput
           name="enableExperimental"
-          label="Experimental time"
+          label={t("settings.experimentalTime")}
           value={testConfig.availableConditions["enableExperimental"] || ""}
           onChange={handleConditionInputChange}
           disabled={!Object.prototype.hasOwnProperty.call(testConfig.availableConditions, "enableExperimental")}
@@ -102,7 +104,7 @@ export default function Settings(props) {
       <div>
         <NumberInput
           name="answerTimeout"
-          label="Answer timeout"
+          label={t("settings.answerTimeout")}
           value={testConfig.answerTimeout}
           onChange={handleInputChange}
         />
@@ -110,7 +112,7 @@ export default function Settings(props) {
       <div>
         <NumberInput
           name="waitTime"
-          label="Time between questions"
+          label={t("settings.waitTime")}
           value={testConfig.waitTime}
           onChange={handleInputChange}
         />
@@ -118,12 +120,12 @@ export default function Settings(props) {
       <div>
         <NumberInput
           name="difficulty"
-          label="Difficulty (Easy: 0; Hard: 4)"
+          label={t("settings.difficulty")}
           value={testConfig.difficulty}
           onChange={handleInputChange}
         />
       </div>
-      <Button onClick={() => props.startTest(testConfig)}>Start</Button>
+      <Button onClick={() => props.startTest(testConfig)}>{t("settings.startButton")}</Button>
     </div>
   );
 }
