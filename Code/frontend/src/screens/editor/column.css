@@ -1,0 +1,12 @@
+.Column {
+  margin: 8px;
+  border: 2px solid lightgrey;
+  border-radius: 2px;
+}
+
+h3 {
+  padding: 8px;
+}
+.Column .screenList {
+  padding: 8px;
+}
