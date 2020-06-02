@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 import Checkbox from "components/checkbox/checkbox";
 import NumberInput from "components/number-input/number-input";
@@ -28,6 +29,7 @@ function getInputValue(element) {
 export default function Settings(props) {
   const {t} = useTranslation();
   const [testConfig, setTestConfig] = useState(defaultTestConfig);
+  const history = useHistory();
 
   const handleConditionInputChange = (event) => {
     const conditionsParent = event.target.closest(".conditions");
@@ -126,6 +128,9 @@ export default function Settings(props) {
         />
       </div>
       <Button onClick={() => props.startTest(testConfig)}>{t("settings.startButton")}</Button>
+      <div>
+        <Button onClick={() => history.push("/editor")}>{"Go to editor"}</Button>
+      </div>
     </div>
   );
 }
