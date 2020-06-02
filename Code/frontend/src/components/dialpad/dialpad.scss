@@ -22,8 +22,8 @@
   left: 50%;
   border: none;
   border-radius: 50%;
-  background-color: #cffafa;
-  color: black;
+  background-color: var(--primary);
+  color: var(--light);
   text-align: center;
   text-decoration: none;
   font-size: 20px;
@@ -31,7 +31,7 @@
 }
 
 .dialpad button:hover {
-  background-color: #8ffcfc;
+  background-color: var(--secondary);
 }
 
 .dialpad .button0 {
