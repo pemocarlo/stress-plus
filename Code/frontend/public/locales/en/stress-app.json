@@ -18,7 +18,11 @@
   },
   "levelBar": {
     "you": "You",
-    "average": "Average"
+    "average": "Average",
+    "BAD": "BAD",
+    "ok": "ok",
+    "good": "good"
+
   },
   "end": {
     "message": "Test Finished!",

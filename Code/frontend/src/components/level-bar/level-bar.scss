@@ -1,0 +1,63 @@
+.Levelbar {
+  width: 100%;
+  height: 100%;
+  --triangle_height: 20px;
+  --triangle_width: 10px;
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: var(--triangle_width) solid transparent;
+    border-right: var(--triangle_width) solid transparent;
+    border-top: var(--triangle_height) solid black;
+    position: relative;
+  }
+
+  .triangle_down {
+    width: 0;
+    left: -10px;
+    position: relative;
+  }
+
+  .triangle_down span {
+    left: -20px;
+    position: relative;
+  }
+
+  .triangle_up {
+    width: 0;
+    left: -10px;
+    position: relative;
+  }
+
+  .triangle_up .triangle {
+    transform: rotate(180deg);
+  }
+
+  .triangle_up span {
+    left: -5px;
+    position: relative;
+  }
+
+  .meter_red {
+    height: 100%;
+    width: 33%;
+    float: left;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+  }
+
+  .meter_yellow {
+    height: 100%;
+    width: 34%;
+    float: left;
+    color: rgb(255, 255, 255);
+  }
+
+  .meter_green {
+    height: 100%;
+    width: 33%;
+    float: left;
+    color: rgb(255, 255, 255);
+  }
+}
