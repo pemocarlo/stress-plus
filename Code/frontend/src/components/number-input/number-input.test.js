@@ -20,6 +20,22 @@ test("number input enabled textbox", () => {
   userEvent.type(num_input, "3");
 });
 
+test("concatinating number with existing input enabled textbox", () => {
+  expect.assertions(2);
+  render(
+    <NumberInput
+      name="test"
+      label="test"
+      value={"5"}
+      onChange={(event) => expect(event.target.value).toEqual("56")}
+      disabled={false}
+    />
+  );
+  const num_input = screen.getByLabelText("test");
+  expect(num_input).toBeInTheDocument();
+  userEvent.type(num_input, "6");
+});
+
 test("input disabled textbox", () => {
   expect.assertions(1);
   render(
