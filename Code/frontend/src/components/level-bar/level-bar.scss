@@ -9,7 +9,7 @@
     height: 0;
     border-left: var(--triangle_width) solid transparent;
     border-right: var(--triangle_width) solid transparent;
-    border-top: var(--triangle_height) solid black;
+    border-top: var(--triangle_height) solid var(--primary);
     position: relative;
   }
 
@@ -22,6 +22,7 @@
   .triangle_down span {
     left: -20px;
     position: relative;
+    color: var(--primary);
   }
 
   .triangle_up {
@@ -37,13 +38,14 @@
   .triangle_up span {
     left: -5px;
     position: relative;
+    color: var(--primary);
   }
 
   .meter_red {
     height: 100%;
     width: 33%;
     float: left;
-    color: rgb(255, 255, 255);
+    color: var(--light);
     font-weight: 700;
   }
 
@@ -51,13 +53,13 @@
     height: 100%;
     width: 34%;
     float: left;
-    color: rgb(255, 255, 255);
+    color: var(--light);
   }
 
   .meter_green {
     height: 100%;
     width: 33%;
     float: left;
-    color: rgb(255, 255, 255);
+    color: var(--light);
   }
 }

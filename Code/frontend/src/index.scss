@@ -1,1 +1,16 @@
+// overwriting the default bootstrap settings
+
+$theme-colors: (
+  "primary": #020856,
+  "secondary": #efaf3c,
+);
+
+$font-family-base: "Work Sans", sans-serif;
+$body-color: var(--primary);
+
 @import "~bootstrap/scss/bootstrap";
+
+.btn-primary:hover {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+}
