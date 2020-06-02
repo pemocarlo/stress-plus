@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./dialpad.css";
+import "./dialpad.scss";
 
 export default function Dialpad(props) {
   const buttons = [...new Array(10)].map((_, i) => (
