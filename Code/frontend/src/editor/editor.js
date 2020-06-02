@@ -1,7 +1,11 @@
+import qs from "qs";
 import React, {useState} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
+import {useTranslation} from "react-i18next";
+
 import Column from "editor/column";
-import "./editor.css";
+import Button from "react-bootstrap/Button";
+import "./editor.scss";
 
 const initialData = {
   screens: {
@@ -9,37 +13,25 @@ const initialData = {
       type: "mathTest",
       name: "math test 1",
       id: "screen1",
-      answerTimeOut: 5,
-      waitTime: 2, // in seconds
-      enableSound: false,
-      availableConditions: {enableExperimental: 10},
-      difficulty: 0,
+      title: "Math test 1",
     },
     screen2: {
       type: "message",
       name: "message 1",
       id: "screen2",
-      message: "Test is finished!",
+      title: "message 1",
     },
     screen3: {
       type: "mathTest",
       name: "math test 2",
       id: "screen3",
-      answerTimeOut: 5,
-      waitTime: 2, // in seconds
-      enableSound: false,
-      availableConditions: {enableExperimental: 10},
-      difficulty: 0,
+      title: "Math test 2",
     },
     screen4: {
-      type: "mathTest",
-      name: "math test 3",
+      type: "message",
+      name: "message 2",
       id: "screen4",
-      answerTimeOut: 5,
-      waitTime: 2, // in seconds
-      enableSound: false,
-      availableConditions: {enableExperimental: 10},
-      difficulty: 0,
+      title: "message 2: Test finished!",
     },
   },
 
@@ -53,6 +45,8 @@ const initialData = {
 };
 
 export default function Editor() {
+  const {t} = useTranslation();
+  const [link, setLink] = useState("");
   const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
@@ -85,14 +79,24 @@ export default function Editor() {
     setState(newState);
   };
 
+  const onGenerateLink = () => {
+    const screens = state.columns[0].screenList.map((screenId) => state.screens[screenId]);
+    const link = qs.stringify({screens}, {allowDots: true});
+    setLink(`localhost:3000/executor?${link}`);
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="Columns">
-        {state.columns.map((column) => {
-          const currentScreens = column.screenList.map((screenName) => state.screens[screenName]);
-          return <Column key={column.id} column={column} screens={currentScreens} />;
-        })}
-      </div>
-    </DragDropContext>
+    <div className="Editor">
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="columns">
+          {state.columns.map((column) => {
+            const currentScreens = column.screenList.map((screenName) => state.screens[screenName]);
+            return <Column key={column.id} column={column} screens={currentScreens} />;
+          })}
+        </div>
+      </DragDropContext>
+      <Button onClick={onGenerateLink}>{t("editor.generateLink")}</Button>
+      <input type="text" value={link} className="link-box" readOnly></input>
+    </div>
   );
 }
