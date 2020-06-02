@@ -1,0 +1,15 @@
+.Column {
+  margin: 8px;
+  border: 2px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+}
+
+.Column .ScreenList {
+  padding: 8px;
+  display: flex;
+}
+
+.Column h3 {
+  padding: 8px;
+}
