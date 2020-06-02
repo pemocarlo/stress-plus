@@ -6,6 +6,7 @@ import ArithmeticTest from "components/arithmetic-test/arithmetic-test";
 import Settings from "components/settings/settings";
 import TestEnd from "components/test-end/test-end";
 import Editor from "editor/editor";
+import PipelineExecutor from "executor/pipeline-executor";
 import "./stress-app.css";
 
 export default function StressApp() {
@@ -29,6 +30,9 @@ export default function StressApp() {
       </Route>
       <Route path="/editor">
         <Editor />
+      </Route>
+      <Route path="/executor">
+        <PipelineExecutor />
       </Route>
     </Switch>
   );

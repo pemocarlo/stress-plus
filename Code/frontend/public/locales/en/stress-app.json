@@ -27,5 +27,8 @@
   "end": {
     "message": "Test Finished!",
     "button": "Back to Settings"
+  },
+  "editor": {
+    "generateLink": "Generate Link"
   }
 }
