@@ -14,16 +14,16 @@
   height: var(--totalHeight);
   padding: 10px;
   margin: 5px;
-}
 
-.TestEnd .message {
-  font-size: 50px;
-  height: 100px;
-  width: 200px;
-}
+  .row {
+    justify-content: center;
+  }
 
-.TestEnd .buttonSettings {
-  margin: 20px auto;
-  height: 100px;
-  width: 200px;
+  .message {
+    font-size: 50px;
+  }
+
+  .buttonSettings {
+    margin: 20px auto;
+  }
 }
