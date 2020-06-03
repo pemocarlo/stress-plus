@@ -51,17 +51,23 @@ const initialData = [
   },
 ];
 
-function reorder(list, startIndex, endIndex) {
+const reorder = (list, sourceIndex, destinationIndex) => {
   const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
+  const [removed] = result.splice(sourceIndex, 1);
+  result.splice(destinationIndex, 0, removed);
   return result;
-}
+};
 
-const copy = (source, destination, droppableSource, droppableDestination) => {
-  const item = source[droppableSource.index];
-  destination.splice(droppableDestination.index, 0, {...item, id: uuid()});
+const copy = (source, destination, sourceIndex, destinationIndex) => {
+  const item = source[sourceIndex];
+  destination.splice(destinationIndex, 0, {...item, id: uuid()});
   return destination;
+};
+
+const remove = (list, index) => {
+  const result = Array.from(list);
+  result.splice(index, 1);
+  return result;
 };
 
 export default function Editor() {
@@ -83,16 +89,27 @@ export default function Editor() {
         return;
       }
 
-      switch (source.droppableId) {
-        case "PIPELINE":
-          setPipeline((pipeline) => reorder(pipeline, source.index, destination.index));
-          break;
-        case "TOOLBAR":
-          setPipeline((pipeline) => copy(TOOLBAR, pipeline, source, destination));
-          break;
-        default:
-          break;
+      if (destination.droppableId === "TRASH") {
+        setPipeline((pipeline) => remove(pipeline, source.index));
+      } else {
+        switch (source.droppableId) {
+          case "PIPELINE":
+            setPipeline((pipeline) => reorder(pipeline, source.index, destination.index));
+            break;
+          case "TOOLBAR":
+            setPipeline((pipeline) => copy(TOOLBAR, pipeline, source.index, destination.index));
+            break;
+          default:
+            break;
+        }
       }
+    },
+    [setPipeline]
+  );
+
+  const removeItemFromPipeline = useCallback(
+    (index) => {
+      setPipeline((pipeline) => remove(pipeline, index));
     },
     [setPipeline]
   );
@@ -107,7 +124,7 @@ export default function Editor() {
     <div className="Editor">
       <DragDropContext onDragEnd={onDragEnd}>
         <Toolbar id="TOOLBAR" items={TOOLBAR} />
-        <Pipeline id="PIPELINE" items={pipeline} />
+        <Pipeline id="PIPELINE" items={pipeline} removeItem={removeItemFromPipeline} />
       </DragDropContext>
       <Button onClick={onGenerateLink}>{t("editor.generateLink")}</Button>
       <input type="text" value={link} className="link-box" readOnly></input>
