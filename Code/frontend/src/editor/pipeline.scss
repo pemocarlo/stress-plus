@@ -1,0 +1,27 @@
+.pipeline {
+  margin: 8px;
+  border: 2px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+
+  .screens {
+    padding: 8px;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  h3 {
+    padding: 8px;
+  }
+}
+
+.pipeline-draggable {
+  margin: 8px;
+
+  .screen {
+    border: 1px solid lightgrey;
+    padding: 8px;
+    border-radius: 2px;
+    background: white;
+  }
+}
