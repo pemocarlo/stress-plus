@@ -44,12 +44,15 @@
   }
 
   .results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 100%;
     min-height: 100%;
     height: calc(var(--totalHeight) * 0.1);
     justify-content: center;
     border: 2px var(--primary) solid;
-    font-size: 50px;
+    font-size: x-large;
     color: var(--primary);
   }
 
@@ -58,10 +61,31 @@
     min-width: 100%;
     min-height: 100%;
     height: calc(var(--totalHeight) * 0.1);
-    justify-content: center;
+
     border: 2px var(--primary) solid;
-    font-size: 50px;
-    color: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .recorded-text {
+      font-size: large;
+      color: var(--primary);
+    }
+    .rounded-circle {
+      margin-bottom: 22px;
+      width: calc(var(--height) * 0.04);
+      height: calc(var(--height) * 0.04);
+      background-color: var(--danger);
+      font-size: x-small;
+      animation: blinker 1.5s linear infinite;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
   }
 
   .dialpad {

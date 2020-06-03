@@ -14,7 +14,8 @@
   "arithmeticTest": {
     "correct": "Correct",
     "wrong": "Incorrect",
-    "timeout": "Timeout"
+    "timeout": "Timeout",
+    "recorded": "recorded"
   },
   "levelBar": {
     "you": "You",
