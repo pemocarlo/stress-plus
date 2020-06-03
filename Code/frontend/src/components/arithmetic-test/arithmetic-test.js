@@ -150,7 +150,10 @@ export default function ArithmeticTest() {
           <div className="col-6">
             <div>
               <div className="results">{displayResult(state.result, t)}</div>
-              <div className="recorded"></div>
+              <div className="recorded">
+                <div className="recorded-text">{t("recorded")}</div>
+                <div className="rounded-circle"></div>
+              </div>
             </div>
           </div>
 
