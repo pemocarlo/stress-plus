@@ -1,0 +1,37 @@
+.toolbar {
+  margin: 8px;
+  border: 2px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+
+  .items {
+    padding: 8px;
+    display: flex;
+  }
+
+  h3 {
+    padding: 8px;
+  }
+}
+
+.toolbar-draggable {
+  margin: 8px;
+
+  .toolbar-item {
+    border: 1px solid lightgrey;
+    padding: 8px;
+    border-radius: 2px;
+    background: white;
+  }
+}
+
+//Do not modify the following two rules! This ensures that dragging from the toolbar looks nice
+.toolbar-item-copy {
+  ~ [data-rbd-placeholder-context-id] {
+    display: none !important;
+  }
+
+  ~ div {
+    transform: none !important;
+  }
+}
