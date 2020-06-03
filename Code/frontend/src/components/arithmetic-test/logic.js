@@ -20,13 +20,13 @@ export function getInitialState(settings) {
     averageScore: 50,
     yourScore: 0,
     waiting: true,
-    enableSound: settings.enableSound,
-    enableControl: settings.enableControl,
+    enableSound: settings.enableSound === "true",
+    enableControl: settings.enableControl === "true",
     availableConditions: settings.availableConditions,
     currentConditionIndex: 0,
     currentCondition: Object.keys(settings.availableConditions)[0],
     currentConditionTime: parseInt(Object.values(settings.availableConditions)[0]),
-    difficulty: settings.difficulty,
+    difficulty: parseInt(settings.difficulty),
   };
 }
 
