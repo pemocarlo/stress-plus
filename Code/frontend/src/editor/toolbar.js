@@ -17,6 +17,14 @@ export default function Toolbar(props) {
           </div>
         )}
       </Droppable>
+      <Droppable droppableId="TRASH" isDragDisabled={true}>
+        {(provided) => (
+          <div className="items toolbar-draggable" ref={provided.innerRef}>
+            <ToolbarItem name="Trash" />
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
+import Button from "react-bootstrap/Button";
 
 import "./pipeline.scss";
 
@@ -11,7 +12,7 @@ export default function Pipeline(props) {
         {(provided) => (
           <div className="screens" ref={provided.innerRef}>
             {props.items.map((item, index) => (
-              <PipelineDraggable {...item} key={item.id} index={index} />
+              <PipelineDraggable {...item} key={item.id} index={index} onDelete={() => props.removeItem(index)} />
             ))}
             {provided.placeholder}
           </div>
@@ -39,5 +40,10 @@ function PipelineDraggable(props) {
 }
 
 function Screen(props) {
-  return <div className="screen">{props.name}</div>;
+  return (
+    <div className="screen">
+      {props.name}
+      <Button onClick={props.onDelete}>X</Button>
+    </div>
+  );
 }
