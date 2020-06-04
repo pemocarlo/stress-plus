@@ -30,6 +30,33 @@
     "button": "Back to Settings"
   },
   "editor": {
-    "generateLink": "Generate Link"
+    "generateLink": "Generate Link",
+    "screen": {
+      "toolbar": "Toolbar Screens",
+      "pipeline": "Pipeline Screens",
+      "items": {
+        "trash": {
+          "name": "Trash"
+        },
+        "mathTest": {
+          "name": "Math Test"
+        },
+        "message": {
+          "name": "Message"
+        }
+      }
+    },
+    "overlay": {
+      "toolbar": "Toolbar Overlays",
+      "pipeline": "Pipeline Overlays",
+      "items": {
+        "trash": {
+          "name": "Trash"
+        },
+        "test": {
+          "name": "Test"
+        }
+      }
+    }
   }
 }

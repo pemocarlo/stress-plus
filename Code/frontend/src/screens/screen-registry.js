@@ -3,11 +3,15 @@ import MessageComponent from "./message/message-component";
 
 export default {
   mathTest: {
-    name: "Math",
     component: MathComponent,
+    initialSettings: {
+      title: "Math Test",
+    },
   },
   message: {
-    name: "Message",
     component: MessageComponent,
+    initialSettings: {
+      title: "Message",
+    },
   },
 };
