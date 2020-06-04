@@ -1,6 +1,5 @@
 .TestEnd {
   --totalHeight: 95vh;
-  --totalWidth: 95vw;
 
   display: flex;
   justify-content: center;
@@ -10,10 +9,8 @@
   flex-direction: column;
 
   position: relative;
-  width: var(--totalWidth);
+
   height: var(--totalHeight);
-  padding: 10px;
-  margin: 5px;
 
   .row {
     justify-content: center;
@@ -25,5 +22,8 @@
 
   .buttonSettings {
     margin: 20px auto;
+  }
+  .footer {
+    width: 100%;
   }
 }

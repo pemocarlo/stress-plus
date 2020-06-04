@@ -1,0 +1,19 @@
+.footer-stress {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 5%;
+  background-color: var(--primary);
+  font-size: smaller;
+
+  .hr {
+    border-top: 2px solid var(--light);
+    margin: 0;
+  }
+
+  .container-fluid {
+    margin: 5px;
+    color: var(--light);
+  }
+}

@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 
 import Checkbox from "components/checkbox/checkbox";
 import NumberInput from "components/number-input/number-input";
+import Footer from "components/footer/footer";
 import "./settings.css";
 
 const defaultTestConfig = {
@@ -130,6 +131,9 @@ export default function Settings(props) {
       <Button onClick={() => props.startTest(testConfig)}>{t("settings.startButton")}</Button>
       <div>
         <Button onClick={() => history.push("/editor")}>{"Go to editor"}</Button>
+      </div>
+      <div>
+        <Footer></Footer>
       </div>
     </div>
   );
