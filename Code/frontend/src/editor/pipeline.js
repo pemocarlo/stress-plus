@@ -1,18 +1,26 @@
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
 import Button from "react-bootstrap/Button";
+import {useTranslation} from "react-i18next";
 
 import "./pipeline.scss";
 
 export default function Pipeline(props) {
+  const {t} = useTranslation();
   return (
     <div className="pipeline">
-      <h3>Pipeline</h3>
-      <Droppable droppableId={props.id} direction="horizontal">
+      <h3>{t(`editor.${props.dndType}.pipeline`)}</h3>
+      <Droppable droppableId={props.id} type={props.dndType} direction="horizontal">
         {(provided) => (
           <div className="screens" ref={provided.innerRef}>
             {props.items.map((item, index) => (
-              <PipelineDraggable {...item} key={item.id} index={index} onDelete={() => props.removeItem(index)} />
+              <PipelineDraggable
+                {...item}
+                key={item.id}
+                index={index}
+                dndType={props.dndType}
+                onDelete={() => props.removeItem(index)}
+              />
             ))}
             {provided.placeholder}
           </div>
@@ -24,7 +32,7 @@ export default function Pipeline(props) {
 
 function PipelineDraggable(props) {
   return (
-    <Draggable key={props.id} draggableId={props.id} index={props.index}>
+    <Draggable key={props.id} draggableId={props.id} index={props.index} type={props.dndType}>
       {(provided) => (
         <div
           ref={provided.innerRef}
@@ -40,9 +48,10 @@ function PipelineDraggable(props) {
 }
 
 function Screen(props) {
+  const {t} = useTranslation();
   return (
     <div className="screen">
-      {props.name}
+      {t(`editor.${props.dndType}.items.${props.type}.name`)}
       <Button onClick={props.onDelete}>X</Button>
     </div>
   );

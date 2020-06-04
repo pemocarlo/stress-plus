@@ -1,26 +1,28 @@
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
+import {useTranslation} from "react-i18next";
 
 import "./toolbar.scss";
 
 export default function Toolbar(props) {
+  const {t} = useTranslation();
   return (
     <div className="toolbar">
-      <h3>Toolbar</h3>
-      <Droppable droppableId={props.id} direction="horizontal" isDropDisabled={true}>
+      <h3>{t(`editor.${props.dndType}.toolbar`)}</h3>
+      <Droppable droppableId={props.id} type={props.dndType} direction="horizontal" isDropDisabled={true}>
         {(provided) => (
           <div className="items" ref={provided.innerRef}>
             {props.items.map((item, index) => (
-              <ToolbarDraggable {...item} key={item.id} index={index} />
+              <ToolbarDraggable {...item} key={item.id} index={index} dndType={props.dndType} />
             ))}
             {provided.placeholder}
           </div>
         )}
       </Droppable>
-      <Droppable droppableId="TRASH" isDragDisabled={true}>
+      <Droppable droppableId={props.trashId} type={props.dndType} isDragDisabled={true}>
         {(provided) => (
           <div className="items toolbar-draggable" ref={provided.innerRef}>
-            <ToolbarItem name="Trash" />
+            <ToolbarItem dndType={props.dndType} type="trash" />
             {provided.placeholder}
           </div>
         )}
@@ -31,7 +33,7 @@ export default function Toolbar(props) {
 
 function ToolbarDraggable(props) {
   return (
-    <Draggable key={props.id} draggableId={props.id} index={props.index}>
+    <Draggable key={props.id} draggableId={props.id} index={props.index} type={props.dndType}>
       {(provided, snapshot) => (
         <React.Fragment>
           <div
@@ -54,5 +56,6 @@ function ToolbarDraggable(props) {
 }
 
 function ToolbarItem(props) {
-  return <div className="toolbar-item">{props.name}</div>;
+  const {t} = useTranslation();
+  return <div className="toolbar-item">{t(`editor.${props.dndType}.items.${props.type}.name`)}</div>;
 }
