@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Button from "react-bootstrap/Button";
 
+import Footer from "components/footer/footer";
 import "./test-end.scss";
 
 export default function TestEnd() {
@@ -19,6 +20,9 @@ export default function TestEnd() {
             <Button onClick={() => history.push("/")}>{t("end.button")}</Button>
           </div>
         </div>
+      </div>
+      <div className="footer">
+        <Footer></Footer>
       </div>
     </div>
   );
