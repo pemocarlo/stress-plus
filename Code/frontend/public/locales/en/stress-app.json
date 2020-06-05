@@ -3,10 +3,8 @@
     "title": "Setup your Stress Test",
     "startButton": "Start",
     "enableSound": "Enable sound",
-    "enableControl": "Control",
-    "enableExperimental": "Experimental",
-    "controlTime": "Control time",
-    "experimentalTime": "Experimental time",
+    "isControl": "Activate Control?",
+    "totalTime": "Total time",
     "answerTimeout": "Answer timeout",
     "waitTime": "Time between questions",
     "difficulty": "Difficulty (Easy: 0; Hard: 4)"
