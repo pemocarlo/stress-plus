@@ -14,18 +14,15 @@ export function getInitialState(settings) {
     progressPercentage: 0,
     correctAnswers: 0,
     totalAnswers: 0,
-    finalTime: 0,
+    finalQuestionTime: 0,
     seconds: parseInt(settings.answerTimeout),
     waitTime: parseInt(settings.waitTime),
     averageScore: 50,
     yourScore: 0,
     waiting: true,
     enableSound: settings.enableSound === "true",
-    enableControl: settings.enableControl === "true",
-    availableConditions: settings.availableConditions,
-    currentConditionIndex: 0,
-    currentCondition: Object.keys(settings.availableConditions)[0],
-    currentConditionTime: parseInt(Object.values(settings.availableConditions)[0]),
+    isControl: settings.isControl === "true",
+    testTotalTime: parseInt(settings.testTotalTime),
     difficulty: parseInt(settings.difficulty),
   };
 }
@@ -71,8 +68,8 @@ export function mainReducer(state, action) {
       };
     }
     case "newQuestion": {
-      const finalTime = new Date();
-      finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
+      const finalQuestionTime = new Date();
+      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.seconds);
       const [expression, result] = mathGenerator(state.difficulty);
 
       return {
@@ -81,35 +78,14 @@ export function mainReducer(state, action) {
         expression: expression,
         mathResult: result,
         progressPercentage: 0,
-        finalTime: finalTime,
+        finalQuestionTime: finalQuestionTime,
         result: RESULT_NONE,
       };
     }
     case "updateProgressPercentage": {
       return {
         ...state,
-        progressPercentage: 100 - ((state.finalTime - new Date()) / (state.seconds * 1000)) * 100,
-      };
-    }
-    case "newCondition": {
-      const finalTime = new Date();
-      finalTime.setSeconds(finalTime.getSeconds() + state.seconds);
-      const [expression, result] = mathGenerator();
-      return {
-        ...state,
-        currentConditionIndex: state.currentConditionIndex + 1,
-        currentCondition: Object.keys(state.availableConditions)[state.currentConditionIndex + 1],
-        currentConditionTime: Object.values(state.availableConditions)[state.currentConditionIndex + 1],
-        waiting: false,
-        expression: expression,
-        mathResult: result,
-        finalTime: finalTime,
-        result: RESULT_NONE,
-        progressPercentage: 0,
-        correctAnswers: 0,
-        incorrectAnswers: 0,
-        totalAnswers: 0,
-        yourScore: 0,
+        progressPercentage: 100 - ((state.finalQuestionTime - new Date()) / (state.seconds * 1000)) * 100,
       };
     }
     default: {

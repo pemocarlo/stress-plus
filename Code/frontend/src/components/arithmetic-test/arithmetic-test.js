@@ -39,17 +39,13 @@ export default function ArithmeticTest() {
     dispatch({type: "newQuestion"});
   }, []);
 
-  //handles the current condition
+  // Pushes end of test page when time is over
   useEffect(() => {
-    if (state.currentConditionIndex >= Object.keys(state.availableConditions).length) {
-      history.push("/end");
-      return;
-    }
     const id = setTimeout(() => {
-      dispatch({type: "newCondition"});
-    }, state.currentConditionTime * 1000);
+      history.push("/end");
+    }, state.testTotalTime * 1000);
     return () => clearTimeout(id);
-  }, [state.currentConditionIndex, state.availableConditions, state.currentConditionTime, history]);
+  }, [state.testTotalTime, history]);
 
   //Handles the periodic update for the progress bar and fires the timeout action
   useEffect(() => {
@@ -65,7 +61,7 @@ export default function ArithmeticTest() {
       dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
     return () => clearTimeout(id);
-  }, [state.progressPercentage, state.waiting, state.currentCondition]);
+  }, [state.progressPercentage, state.waiting]);
 
   //Handles the waiting between two math questions
   useEffect(() => {
@@ -81,7 +77,7 @@ export default function ArithmeticTest() {
   //This effect controls the sounds
   useEffect(() => {
     if (state.enableSound) {
-      if (!(state.currentCondition === "enableControl")) {
+      if (!state.isControl) {
         if (state.waiting) {
           soundBackground.current.pause();
           soundBackground.current.currentTime = 0;
@@ -113,7 +109,7 @@ export default function ArithmeticTest() {
         }
       }
     }
-  }, [state.enableSound, state.waiting, state.result, state.currentCondition]);
+  }, [state.enableSound, state.waiting, state.result, state.isControl]);
 
   const onButtonClick = (num) => {
     dispatch({type: "userInput", input: num});
@@ -125,9 +121,7 @@ export default function ArithmeticTest() {
         <div className="row">
           <div className="col-12">
             <div className="stressBar">
-              {state.currentCondition !== "enableControl" && (
-                <Levelbar average_score={state.averageScore} your_score={state.yourScore} />
-              )}
+              {!state.isControl && <Levelbar average_score={state.averageScore} your_score={state.yourScore} />}
             </div>
           </div>
         </div>
@@ -141,7 +135,7 @@ export default function ArithmeticTest() {
         <div className="row">
           <div className="col-12 ">
             <div className="progressBar">
-              {state.currentCondition !== "enableControl" && <ProgressBar percentage={state.progressPercentage} />}
+              {!state.isControl && <ProgressBar percentage={state.progressPercentage} />}
             </div>
           </div>
         </div>
@@ -166,9 +160,7 @@ export default function ArithmeticTest() {
 
         <audio ref={soundCorrectAnswer} src="/sound/correct_answer_sound.wav" />
         <audio ref={soundWrongAnswer} src="/sound/wrong_answer_sound.wav" />
-        {state.currentCondition !== "enableControl" && (
-          <audio ref={soundBackground} src="/sound/time_lapsing_sound.wav" />
-        )}
+        {!state.isControl && <audio ref={soundBackground} src="/sound/time_lapsing_sound.wav" />}
       </div>
     </div>
   );
