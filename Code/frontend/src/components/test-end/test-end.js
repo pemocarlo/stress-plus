@@ -3,6 +3,8 @@ import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Button from "react-bootstrap/Button";
 
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 import Footer from "components/footer/footer";
 import "./test-end.scss";
 
@@ -17,7 +19,9 @@ export default function TestEnd() {
         </div>
         <div className="row">
           <div className="buttonSettings">
-            <Button onClick={() => history.push("/")}>{t("end.button")}</Button>
+            <Button onClick={() => history.push("/")}>
+              {t("end.button")} <FontAwesomeIcon icon="cog" />
+            </Button>
           </div>
         </div>
       </div>
