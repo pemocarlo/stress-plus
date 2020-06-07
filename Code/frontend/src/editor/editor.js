@@ -70,6 +70,15 @@ const updatePipeline = (setPipeline, destination, source, toolbarItems, pipeline
   }
 };
 
+const newSettings = (id, settings, setPipeline) => {
+  setPipeline((pipeline) => {
+    const newPipeline = [...pipeline];
+    const pipelineElement = newPipeline.find((item) => item.id === id);
+    Object.assign(pipelineElement, settings);
+    return newPipeline;
+  });
+};
+
 export default function Editor() {
   const {t} = useTranslation();
   const [link, setLink] = useState("");
@@ -137,6 +146,20 @@ export default function Editor() {
     setLink(`localhost:3000/executor?${link}`);
   }, [pipelineScreen, pipelineOverlay]);
 
+  const updateScreenSettings = useCallback(
+    (id, settings) => {
+      newSettings(id, settings, setPipelineScreen);
+    },
+    [setPipelineScreen]
+  );
+
+  const updateOverlaySettings = useCallback(
+    (id, settings) => {
+      newSettings(id, settings, setPipelineOverlay);
+    },
+    [setPipelineOverlay]
+  );
+
   return (
     <div className="Editor">
       <DragDropContext onDragEnd={onDragEnd}>
@@ -152,12 +175,14 @@ export default function Editor() {
           dndType={TYPE_SCREEN}
           items={pipelineScreen}
           removeItem={removeScreenPipelineItem}
+          updateSettings={updateScreenSettings}
         />
         <Pipeline
           id={PIPELINE_OVERLAYS_ID}
           dndType={TYPE_OVERLAY}
           items={pipelineOverlay}
           removeItem={removeOverlayPipelineItem}
+          updateSettings={updateOverlaySettings}
         />
       </DragDropContext>
       <Button onClick={onGenerateLink}>{t("editor.generateLink")}</Button>

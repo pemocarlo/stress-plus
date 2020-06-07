@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function TestComponent() {
-  return <div>Test Overlay</div>;
+export default function Test(props) {
+  return <div>{props.title}</div>;
 }

@@ -1,14 +1,14 @@
 import React from "react";
 
-import "./number-input.scss";
+import "./text-input.scss";
 
-export default function NumberInput(props) {
+export default function TextInput(props) {
   return (
-    <div className="number-input">
+    <div className="text-input">
       <label>
         {props.label}
         <input
-          type="number"
+          type="text"
           value={props.value}
           name={props.name}
           onChange={props.onChange}
