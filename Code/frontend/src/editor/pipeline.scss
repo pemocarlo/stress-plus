@@ -16,16 +16,45 @@
 }
 
 .pipeline-draggable {
-  margin: 8px;
+  margin: 2px;
 
-  .item {
-    border: 1px solid lightgrey;
-    padding: 8px;
-    border-radius: 2px;
-    background: white;
+  .cardHead-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .col-9 {
+      font-weight: bolder;
+      font-size: larger;
+    }
+    .col-3 {
+      .button {
+        padding: 3px 6px;
+      }
+    }
+  }
+  .cardBody {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 
-    button {
-      margin-left: 8px;
+    .card {
+      .cardHead {
+        padding: 0px;
+        background-color: var(--primary);
+      }
+      .cardLink {
+        color: var(--light);
+        box-shadow: none;
+        text-decoration: none;
+        width: 100%;
+        border-radius: 0px;
+      }
+      .cardLink:hover {
+        background-color: var(--secondary);
+      }
+      .cardBodyCollapse {
+        padding: 10px;
+      }
     }
   }
 }

@@ -33,7 +33,6 @@ export default function MathSettings(props) {
 
   return (
     <div className="Settings">
-      <div>Math settings</div>
       <Checkbox name="isControl" label={"is Control?"} isChecked={testConfig.isControl} onChange={handleInputChange} />
       <div>
         <TextInput name="title" label={"title"} value={testConfig.title} onChange={handleInputChange} />

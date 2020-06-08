@@ -32,7 +32,6 @@ export default function MessageSettings(props) {
 
   return (
     <div className="Settings">
-      <div>Message settings</div>
       <div>
         <TextInput name="title" label={"title"} value={testConfig.title} onChange={handleInputChange} />
       </div>
