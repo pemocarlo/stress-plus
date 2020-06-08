@@ -11,7 +11,7 @@ export default function TextInput(props) {
           type="text"
           value={props.value}
           name={props.name}
-          onChange={props.onChange}
+          onChange={(e) => props.onChange(props.name, e.target.value)}
           disabled={props.disabled || false}
         />
       </label>

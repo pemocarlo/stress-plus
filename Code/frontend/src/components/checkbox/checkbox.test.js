@@ -5,13 +5,16 @@ import userEvent from "@testing-library/user-event";
 import Checkbox from "./checkbox";
 
 test("checkbox true initial", () => {
-  expect.assertions(2);
+  expect.assertions(3);
   render(
     <Checkbox
       name="test"
       label="test"
       isChecked={true}
-      onChange={(event) => expect(event.target.checked).toBeFalsy()}
+      onChange={(name, value) => {
+        expect(name).toEqual("test");
+        expect(value).toBeFalsy();
+      }}
     />
   );
   const ch_box = screen.getByLabelText("test");
@@ -20,13 +23,16 @@ test("checkbox true initial", () => {
 });
 
 test("checkbox false initial", () => {
-  expect.assertions(2);
+  expect.assertions(3);
   render(
     <Checkbox
       name="test"
       label="test"
       isChecked={false}
-      onChange={(event) => expect(event.target.checked).toBeTruthy()}
+      onChange={(name, value) => {
+        expect(name).toEqual("test");
+        expect(value).toBeTruthy();
+      }}
     />
   );
   const ch_box = screen.getByLabelText("test");

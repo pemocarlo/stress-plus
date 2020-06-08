@@ -5,7 +5,12 @@ export default function Checkbox(props) {
     <div className="checkbox">
       <label>
         {props.label}
-        <input type="checkbox" checked={props.isChecked} name={props.name} onChange={props.onChange} />
+        <input
+          type="checkbox"
+          checked={props.isChecked}
+          name={props.name}
+          onChange={(e) => props.onChange(props.name, e.target.checked)}
+        />
       </label>
     </div>
   );
