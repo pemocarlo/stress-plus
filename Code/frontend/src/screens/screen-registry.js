@@ -1,18 +1,24 @@
 import React from "react";
-
-import MathComponent from "./math/math-component";
 import MessageComponent from "./message/message-component";
+import ArithmeticTest from "./math/arithmetic-test";
 import MathSettings from "./math/math-settings";
 import MessageSettings from "./message/message-settings";
 
 export default {
   mathTest: {
-    component: MathTestScreen,
+    component: ArithmeticTestScreen,
     initialSettings: {
       title: "Math Test",
+      answerTimeout: 5, //in seconds
+      waitTime: 2, // in seconds
+      testTotalTime: 10, // in seconds
+      enableSound: false,
+      isControl: false,
+      difficulty: 0,
     },
     settingsComponent: MathTestScreenSettings,
   },
+
   message: {
     component: MessageScreen,
     initialSettings: {
@@ -22,8 +28,8 @@ export default {
   },
 };
 
-function MathTestScreen(props) {
-  return <MathComponent {...props} />;
+function ArithmeticTestScreen(props) {
+  return <ArithmeticTest {...props} />;
 }
 
 function MessageScreen(props) {
