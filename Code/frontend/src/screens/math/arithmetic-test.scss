@@ -1,0 +1,101 @@
+.StressApp {
+  --totalHeight: 95vh;
+  --totalWidth: 95vw;
+
+  box-sizing: border-box;
+  width: var(--totalWidth);
+  height: var(--totalHeight);
+  margin: 5px;
+
+  .row {
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .stressBar {
+    min-width: 100%;
+    min-height: 70px;
+    height: calc(var(--totalHeight) * 0.2);
+    margin-bottom: 30px;
+  }
+
+  .arithmetic {
+    border: 2px var(--primary) solid;
+    font-size: 50px;
+    justify-content: center;
+    color: var(--primary);
+  }
+
+  .progress-bar {
+    min-width: 100%;
+    min-height: 15px;
+    height: calc(var(--totalHeight) * 0.035);
+  }
+
+  .lower-part {
+    --height: calc(var(--totalHeight) * 0.5);
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: var(--height);
+    padding: 0px 5px;
+    margin: 5px;
+    min-width: 95%;
+  }
+
+  .results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100%;
+    height: calc(var(--totalHeight) * 0.1);
+    justify-content: center;
+    border: 2px var(--primary) solid;
+    font-size: x-large;
+    color: var(--primary);
+  }
+
+  .recorded {
+    margin-top: 20px;
+    min-width: 100%;
+    min-height: 100%;
+    height: calc(var(--totalHeight) * 0.1);
+
+    border: 2px var(--primary) solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .recorded-text {
+      font-size: large;
+      color: var(--primary);
+    }
+    .rounded-circle {
+      margin-bottom: 22px;
+      width: calc(var(--height) * 0.04);
+      height: calc(var(--height) * 0.04);
+      background-color: var(--danger);
+      font-size: x-small;
+      animation: blinker 1.5s linear infinite;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+  }
+
+  .dialpad {
+    --myDiameter: calc(var(--height) * 0.85);
+    --outerDiameter: var(--myDiameter);
+    /* border: 2px #000000 solid; */
+  }
+
+  .dial {
+    display: flex;
+    justify-content: center;
+  }
+}
