@@ -1,6 +1,9 @@
 .toolbar {
   margin: 8px;
-  border: 2px solid lightgrey;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0px var(--info);
+  background-color: var(--info);
+
   display: inline-flex;
   flex-direction: row;
 
@@ -11,6 +14,9 @@
 
   h3 {
     padding: 8px;
+    .iconTool {
+      margin-right: 8px;
+    }
   }
 }
 
@@ -18,10 +24,9 @@
   margin: 8px;
 
   .toolbar-item {
-    border: 1px solid lightgrey;
     padding: 8px;
-    border-radius: 2px;
-    background: white;
+    border-radius: 5px;
+    background: var(--infoLight);
   }
 }
 

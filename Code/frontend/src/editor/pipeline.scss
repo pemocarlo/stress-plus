@@ -1,8 +1,11 @@
 .pipeline {
   margin: 8px;
-  border: 2px solid lightgrey;
+  border: 2px solid var(--info);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+
+  min-height: 100px;
 
   .screens {
     padding: 8px;
