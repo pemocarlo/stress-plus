@@ -17,29 +17,14 @@ const defaultTestConfig = {
   difficulty: 0,
 };
 
-function getInputValue(element) {
-  switch (element.type) {
-    case "checkbox":
-      return element.checked;
-    case "number":
-      return parseInt(element.value);
-    default:
-      return element.value;
-  }
-}
-
 export default function Settings(props) {
   const {t} = useTranslation();
   const [testConfig, setTestConfig] = useState(defaultTestConfig);
   const history = useHistory();
 
-  const handleInputChange = (event) => {
-    const target = event.target;
-    const value = getInputValue(target);
-    const name = target.name;
-    setTestConfig({
-      ...testConfig,
-      [name]: value,
+  const handleInputChange = (name, value) => {
+    setTestConfig((oldConfig) => {
+      return {...oldConfig, [name]: value};
     });
   };
 

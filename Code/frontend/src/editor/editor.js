@@ -75,11 +75,11 @@ const updatePipeline = (setPipeline, destination, source, toolbarItems, pipeline
   }
 };
 
-const newSettings = (id, settings, setPipeline) => {
+const newSettings = (id, name, value, setPipeline) => {
   setPipeline((pipeline) => {
     const newPipeline = [...pipeline];
     const pipelineElement = newPipeline.find((item) => item.id === id);
-    Object.assign(pipelineElement, settings);
+    Object.assign(pipelineElement, {[name]: value});
     return newPipeline;
   });
 };
@@ -152,15 +152,15 @@ export default function Editor() {
   }, [pipelineScreen, pipelineOverlay]);
 
   const updateScreenSettings = useCallback(
-    (id, settings) => {
-      newSettings(id, settings, setPipelineScreen);
+    (id, name, value) => {
+      newSettings(id, name, value, setPipelineScreen);
     },
     [setPipelineScreen]
   );
 
   const updateOverlaySettings = useCallback(
-    (id, settings) => {
-      newSettings(id, settings, setPipelineOverlay);
+    (id, name, value) => {
+      newSettings(id, name, value, setPipelineOverlay);
     },
     [setPipelineOverlay]
   );

@@ -5,13 +5,16 @@ import userEvent from "@testing-library/user-event";
 import NumberInput from "./number-input";
 
 test("number input enabled textbox", () => {
-  expect.assertions(2);
+  expect.assertions(3);
   render(
     <NumberInput
       name="test"
       label="test"
       value={""}
-      onChange={(event) => expect(event.target.value).toEqual("3")}
+      onChange={(name, value) => {
+        expect(name).toEqual("test");
+        expect(value).toEqual(3);
+      }}
       disabled={false}
     />
   );
@@ -21,13 +24,16 @@ test("number input enabled textbox", () => {
 });
 
 test("concatinating number with existing input enabled textbox", () => {
-  expect.assertions(2);
+  expect.assertions(3);
   render(
     <NumberInput
       name="test"
       label="test"
       value={"5"}
-      onChange={(event) => expect(event.target.value).toEqual("56")}
+      onChange={(name, value) => {
+        expect(name).toEqual("test");
+        expect(value).toEqual(56);
+      }}
       disabled={false}
     />
   );
@@ -43,7 +49,9 @@ test("input disabled textbox", () => {
       name="test"
       label="test"
       value={"10"}
-      onChange={(event) => expect(event.target.value).toEqual("")}
+      onChange={() => {
+        throw new Error("OnChange should not been called!");
+      }}
       disabled={true}
     />
   );

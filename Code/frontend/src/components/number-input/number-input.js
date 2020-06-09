@@ -11,7 +11,7 @@ export default function NumberInput(props) {
           type="number"
           value={props.value}
           name={props.name}
-          onChange={props.onChange}
+          onChange={(e) => props.onChange(props.name, parseInt(e.target.value))}
           disabled={props.disabled || false}
         />
       </label>
