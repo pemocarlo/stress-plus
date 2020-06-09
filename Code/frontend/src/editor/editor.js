@@ -2,13 +2,17 @@ import qs from "qs";
 import React, {useState, useCallback} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import Button from "react-bootstrap/Button";
+
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
 import screenRegistry from "../screens/screen-registry";
 import overlayRegistry from "../overlays/overlay-registry";
+import Footer from "components/footer/footer";
 import "./editor.scss";
 
 const TYPE_SCREEN = "screen";
@@ -161,32 +165,74 @@ export default function Editor() {
   );
 
   return (
-    <div className="Editor">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Toolbar id={TOOLBAR_SCREENS_ID} trashId={TRASH_SCREENS_ID} dndType={TYPE_SCREEN} items={toolbarScreenItems} />
-        <Toolbar
-          id={TOOLBAR_OVERLAYS_ID}
-          trashId={TRASH_OVERLAYS_ID}
-          dndType={TYPE_OVERLAY}
-          items={toolbarOverlayItems}
-        />
-        <Pipeline
-          id={PIPELINE_SCREENS_ID}
-          dndType={TYPE_SCREEN}
-          items={pipelineScreen}
-          removeItem={removeScreenPipelineItem}
-          updateSettings={updateScreenSettings}
-        />
-        <Pipeline
-          id={PIPELINE_OVERLAYS_ID}
-          dndType={TYPE_OVERLAY}
-          items={pipelineOverlay}
-          removeItem={removeOverlayPipelineItem}
-          updateSettings={updateOverlaySettings}
-        />
-      </DragDropContext>
-      <Button onClick={onGenerateLink}>{t("editor.generateLink")}</Button>
-      <input type="text" value={link} className="link-box" readOnly></input>
+    <div className="container-fluid" id="editor">
+      <div className="header">
+        <FontAwesomeIcon icon="edit" />
+        Editor
+      </div>
+
+      <div className="container-fluid">
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="row">
+            <div className="col-6">
+              <Toolbar
+                id={TOOLBAR_SCREENS_ID}
+                trashId={TRASH_SCREENS_ID}
+                dndType={TYPE_SCREEN}
+                items={toolbarScreenItems}
+              />
+            </div>
+
+            <div className="col-6">
+              <Toolbar
+                id={TOOLBAR_OVERLAYS_ID}
+                trashId={TRASH_OVERLAYS_ID}
+                dndType={TYPE_OVERLAY}
+                items={toolbarOverlayItems}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <Pipeline
+                id={PIPELINE_SCREENS_ID}
+                dndType={TYPE_SCREEN}
+                items={pipelineScreen}
+                removeItem={removeScreenPipelineItem}
+                updateSettings={updateScreenSettings}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <Pipeline
+                id={PIPELINE_OVERLAYS_ID}
+                dndType={TYPE_OVERLAY}
+                items={pipelineOverlay}
+                removeItem={removeOverlayPipelineItem}
+                updateSettings={updateOverlaySettings}
+              />
+            </div>
+          </div>
+        </DragDropContext>
+      </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2">
+            <Button className="button" onClick={onGenerateLink}>
+              {t("editor.generateLink")}
+              <FontAwesomeIcon icon="link" />
+            </Button>
+          </div>
+          <div className="col-10">
+            <input type="text" value={link} className="link-box" readOnly placeholder="/executor"></input>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer">
+        <Footer></Footer>
+      </div>
     </div>
   );
 }
