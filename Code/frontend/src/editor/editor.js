@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -168,7 +169,7 @@ export default function Editor() {
     <div className="container-fluid" id="editor">
       <div className="header">
         <FontAwesomeIcon icon="edit" />
-        Editor
+        {t("editor.title")}
       </div>
 
       <div className="container-fluid">
@@ -218,13 +219,19 @@ export default function Editor() {
       </div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-2">
+          <div className="col-3">
             <Button className="button" onClick={onGenerateLink}>
               {t("editor.generateLink")}
               <FontAwesomeIcon icon="link" />
             </Button>
+            <CopyToClipboard text={link}>
+              <Button className="button2">
+                {t("editor.copyLink")}
+                <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
+              </Button>
+            </CopyToClipboard>
           </div>
-          <div className="col-10">
+          <div className="col-9">
             <input type="text" value={link} className="link-box" readOnly placeholder="/executor"></input>
           </div>
         </div>

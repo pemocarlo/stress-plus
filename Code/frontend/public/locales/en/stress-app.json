@@ -28,7 +28,9 @@
     "button": "Back to Settings"
   },
   "editor": {
+    "title": "Editor",
     "generateLink": "Generate Link",
+    "copyLink": "Copy Link",
     "screen": {
       "toolbar": "Toolbar Screens",
       "pipeline": "Pipeline Screens",

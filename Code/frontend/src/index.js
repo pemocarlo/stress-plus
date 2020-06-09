@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCog, faTrashAlt, faLink, faEdit, faTools} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faTrashAlt, faLink, faEdit, faTools, faCopy} from "@fortawesome/free-solid-svg-icons";
 
 import "./index.scss";
 import StressApp from "./stress-app";
@@ -26,7 +26,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-library.add(faCog, faTrashAlt, faLink, faEdit, faTools);
+library.add(faCog, faTrashAlt, faLink, faEdit, faTools, faCopy);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
