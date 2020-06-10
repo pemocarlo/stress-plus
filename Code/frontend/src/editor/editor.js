@@ -25,9 +25,6 @@ const TOOLBAR_OVERLAYS_ID = "TOOLBAR-OVERLAYS";
 const PIPELINE_SCREENS_ID = "PIPELINE-SCREENS";
 const PIPELINE_OVERLAYS_ID = "PIPELINE-OVERLAYS";
 
-const TRASH_SCREENS_ID = "TRASH-SCREENS";
-const TRASH_OVERLAYS_ID = "TRASH_OVERLAYS";
-
 const createToolbarItems = (registry) => {
   return Object.keys(registry).map((id) => {
     const item = registry[id];
@@ -58,20 +55,16 @@ const remove = (list, index) => {
   return result;
 };
 
-const updatePipeline = (setPipeline, destination, source, toolbarItems, pipelineId, toolbarId, trashId) => {
-  if (destination.droppableId === trashId) {
-    setPipeline((pipeline) => remove(pipeline, source.index));
-  } else {
-    switch (source.droppableId) {
-      case pipelineId:
-        setPipeline((pipeline) => reorder(pipeline, source.index, destination.index));
-        break;
-      case toolbarId:
-        setPipeline((pipeline) => copy(toolbarItems, pipeline, source.index, destination.index));
-        break;
-      default:
-        break;
-    }
+const updatePipeline = (setPipeline, destination, source, toolbarItems, pipelineId, toolbarId) => {
+  switch (source.droppableId) {
+    case pipelineId:
+      setPipeline((pipeline) => reorder(pipeline, source.index, destination.index));
+      break;
+    case toolbarId:
+      setPipeline((pipeline) => copy(toolbarItems, pipeline, source.index, destination.index));
+      break;
+    default:
+      break;
   }
 };
 
@@ -113,8 +106,7 @@ export default function Editor() {
           source,
           toolbarScreenItems,
           PIPELINE_SCREENS_ID,
-          TOOLBAR_SCREENS_ID,
-          TRASH_SCREENS_ID
+          TOOLBAR_SCREENS_ID
         );
       } else if (type === TYPE_OVERLAY) {
         updatePipeline(
@@ -123,8 +115,7 @@ export default function Editor() {
           source,
           toolbarOverlayItems,
           PIPELINE_OVERLAYS_ID,
-          TOOLBAR_OVERLAYS_ID,
-          TRASH_OVERLAYS_ID
+          TOOLBAR_OVERLAYS_ID
         );
       }
     },
@@ -176,21 +167,11 @@ export default function Editor() {
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="row">
             <div className="col-6">
-              <Toolbar
-                id={TOOLBAR_SCREENS_ID}
-                trashId={TRASH_SCREENS_ID}
-                dndType={TYPE_SCREEN}
-                items={toolbarScreenItems}
-              />
+              <Toolbar id={TOOLBAR_SCREENS_ID} dndType={TYPE_SCREEN} items={toolbarScreenItems} />
             </div>
 
             <div className="col-6">
-              <Toolbar
-                id={TOOLBAR_OVERLAYS_ID}
-                trashId={TRASH_OVERLAYS_ID}
-                dndType={TYPE_OVERLAY}
-                items={toolbarOverlayItems}
-              />
+              <Toolbar id={TOOLBAR_OVERLAYS_ID} dndType={TYPE_OVERLAY} items={toolbarOverlayItems} />
             </div>
           </div>
           <div className="row">

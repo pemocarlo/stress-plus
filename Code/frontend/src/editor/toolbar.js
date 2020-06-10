@@ -1,9 +1,9 @@
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
 import {useTranslation} from "react-i18next";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import "./toolbar.scss";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Toolbar(props) {
   const {t} = useTranslation();
@@ -19,14 +19,6 @@ export default function Toolbar(props) {
             {props.items.map((item, index) => (
               <ToolbarDraggable {...item} key={item.id} index={index} dndType={props.dndType} />
             ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-      <Droppable droppableId={props.trashId} type={props.dndType} isDragDisabled={true}>
-        {(provided) => (
-          <div className="items toolbar-draggable" ref={provided.innerRef}>
-            <ToolbarItem dndType={props.dndType} type="trash"></ToolbarItem>
             {provided.placeholder}
           </div>
         )}
