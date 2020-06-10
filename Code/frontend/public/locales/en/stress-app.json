@@ -35,9 +35,6 @@
       "toolbar": "Toolbar Screens",
       "pipeline": "Pipeline Screens",
       "items": {
-        "trash": {
-          "name": "Trash"
-        },
         "mathTest": {
           "name": "Math Test"
         },
@@ -50,9 +47,6 @@
       "toolbar": "Toolbar Overlays",
       "pipeline": "Pipeline Overlays",
       "items": {
-        "trash": {
-          "name": "Trash"
-        },
         "test": {
           "name": "Test"
         }
