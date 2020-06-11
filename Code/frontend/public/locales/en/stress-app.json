@@ -47,8 +47,9 @@
       "toolbar": "Toolbar Overlays",
       "pipeline": "Pipeline Overlays",
       "items": {
-        "test": {
-          "name": "Test"
+        "currentTime": {
+          "name": "Current Time",
+          "position": "Position"
         }
       }
     }

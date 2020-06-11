@@ -1,21 +1,21 @@
 import React from "react";
-import Test from "./test/test-component";
-import TestSettings from "./test/test-settings";
+import CurrentTime from "./current-time/current-time";
+import CurrentTimeSettings from "./current-time/current-time-settings";
 
 export default {
-  test: {
-    component: TestOverlay,
+  currentTime: {
+    component: CurrentTimeOverlay,
     initialSettings: {
-      title: "Test overlay",
+      position: "center",
     },
-    settingsComponent: TestOverlaySettings,
+    settingsComponent: CurrentTimeOverlaySettings,
   },
 };
 
-function TestOverlay(props) {
-  return <Test {...props} />;
+function CurrentTimeOverlay(props) {
+  return <CurrentTime {...props} />;
 }
 
-function TestOverlaySettings(props) {
-  return <TestSettings {...props} />;
+function CurrentTimeOverlaySettings(props) {
+  return <CurrentTimeSettings {...props} />;
 }
