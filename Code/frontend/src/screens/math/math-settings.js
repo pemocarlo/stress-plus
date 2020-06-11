@@ -8,7 +8,7 @@ export default function MathSettings(props) {
 
   return (
     <div>
-      <Checkbox name="isControl" label={"is Control?"} isChecked={props.isControl} onChange={onChange} />
+      <Checkbox name="isControl" label={"is Control?"} value={props.isControl} onChange={onChange} />
       <TextInput name="title" label={"title"} value={props.title} onChange={onChange} />
     </div>
   );

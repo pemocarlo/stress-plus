@@ -1,20 +1,17 @@
 import React from "react";
-
-import "./text-input.scss";
+import {Form} from "react-bootstrap";
 
 export default function TextInput(props) {
   return (
-    <div className="text-input">
-      <label>
-        {props.label}
-        <input
-          type="text"
-          value={props.value}
-          name={props.name}
-          onChange={(e) => props.onChange(props.name, e.target.value)}
-          disabled={props.disabled || false}
-        />
-      </label>
-    </div>
+    <Form.Group controlId="text-input">
+      <Form.Label>{props.label}</Form.Label>
+      <Form.Control
+        type="text"
+        value={props.value}
+        name={props.name}
+        onChange={(e) => props.onChange(props.name, e.target.value)}
+        disabled={props.disabled || false}
+      />
+    </Form.Group>
   );
 }

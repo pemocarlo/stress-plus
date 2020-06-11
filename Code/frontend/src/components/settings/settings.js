@@ -35,14 +35,14 @@ export default function Settings(props) {
         <Checkbox
           name="enableSound"
           label={t("settings.enableSound")}
-          isChecked={testConfig.enableSound}
+          value={testConfig.enableSound}
           onChange={handleInputChange}
         />
       </div>
       <Checkbox
         name="isControl"
         label={t("settings.isControl")}
-        isChecked={testConfig.isControl}
+        value={testConfig.isControl}
         onChange={handleInputChange}
       />
       <div>
