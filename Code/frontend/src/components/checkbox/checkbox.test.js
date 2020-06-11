@@ -10,7 +10,7 @@ test("checkbox true initial", () => {
     <Checkbox
       name="test"
       label="test"
-      isChecked={true}
+      value={true}
       onChange={(name, value) => {
         expect(name).toEqual("test");
         expect(value).toBeFalsy();
@@ -28,7 +28,7 @@ test("checkbox false initial", () => {
     <Checkbox
       name="test"
       label="test"
-      isChecked={false}
+      value={false}
       onChange={(name, value) => {
         expect(name).toEqual("test");
         expect(value).toBeTruthy();

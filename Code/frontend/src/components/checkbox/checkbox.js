@@ -1,17 +1,17 @@
 import React from "react";
+import {Form} from "react-bootstrap";
 
 export default function Checkbox(props) {
   return (
-    <div className="checkbox">
-      <label>
-        {props.label}
-        <input
-          type="checkbox"
-          checked={props.isChecked}
-          name={props.name}
-          onChange={(e) => props.onChange(props.name, e.target.checked)}
-        />
-      </label>
-    </div>
+    <Form.Group controlId="checkbox-input">
+      <Form.Check
+        type="checkbox"
+        checked={props.value}
+        label={props.label}
+        name={props.name}
+        onChange={(e) => props.onChange(props.name, e.target.checked)}
+        disabled={props.disabled || false}
+      />
+    </Form.Group>
   );
 }
