@@ -7,7 +7,6 @@ import Settings from "components/settings/settings";
 import TestEnd from "components/test-end/test-end";
 import Editor from "editor/editor";
 import PipelineExecutor from "executor/pipeline-executor";
-import "./stress-app.css";
 
 export default function StressApp() {
   const history = useHistory();
