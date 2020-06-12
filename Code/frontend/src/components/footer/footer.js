@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="row">
           <div className="col-5">
             {" "}
-            A. Aravindan, A. Ohlmann, C. Perez, J. Schuell, T. Vogel <span>{t("and")}</span> M. Nissen, M. Zuerl
+            A. Aravindan, A. Ohlmann, C. Perez, J. Schuell, T. Vogel <span>{t("footer.and")}</span> M. Nissen, M. Zuerl
           </div>
           <div className="col-3 font-weight-bold">stress+</div>
           <div className="col-2">Version 1.0 </div>

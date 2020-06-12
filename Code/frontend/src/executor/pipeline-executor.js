@@ -48,7 +48,7 @@ export default function PipelineExecutor() {
   const component = getScreenComponent(currentScreen);
 
   return (
-    <div className="pipeline-executor">
+    <div className="pipeline-executor" key={screenIndex}>
       {component({settings: currentScreen, onFinished: onScreenFinished})}
       {overlays &&
         overlays.map((overlay) => (

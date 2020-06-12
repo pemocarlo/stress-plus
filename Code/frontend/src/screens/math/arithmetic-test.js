@@ -1,7 +1,4 @@
-// import qs from "qs";
 import React, {useEffect, useReducer, useRef} from "react";
-// import {useHistory} from "react-router-dom";
-// import {useLocation, useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 import Dialpad from "components/dialpad/dialpad";
@@ -9,6 +6,15 @@ import ProgressBar from "components/progress-bar/progress-bar";
 import Levelbar from "components/level-bar/level-bar";
 import {mainReducer, getInitialState, RESULT_CORRECT, RESULT_WRONG, RESULT_TIMEOUT} from "./logic";
 import "./arithmetic-test.scss";
+
+function playAudio(audioRef) {
+  const promise = audioRef.current.play();
+  if (promise !== undefined) {
+    promise.catch((error) => {
+      console.warn(`Audio playback was prevented! ${error.message}`);
+    });
+  }
+}
 
 function displayResult(result, t) {
   switch (result) {
@@ -24,11 +30,7 @@ function displayResult(result, t) {
 }
 
 export default function ArithmeticTest(props) {
-  // const location = useLocation();
-  // const history = useHistory();
   const {t} = useTranslation();
-
-  // const settings = qs.parse(location.search, {allowDots: true, ignoreQueryPrefix: true});
 
   const [state, dispatch] = useReducer(mainReducer, getInitialState(props.settings));
   const soundCorrectAnswer = useRef(null);
@@ -43,7 +45,6 @@ export default function ArithmeticTest(props) {
   // Pushes end of test page when time is over
   useEffect(() => {
     const id = setTimeout(() => {
-      // history.push("/end");
       props.onFinished();
     }, state.testTotalTime * 1000);
     return () => clearTimeout(id);
@@ -85,26 +86,26 @@ export default function ArithmeticTest(props) {
           soundBackground.current.currentTime = 0;
           switch (state.result) {
             case RESULT_CORRECT:
-              soundCorrectAnswer.current.play();
+              playAudio(soundCorrectAnswer);
               break;
             case RESULT_WRONG:
             case RESULT_TIMEOUT:
-              soundWrongAnswer.current.play();
+              playAudio(soundWrongAnswer);
               break;
             default:
           }
         } else {
-          soundBackground.current.play();
+          playAudio(soundBackground);
         }
       } else {
         if (state.waiting) {
           switch (state.result) {
             case RESULT_CORRECT:
-              soundCorrectAnswer.current.play();
+              playAudio(soundCorrectAnswer);
               break;
             case RESULT_WRONG:
             case RESULT_TIMEOUT:
-              soundWrongAnswer.current.play();
+              playAudio(soundWrongAnswer);
               break;
             default:
           }
@@ -147,7 +148,7 @@ export default function ArithmeticTest(props) {
             <div>
               <div className="results">{displayResult(state.result, t)}</div>
               <div className="recorded">
-                <div className="recorded-text">{t("recorded")}</div>
+                <div className="recorded-text">{t("arithmeticTest.recorded")}</div>
                 <div className="rounded-circle"></div>
               </div>
             </div>
