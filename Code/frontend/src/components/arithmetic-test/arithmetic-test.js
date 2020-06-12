@@ -22,6 +22,15 @@ function displayResult(result, t) {
   }
 }
 
+function playAudio(audioRef) {
+  const promise = audioRef.current.play();
+  if (promise !== undefined) {
+    promise.catch((error) => {
+      console.warn(`Audio playback was prevented! ${error.message}`);
+    });
+  }
+}
+
 export default function ArithmeticTest() {
   const location = useLocation();
   const history = useHistory();
@@ -83,26 +92,26 @@ export default function ArithmeticTest() {
           soundBackground.current.currentTime = 0;
           switch (state.result) {
             case RESULT_CORRECT:
-              soundCorrectAnswer.current.play();
+              playAudio(soundCorrectAnswer);
               break;
             case RESULT_WRONG:
             case RESULT_TIMEOUT:
-              soundWrongAnswer.current.play();
+              playAudio(soundWrongAnswer);
               break;
             default:
           }
         } else {
-          soundBackground.current.play();
+          playAudio(soundBackground);
         }
       } else {
         if (state.waiting) {
           switch (state.result) {
             case RESULT_CORRECT:
-              soundCorrectAnswer.current.play();
+              playAudio(soundCorrectAnswer);
               break;
             case RESULT_WRONG:
             case RESULT_TIMEOUT:
-              soundWrongAnswer.current.play();
+              playAudio(soundWrongAnswer);
               break;
             default:
           }
@@ -145,7 +154,7 @@ export default function ArithmeticTest() {
             <div>
               <div className="results">{displayResult(state.result, t)}</div>
               <div className="recorded">
-                <div className="recorded-text">{t("recorded")}</div>
+                <div className="recorded-text">{t("arithmeticTest.recorded")}</div>
                 <div className="rounded-circle"></div>
               </div>
             </div>

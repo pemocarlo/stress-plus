@@ -21,7 +21,6 @@
     "BAD": "BAD",
     "ok": "ok",
     "good": "good"
-
   },
   "end": {
     "message": "Test Finished!",
@@ -53,5 +52,8 @@
         }
       }
     }
+  },
+  "footer": {
+    "and": "and"
   }
 }
