@@ -23,6 +23,8 @@ export default {
     component: MessageScreen,
     initialSettings: {
       title: "Message",
+      message: "",
+      buttonText: "Next",
     },
     settingsComponent: MessageScreenSettings,
   },

@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form} from "react-bootstrap";
+import {v4 as uuid} from "uuid";
 
 export default function TextInput(props) {
+  const [id] = useState(() => uuid());
   return (
-    <Form.Group controlId="text-input">
+    <Form.Group controlId={id}>
       <Form.Label>{props.label}</Form.Label>
       <Form.Control
         type="text"
