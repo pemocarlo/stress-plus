@@ -56,6 +56,12 @@
       }
     }
   },
+  "home":{
+    "welcome": "Welcome to ",
+    "stress": "stress",
+    "tagline": "Push your stress - Push your mind",
+    "buttonEditor": "Go to editor"
+  },
   "footer": {
     "and": "and"
   }
