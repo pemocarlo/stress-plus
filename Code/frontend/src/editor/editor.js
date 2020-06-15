@@ -7,7 +7,7 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
 
-import Footer from "components/footer/footer";
+import MainLayout from "components/main-layout/main-layout";
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
 import overlayRegistry from "overlays/overlay-registry";
@@ -155,13 +155,12 @@ export default function Editor() {
   );
 
   return (
-    <div className="container-fluid" id="editor">
-      <div className="header">
+    <MainLayout>
+      <div id="editor-header">
         <FontAwesomeIcon icon="edit" />
         {t("editor.title")}
       </div>
-
-      <div className="container-fluid">
+      <div className="container-fluid" id="editor-content">
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="row">
             <div className="col-6">
@@ -195,16 +194,14 @@ export default function Editor() {
             </div>
           </div>
         </DragDropContext>
-      </div>
-      <div className="container-fluid">
         <div className="row">
           <div className="col-3">
-            <Button className="button" onClick={onGenerateLink}>
+            <Button id="generateLinkButton" onClick={onGenerateLink}>
               {t("editor.generateLink")}
               <FontAwesomeIcon icon="link" />
             </Button>
             <CopyToClipboard text={link}>
-              <Button className="button2">
+              <Button id="copyLinkButton">
                 {t("editor.copyLink")}
                 <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
               </Button>
@@ -215,10 +212,6 @@ export default function Editor() {
           </div>
         </div>
       </div>
-
-      <div className="footer">
-        <Footer></Footer>
-      </div>
-    </div>
+    </MainLayout>
   );
 }

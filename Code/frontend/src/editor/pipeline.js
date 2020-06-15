@@ -81,7 +81,7 @@ function PipelineItem(props) {
         <Accordion defaultActiveKey="0">
           <Card className="card">
             <Card.Header className="cardHead">
-              <Accordion.Toggle as={Button} variant="link" eventKey="1" className="cardLink">
+              <Accordion.Toggle as={Button} eventKey="1" className="cardLink">
                 Settings
                 <FontAwesomeIcon icon="cog" />
               </Accordion.Toggle>
