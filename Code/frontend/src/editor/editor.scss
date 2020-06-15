@@ -1,20 +1,17 @@
-#editor {
+#editor-header {
+  background-color: var(--primary);
+  color: var(--light);
+  font-size: larger;
+  padding: 10px 0 10px 25px;
   margin-bottom: 30px;
-  padding: 0;
 
-  .header {
-    background-color: var(--primary);
-    color: var(--light);
-    font-size: larger;
-    padding: 10px 0 10px 25px;
-    margin-bottom: 30px;
-
-    .fa-edit {
-      margin-right: 5px;
-    }
+  .fa-edit {
+    margin-right: 5px;
   }
+}
 
-  .container-fluid {
+#editor-content {
+  &.container-fluid {
     padding: 0 25px;
 
     .row {
@@ -28,15 +25,17 @@
       }
     }
 
-    .button {
+    #generateLinkButton {
       box-shadow: none;
       text-decoration: none;
       .fa-link {
         padding-left: 5px;
       }
     }
-    .button2 {
+    #copyLinkButton {
       margin-left: 20px;
+      box-shadow: none;
+      text-decoration: none;
       .fa-copy {
         margin-left: 5px;
       }

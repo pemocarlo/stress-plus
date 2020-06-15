@@ -10,6 +10,9 @@ $theme-colors: (
 $font-family-base: "Work Sans", sans-serif;
 $body-color: var(--primary);
 
+$input-focus-box-shadow: 0 0 0 0.1rem var(--info);
+$input-focus-border-color: var(--info);
+
 @import "~bootstrap/scss/bootstrap";
 
 .btn-primary:hover {

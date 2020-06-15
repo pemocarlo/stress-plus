@@ -4,15 +4,15 @@ import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
 
-import Footer from "components/footer/footer";
+import MainLayout from "components/main-layout/main-layout";
 import "./test-end.scss";
 
 export default function TestEnd() {
   const {t} = useTranslation();
   const history = useHistory();
   return (
-    <div className="TestEnd">
-      <div className="container">
+    <MainLayout>
+      <div className="container" id="test-end">
         <div className="row">
           <div className="message">{t("end.message")}</div>
         </div>
@@ -24,9 +24,6 @@ export default function TestEnd() {
           </div>
         </div>
       </div>
-      <div className="footer">
-        <Footer></Footer>
-      </div>
-    </div>
+    </MainLayout>
   );
 }

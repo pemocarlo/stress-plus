@@ -1,29 +1,14 @@
-.TestEnd {
-  --totalHeight: 95vh;
-
+#test-end {
   display: flex;
-  justify-content: center;
-  align-content: center;
   align-items: center;
-  box-sizing: border-box;
   flex-direction: column;
-
-  position: relative;
-
-  height: var(--totalHeight);
-
-  .row {
-    justify-content: center;
-  }
+  margin-top: 30vh;
 
   .message {
     font-size: 50px;
   }
 
   .buttonSettings {
-    margin: 20px auto;
-  }
-  .footer {
-    width: 100%;
+    margin: 20px;
   }
 }
