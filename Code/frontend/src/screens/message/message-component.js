@@ -1,5 +1,6 @@
 import React from "react";
-import {Button, Jumbotron} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Jumbotron from "react-bootstrap/Jumbotron";
 
 import "./message-component.scss";
 

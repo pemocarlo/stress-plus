@@ -1,9 +1,9 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import "./home.scss";
 

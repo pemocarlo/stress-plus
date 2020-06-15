@@ -1,10 +1,10 @@
 import React, {useEffect, useReducer, useRef} from "react";
 import {useTranslation} from "react-i18next";
 
-import Dialpad from "components/dialpad/dialpad";
-import ProgressBar from "components/progress-bar/progress-bar";
-import Levelbar from "components/level-bar/level-bar";
+import Dialpad from "./dialpad/dialpad";
+import Levelbar from "./level-bar/level-bar";
 import {mainReducer, getInitialState, RESULT_CORRECT, RESULT_WRONG, RESULT_TIMEOUT} from "./logic";
+import ProgressBar from "./progress-bar/progress-bar";
 import "./arithmetic-test.scss";
 
 function playAudio(audioRef) {

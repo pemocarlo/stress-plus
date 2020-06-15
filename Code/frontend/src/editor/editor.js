@@ -1,19 +1,17 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import qs from "qs";
 import React, {useState, useCallback} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import Button from "react-bootstrap/Button";
-
+import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
-import {CopyToClipboard} from "react-copy-to-clipboard";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import Footer from "components/footer/footer";
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
-import screenRegistry from "../screens/screen-registry";
-import overlayRegistry from "../overlays/overlay-registry";
-import Footer from "components/footer/footer";
+import overlayRegistry from "overlays/overlay-registry";
+import screenRegistry from "screens/screen-registry";
 import "./editor.scss";
 
 const TYPE_SCREEN = "screen";

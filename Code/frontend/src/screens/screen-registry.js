@@ -1,7 +1,8 @@
 import React from "react";
-import MessageComponent from "./message/message-component";
+
 import ArithmeticTest from "./math/arithmetic-test";
 import MathSettings from "./math/math-settings";
+import MessageComponent from "./message/message-component";
 import MessageSettings from "./message/message-settings";
 
 export default {

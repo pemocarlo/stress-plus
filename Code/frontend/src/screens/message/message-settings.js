@@ -1,8 +1,8 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 
-import TextInput from "components/text-input/text-input";
 import MultilineTextInput from "components/multiline-text-input/multiline-text-input";
+import TextInput from "components/text-input/text-input";
 
 export default function MessageSettings(props) {
   const {t} = useTranslation();

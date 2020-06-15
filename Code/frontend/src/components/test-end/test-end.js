@@ -1,9 +1,8 @@
-import React from "react";
-import {useHistory} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-import Button from "react-bootstrap/Button";
-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React from "react";
+import Button from "react-bootstrap/Button";
+import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 import Footer from "components/footer/footer";
 import "./test-end.scss";
