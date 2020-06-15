@@ -1,13 +1,12 @@
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faCog, faTrashAlt, faLink, faEdit, faTools, faCopy} from "@fortawesome/free-solid-svg-icons";
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCog, faTrashAlt, faLink, faEdit, faTools, faCopy} from "@fortawesome/free-solid-svg-icons";
-
 import "./index.scss";
-import StressApp from "./stress-app";
 import * as serviceWorker from "./service-worker";
+import StressApp from "./stress-app";
 import "./i18n";
 
 function LoadingComponent() {

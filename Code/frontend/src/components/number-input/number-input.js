@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Form} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import {v4 as uuid} from "uuid";
 
 export default function NumberInput(props) {

@@ -1,13 +1,14 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
-import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {useTranslation} from "react-i18next";
 
-import screenRegistry from "../screens/screen-registry";
-import overlayRegistry from "../overlays/overlay-registry";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import overlayRegistry from "overlays/overlay-registry";
+import screenRegistry from "screens/screen-registry";
+
 import "./pipeline.scss";
 
 export default function Pipeline(props) {

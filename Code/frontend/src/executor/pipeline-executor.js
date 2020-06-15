@@ -2,8 +2,8 @@ import qs from "qs";
 import React, {useState} from "react";
 import {useLocation, useHistory} from "react-router-dom";
 
-import screenRegistry from "screens/screen-registry";
 import overlayRegistry from "overlays/overlay-registry";
+import screenRegistry from "screens/screen-registry";
 import "./pipeline-executor.scss";
 
 function parseQueryString(queryString) {

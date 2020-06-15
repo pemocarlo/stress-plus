@@ -1,7 +1,7 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import {Droppable, Draggable} from "react-beautiful-dnd";
 import {useTranslation} from "react-i18next";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import "./toolbar.scss";
 

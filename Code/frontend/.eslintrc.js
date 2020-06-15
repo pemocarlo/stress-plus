@@ -18,6 +18,11 @@ module.exports = {
     jest: true,
     node: true,
   },
+
+  ignorePatterns: [
+    "node_modules",
+    "build"
+  ],
   
   parserOptions: {
     ecmaVersion: 2018,
@@ -48,6 +53,11 @@ module.exports = {
     "prefer-template": "warn",
 
     "import/newline-after-import": ["warn", {"count": 1}],
+    "import/order": ["warn", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+      "newlines-between": "always",
+      "alphabetize": {"order": "asc"}
+    }],
 
     "jsx-a11y/media-has-caption": "off",
 
