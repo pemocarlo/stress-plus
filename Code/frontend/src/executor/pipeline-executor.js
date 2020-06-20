@@ -1,5 +1,5 @@
 import qs from "qs";
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import {useLocation, useHistory} from "react-router-dom";
 
 import overlayRegistry from "overlays/overlay-registry";
@@ -34,14 +34,18 @@ export default function PipelineExecutor() {
   const history = useHistory();
   const settings = parseQueryString(location.search);
   const {screens, overlays} = settings;
+  const screenCount = screens.length;
 
-  const onScreenFinished = () => {
-    if (screens.length > screenIndex + 1) {
-      setScreenIndex((i) => i + 1);
-    } else {
-      history.push("/end");
-    }
-  };
+  const onScreenFinished = useCallback(() => {
+    setScreenIndex((index) => {
+      if (screenCount > index + 1) {
+        return index + 1;
+      } else {
+        history.push("/end");
+        return index;
+      }
+    });
+  }, [setScreenIndex, screenCount, history]);
 
   const currentScreen = screens[screenIndex];
 
