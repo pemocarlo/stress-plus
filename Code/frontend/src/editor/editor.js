@@ -1,8 +1,9 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import qs from "qs";
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useRef, useEffect} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
@@ -42,9 +43,10 @@ const reorder = (list, sourceIndex, destinationIndex) => {
 };
 
 const copy = (source, destination, sourceIndex, destinationIndex) => {
+  const result = Array.from(destination);
   const item = source[sourceIndex];
-  destination.splice(destinationIndex, 0, {...item, id: uuid()});
-  return destination;
+  result.splice(destinationIndex, 0, {...item, id: uuid()});
+  return result;
 };
 
 const remove = (list, index) => {
@@ -77,11 +79,17 @@ const newSettings = (id, name, value, setPipeline) => {
 
 export default function Editor() {
   const {t} = useTranslation();
+  const [isValid, setIsValid] = useState(true);
   const [link, setLink] = useState("");
   const [pipelineScreen, setPipelineScreen] = useState([]);
   const [pipelineOverlay, setPipelineOverlay] = useState([]);
   const [toolbarScreenItems] = useState(() => createToolbarItems(screenRegistry));
   const [toolbarOverlayItems] = useState(() => createToolbarItems(overlayRegistry));
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    setIsValid(formRef.current.checkValidity() && pipelineScreen.length > 0);
+  }, [pipelineScreen, setIsValid]);
 
   const onDragEnd = useCallback(
     (result) => {
@@ -160,13 +168,12 @@ export default function Editor() {
         <FontAwesomeIcon icon="edit" />
         {t("editor.title")}
       </div>
-      <div className="container-fluid" id="editor-content">
+      <Form className="container-fluid" id="editor-content" ref={formRef}>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="row">
             <div className="col-6">
               <Toolbar id={TOOLBAR_SCREENS_ID} dndType={TYPE_SCREEN} items={toolbarScreenItems} />
             </div>
-
             <div className="col-6">
               <Toolbar id={TOOLBAR_OVERLAYS_ID} dndType={TYPE_OVERLAY} items={toolbarOverlayItems} />
             </div>
@@ -196,22 +203,22 @@ export default function Editor() {
         </DragDropContext>
         <div className="row">
           <div className="col-3">
-            <Button id="generateLinkButton" onClick={onGenerateLink}>
+            <Button id="generateLinkButton" onClick={onGenerateLink} disabled={!isValid}>
               {t("editor.generateLink")}
               <FontAwesomeIcon icon="link" />
             </Button>
             <CopyToClipboard text={link}>
-              <Button id="copyLinkButton">
+              <Button id="copyLinkButton" disabled={link === ""}>
                 {t("editor.copyLink")}
                 <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
               </Button>
             </CopyToClipboard>
           </div>
           <div className="col-9">
-            <input type="text" value={link} className="link-box" readOnly placeholder="/executor"></input>
+            <input type="text" value={link} className="link-box" readOnly></input>
           </div>
         </div>
-      </div>
+      </Form>
     </MainLayout>
   );
 }

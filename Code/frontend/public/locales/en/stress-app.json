@@ -42,7 +42,7 @@
           "name": "Message",
           "title": "Title",
           "message": "Message",
-          "buttonText": "Next"
+          "buttonText": "Button Text"
         },
         "waiting": {
           "name": "Wait Screen",
@@ -76,5 +76,10 @@
   },
   "footer": {
     "names": "A. Aravindan, A. Ohlmann, C. Perez, J. Schüll, T. Vogel and M. Nissen, M. Zürl"
+  },
+  "form": {
+    "feedback": {
+      "invalid": "Invalid value"
+    }
   }
 }
