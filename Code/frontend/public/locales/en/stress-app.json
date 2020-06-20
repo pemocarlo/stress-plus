@@ -8,6 +8,7 @@
     "answerTimeout": "Answer timeout",
     "waitTime": "Time between questions",
     "difficulty": "Difficulty (Easy: 0; Hard: 4)"
+    
   },
   "arithmeticTest": {
     "correct": "Correct",
@@ -52,6 +53,11 @@
         "currentTime": {
           "name": "Current Time",
           "position": "Position"
+        },
+        "screenFreeze": {
+          "name": "Screen Freeze",
+          "freezeStart": "Start Time",
+          "freezeDisplay": "Display Time"
         }
       }
     }
