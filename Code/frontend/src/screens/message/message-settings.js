@@ -15,6 +15,7 @@ export default function MessageSettings(props) {
         label={t(`editor.${props.dndType}.items.${props.type}.title`)}
         value={props.title}
         onChange={onChange}
+        required
       />
       <MultilineTextInput
         name="message"
@@ -27,6 +28,7 @@ export default function MessageSettings(props) {
         label={t(`editor.${props.dndType}.items.${props.type}.buttonText`)}
         value={props.buttonText}
         onChange={onChange}
+        required
       />
     </div>
   );
