@@ -43,6 +43,12 @@
           "title": "Title",
           "message": "Message",
           "buttonText": "Next"
+        },
+        "waiting": {
+          "name": "Wait Screen",
+          "title": "Title",
+          "message": "Wait Message",
+          "wait_time": "Wait Time (sec)"
         }
       }
     },
