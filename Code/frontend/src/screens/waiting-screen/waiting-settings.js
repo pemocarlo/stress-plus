@@ -16,6 +16,7 @@ export default function WaitingSettings(props) {
         label={t(`editor.${props.dndType}.items.${props.type}.title`)}
         value={props.title}
         onChange={onChange}
+        required
       />
       <MultilineTextInput
         name="message"
@@ -28,6 +29,8 @@ export default function WaitingSettings(props) {
         label={t(`editor.${props.dndType}.items.${props.type}.wait_time`)}
         value={props.wait_time}
         onChange={onChange}
+        required
+        min={1}
       />
     </div>
   );
