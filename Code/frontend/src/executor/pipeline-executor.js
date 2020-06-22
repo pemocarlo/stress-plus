@@ -15,8 +15,7 @@ function getScreenComponent(screen) {
 }
 
 function getOverlayComponent(overlay) {
-  const component = overlayRegistry[overlay.type].component;
-  return component(overlay);
+  return overlayRegistry[overlay.type].component;
 }
 
 function getOverlayCssClass(overlay) {
@@ -49,17 +48,21 @@ export default function PipelineExecutor() {
 
   const currentScreen = screens[screenIndex];
 
-  const component = getScreenComponent(currentScreen);
+  const ScreenComponent = getScreenComponent(currentScreen);
 
   return (
     <div className="pipeline-executor" key={screenIndex}>
-      {component({settings: currentScreen, onFinished: onScreenFinished})}
-      {overlays &&
-        overlays.map((overlay) => (
-          <div key={overlay.id} className={getOverlayCssClass(overlay)}>
-            {getOverlayComponent(overlay)}
-          </div>
-        ))}
+      <ScreenComponent settings={currentScreen} onFinished={onScreenFinished} />
+      {overlays && overlays.map((overlay) => <OverlayContainer key={overlay.id} {...overlay} />)}
+    </div>
+  );
+}
+
+function OverlayContainer(props) {
+  const OverlayComponent = getOverlayComponent(props);
+  return (
+    <div className={getOverlayCssClass(props)}>
+      <OverlayComponent {...props} />
     </div>
   );
 }
