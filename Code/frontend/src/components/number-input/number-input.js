@@ -7,7 +7,7 @@ function isInRange(number, min, max) {
   if (min !== undefined && number < min) {
     return false;
   }
-  if (max !== undefined && number >= max) {
+  if (max !== undefined && number > max) {
     return false;
   }
   return true;
