@@ -57,9 +57,9 @@ function PipelineDraggable(props) {
 function getSettingsComponent(props) {
   switch (props.dndType) {
     case "screen":
-      return screenRegistry[props.type].settingsComponent(props);
+      return screenRegistry[props.type].settingsComponent;
     case "overlay":
-      return overlayRegistry[props.type].settingsComponent(props);
+      return overlayRegistry[props.type].settingsComponent;
     default:
       return;
   }
@@ -67,6 +67,9 @@ function getSettingsComponent(props) {
 
 function PipelineItem(props) {
   const {t} = useTranslation();
+
+  const SettingsComponent = getSettingsComponent(props);
+
   return (
     <Card className="card">
       <Card.Header className="cardHead-1">
@@ -87,7 +90,9 @@ function PipelineItem(props) {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
-              <Card.Body className="cardBodyCollapse">{getSettingsComponent(props)}</Card.Body>
+              <Card.Body className="cardBodyCollapse">
+                <SettingsComponent {...props} />
+              </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
