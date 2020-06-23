@@ -14,12 +14,16 @@ export default function ScreenFrezzeSettings(props) {
         label={t("editor.overlay.items.screenFreeze.freezeStart")}
         value={props.freezeStart}
         onChange={onChange}
+        required
+        min={0}
       />
       <NumberInput
         name="freezeDisplay"
         label={t("editor.overlay.items.screenFreeze.freezeDisplay")}
         value={props.freezeDisplay}
         onChange={onChange}
+        required
+        min={1}
       />
     </div>
   );

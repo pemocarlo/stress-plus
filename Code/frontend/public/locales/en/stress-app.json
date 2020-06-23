@@ -4,9 +4,9 @@
     "startButton": "Start",
     "enableSound": "Enable sound",
     "isControl": "Activate Control?",
-    "totalTime": "Total time",
-    "answerTimeout": "Answer timeout",
-    "waitTime": "Time between questions",
+    "totalTime": "Total test time (sec)",
+    "answerTimeout": "Answer timeout (sec)",
+    "waitTime": "Time between questions (sec)",
     "difficulty": "Difficulty (Easy: 0; Hard: 4)"
     
   },
@@ -62,8 +62,8 @@
         },
         "screenFreeze": {
           "name": "Screen Freeze",
-          "freezeStart": "Start Time",
-          "freezeDisplay": "Display Time"
+          "freezeStart": "Start Time (sec)",
+          "freezeDisplay": "Display Time (sec)"
         }
       }
     }
