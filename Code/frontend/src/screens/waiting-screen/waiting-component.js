@@ -21,11 +21,11 @@ export default function WaitingComponent(props) {
       <p className="message">{settings.message}</p>
       <div className="spinners">
         <Spinner animation="grow" variant="primary" />
-        <Spinner animation="grow" variant="danger" />
-        <Spinner animation="grow" variant="warning" />
+        <Spinner animation="grow" variant="secondary" />
+        <Spinner animation="grow" variant="info" />
         <Spinner animation="grow" variant="primary" />
-        <Spinner animation="grow" variant="success" />
-        <Spinner animation="grow" variant="danger" />
+        <Spinner animation="grow" variant="secondary" />
+        <Spinner animation="grow" variant="info" />
       </div>
     </Jumbotron>
   );

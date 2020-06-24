@@ -1,3 +1,5 @@
+import DefaultStart from "./default-start/default-start";
+import DefaultStartSettings from "./default-start/default-start-settings";
 import ArithmeticTest from "./math/arithmetic-test";
 import MathSettings from "./math/math-settings";
 import MessageComponent from "./message/message-component";
@@ -38,5 +40,13 @@ export default {
       wait_time: 5,
     },
     settingsComponent: WaitingSettings,
+  },
+
+  start: {
+    component: DefaultStart,
+    initialSettings: {
+      message: "Don't disappoint us",
+    },
+    settingsComponent: DefaultStartSettings,
   },
 };
