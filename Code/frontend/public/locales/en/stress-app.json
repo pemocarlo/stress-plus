@@ -49,6 +49,10 @@
           "title": "Title",
           "message": "Wait Message",
           "wait_time": "Wait Time (sec)"
+        },
+        "start": {
+          "name": "Default Start",
+          "message": "Welcome Message"
         }
       }
     },
@@ -72,7 +76,8 @@
     "welcome": "Welcome to ",
     "stress": "stress",
     "tagline": "Push your stress - Push your mind",
-    "buttonEditor": "Go to editor"
+    "buttonEditor": "Go to editor",
+    "buttonStart": "Start"
   },
   "footer": {
     "names": "A. Aravindan, A. Ohlmann, C. Perez, J. Schüll, T. Vogel and M. Nissen, M. Zürl"
