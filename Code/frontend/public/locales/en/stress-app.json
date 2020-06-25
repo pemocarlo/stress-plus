@@ -8,7 +8,6 @@
     "answerTimeout": "Answer timeout (sec)",
     "waitTime": "Time between questions (sec)",
     "difficulty": "Difficulty (Easy: 0; Hard: 4)"
-    
   },
   "arithmeticTest": {
     "correct": "Correct",
@@ -74,11 +73,15 @@
           "position": "Position",
           "loading": "Starting webcam ...",
           "error": "Failed to access webcam!"
+        },
+        "chatbot": {
+          "name": "Chatbot",
+          "startTime": "Start Time (sec)"
         }
       }
     }
   },
-  "home":{
+  "home": {
     "welcome": "Welcome to ",
     "stress": "stress",
     "tagline": "Push your stress - Push your mind",
