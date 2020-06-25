@@ -77,6 +77,11 @@
         "chatbot": {
           "name": "Chatbot",
           "startTime": "Start Time (sec)"
+        },
+        "heartbeat": {
+          "name": "Heartbeat",
+          "heartbeatStart": "Start Time (sec)",
+          "position": "Position"
         }
       }
     }
