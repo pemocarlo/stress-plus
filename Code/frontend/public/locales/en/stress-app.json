@@ -68,6 +68,12 @@
           "name": "Screen Freeze",
           "freezeStart": "Start Time (sec)",
           "freezeDisplay": "Display Time (sec)"
+        },
+        "webcam": {
+          "name": "Webcam",
+          "position": "Position",
+          "loading": "Starting webcam ...",
+          "error": "Failed to access webcam!"
         }
       }
     }
