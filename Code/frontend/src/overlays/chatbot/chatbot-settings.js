@@ -10,7 +10,7 @@ export default function ScreenFrezzeSettings(props) {
   return (
     <div>
       <NumberInput
-        name="showAt"
+        name="startTime"
         label={t("editor.overlay.items.chatbot.startTime")}
         value={props.startTime}
         onChange={onChange}
