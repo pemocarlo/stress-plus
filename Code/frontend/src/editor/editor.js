@@ -145,7 +145,7 @@ export default function Editor() {
   const onGenerateLink = useCallback(() => {
     const link = qs.stringify({screens: pipelineScreen, overlays: pipelineOverlay}, {allowDots: true});
     console.log(`Link length: ${link.length}`);
-    setLink(`${window.location.host}/executor?${link}`);
+    setLink(`${window.location.protocol}//${window.location.host}/executor?${link}`);
   }, [pipelineScreen, pipelineOverlay]);
 
   const updateScreenSettings = useCallback(
