@@ -1,3 +1,5 @@
+import MyChatBot from "./chatbot/chatbot";
+import MyChatBotSettings from "./chatbot/chatbot-settings";
 import CurrentTime from "./current-time/current-time";
 import CurrentTimeSettings from "./current-time/current-time-settings";
 import ScreenFreeze from "./screen-freeze/screen-freeze";
@@ -28,5 +30,12 @@ export default {
       position: "bottom-left",
     },
     settingsComponent: WebcamOverlaySettings,
+  },
+  chatbot: {
+    component: MyChatBot,
+    initialSettings: {
+      startTime: 5,
+    },
+    settingsComponent: MyChatBotSettings,
   },
 };
