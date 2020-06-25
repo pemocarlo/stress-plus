@@ -1,5 +1,5 @@
 import qs from "qs";
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useMemo} from "react";
 import {useLocation, useHistory} from "react-router-dom";
 
 import overlayRegistry from "overlays/overlay-registry";
@@ -31,28 +31,25 @@ export default function PipelineExecutor() {
 
   const location = useLocation();
   const history = useHistory();
-  const settings = parseQueryString(location.search);
+  const settings = useMemo(() => parseQueryString(location.search), [location.search]);
   const {screens, overlays} = settings;
   const screenCount = screens.length;
 
   const onScreenFinished = useCallback(() => {
-    setScreenIndex((index) => {
-      if (screenCount > index + 1) {
-        return index + 1;
-      } else {
-        history.push("/end");
-        return index;
-      }
-    });
-  }, [setScreenIndex, screenCount, history]);
+    if (screenCount > screenIndex + 1) {
+      setScreenIndex((i) => i + 1);
+    } else {
+      history.push("/end");
+    }
+  }, [setScreenIndex, screenIndex, screenCount, history]);
 
   const currentScreen = screens[screenIndex];
 
   const ScreenComponent = getScreenComponent(currentScreen);
 
   return (
-    <div className="pipeline-executor" key={screenIndex}>
-      <ScreenComponent settings={currentScreen} onFinished={onScreenFinished} />
+    <div className="pipeline-executor">
+      <ScreenComponent key={screenIndex} settings={currentScreen} onFinished={onScreenFinished} />
       {overlays && overlays.map((overlay) => <OverlayContainer key={overlay.id} {...overlay} />)}
     </div>
   );
