@@ -72,7 +72,7 @@
           "name": "Webcam",
           "position": "Position",
           "loading": "Starting webcam ...",
-          "error": "Failed to access webcam!"
+          "error": "Failed to access webcam! Please allow the use of your webcam! Also for your browser!"
         },
         "chatbot": {
           "name": "Chatbot",

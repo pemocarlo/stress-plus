@@ -2,6 +2,8 @@ import React, {useState, useEffect, useCallback} from "react";
 import ChatBot from "react-simple-chatbot";
 
 import "./chatbot.scss";
+import {ThemeProvider} from "styled-components";
+
 import logo from "./user_avatar.svg";
 
 const config = {
@@ -16,6 +18,17 @@ export default function MyChatBot(props) {
   const [startTime] = useState(parseInt(props.startTime));
 
   const toggle = useCallback(() => setIsOpen((state) => !state), [setIsOpen]);
+
+  const theme = {
+    background: "white",
+    fontFamily: "'Work Sans', sans-serif",
+    headerBgColor: "var(--primary)",
+    headerFontColor: "var(--infoLight)",
+    botBubbleColor: "var(--secondary)",
+    botFontColor: "var(--infoLight)",
+    userBubbleColor: "var(--infoLight)",
+    userFontColor: "var(--dark)",
+  };
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -53,8 +66,10 @@ export default function MyChatBot(props) {
   ];
 
   return (
-    <div className="MyChatBot">
-      <ChatBot steps={steps} {...config} opened={isOpen} toggleFloating={toggle} />;
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="MyChatBot">
+        <ChatBot steps={steps} {...config} opened={isOpen} toggleFloating={toggle} />;
+      </div>
+    </ThemeProvider>
   );
 }
