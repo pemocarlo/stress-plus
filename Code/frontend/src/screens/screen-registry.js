@@ -1,5 +1,7 @@
 import DefaultStart from "./default-start/default-start";
 import DefaultStartSettings from "./default-start/default-start-settings";
+import End from "./end/end";
+import EndSettings from "./end/end-settings";
 import ArithmeticTest from "./math/arithmetic-test";
 import MathSettings from "./math/math-settings";
 import MessageComponent from "./message/message-component";
@@ -48,5 +50,13 @@ export default {
       message: "Don't disappoint us",
     },
     settingsComponent: DefaultStartSettings,
+  },
+
+  end: {
+    component: End,
+    initialSettings: {
+      message: "We will now analyze your results",
+    },
+    settingsComponent: EndSettings,
   },
 };
