@@ -24,7 +24,9 @@
   },
   "end": {
     "message": "Test Finished!",
-    "button": "Back to Settings"
+    "button": "Back to Settings",
+    "headline": "Test is over!",
+    "stress": "stress"
   },
   "editor": {
     "title": "Editor",
@@ -52,6 +54,10 @@
         "start": {
           "name": "Default Start",
           "message": "Welcome Message"
+        },
+        "end": {
+          "name": "End Screen",
+          "message": "End Message"
         }
       }
     },
