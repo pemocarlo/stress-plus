@@ -21,7 +21,7 @@ export default {
     component: ScreenFreeze,
     initialSettings: {
       position: "center",
-      freezeStart: 10,
+      freezeStart: 5,
       freezeDisplay: 5,
     },
     settingsComponent: ScreenFreezeSetting,
@@ -43,8 +43,8 @@ export default {
   heartbeat: {
     component: Heartbeat,
     initialSettings: {
-      heartbeatStart: 0,
-      position: "top",
+      heartbeatStart: 5,
+      position: "bottom",
     },
     settingsComponent: HeartbeatSettings,
   },
