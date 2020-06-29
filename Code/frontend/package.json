@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node ./set-env-vars.js && react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test",
     "lint": "eslint .",
