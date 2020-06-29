@@ -1,6 +1,7 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 
+import {VERSION} from "stress-app";
 import "./footer.scss";
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
         <div className="row">
           <div className="col-5">{t("footer.names")}</div>
           <div className="col-3 font-weight-bold">stress+</div>
-          <div className="col-2">Version 1.0 </div>
+          <div className="col-2">Version {VERSION}</div>
           <div className="col-2">2020</div>
         </div>
       </div>

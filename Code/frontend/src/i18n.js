@@ -2,6 +2,8 @@ import i18n from "i18next";
 import Backend from "i18next-http-backend";
 import {initReactI18next} from "react-i18next";
 
+import {BUILD_TIME, IS_DEVELOPMENT} from "stress-app";
+
 i18n
   .use(Backend) // load translation using http https://github.com/i18next/i18next-http-backend
   .use(initReactI18next) // pass the i18n instance to react-i18next
@@ -13,10 +15,14 @@ i18n
     lng: "en",
 
     fallbackLng: "en",
-    debug: true,
+    debug: IS_DEVELOPMENT,
 
     ns: "stress-app",
     defaultNS: "stress-app",
+
+    backend: {
+      queryStringParams: {"build-time": BUILD_TIME},
+    },
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
