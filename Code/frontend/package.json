@@ -43,7 +43,7 @@
     "eject": "react-scripts eject",
     "test": "react-scripts test",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix && prettier --write **/*.css"
+    "lint-fix": "eslint . --fix && prettier --write **/*.scss"
   },
   "browserslist": {
     "production": [
