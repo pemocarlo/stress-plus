@@ -1,27 +1,23 @@
-image: node:12-alpine
-
-stages:
-  - test
-  - build
-
-default:
-  tags:
-    - docker
-  before_script:
+frontend:lint:
+  stage: test
+  needs: []
+  script: 
     - cd Code/frontend
     - npm ci
-
-lint:
-  stage: test
-  script: 
     - npm run lint
 
-test:
+frontend:test:
   stage: test
+  needs: []
   script:
+    - cd Code/frontend
+    - npm ci
     - npm run test
 
-build:
+frontend:build:
   stage: build
+  needs: ["frontend:lint", "frontend:test"]
   script:
+    - cd Code/frontend
+    - npm ci
     - npm run build

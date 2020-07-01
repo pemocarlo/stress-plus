@@ -1,4 +1,5 @@
-FROM node:12-alpine as builder
+# Build the final bundle in the separate builder container
+FROM node:12 as builder
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -12,12 +13,19 @@ RUN npm ci
 # Build app
 RUN npm run build
 
-
-FROM node:12-alpine
+# This is the final container
+FROM node:12
 
 # Create app directory
 WORKDIR /usr/src/app
 
+# Copy package.json and package-lock.json to final container
+COPY package*.json ./
+
+# Install all production dependencies
+RUN npm ci --only=production
+
+# Copy the created server bundle
 COPY --from=builder /usr/src/app/build/server.js .
 
 CMD [ "node", "server.js" ]
