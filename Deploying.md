@@ -23,6 +23,8 @@ The backend uses the Heroku container stack to deploy a docker container. Here t
 
 ### Setup
 - `heroku create --remote heroku-frontend --region eu --stack container stress-plus-backend` Create a new heroku app with the name `stress-plus-backend`
+- `heroku addons:create mongolab:sandbox -a stress-plus-backend` Add a MongoDB database to the backend
+- The MongoDB URI to connect to the database using a driver is automatically added in the Config Vars `MONGODB_URI` to the Heroku backend app.
 
 ### Deploy
 To deploy your code from master branch run `git push heroku-backend master`. If you want to deploy the branch `branch-name`, run `git push heroku-backend branch-name:master`

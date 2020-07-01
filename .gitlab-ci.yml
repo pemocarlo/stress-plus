@@ -1,2 +1,13 @@
+image: node:12
+
+stages:
+  - test
+  - build
+
+default:
+  tags:
+    - docker
+
 include:
   - local: 'Code/frontend/.gitlab-ci.yml'
+  - local: 'Code/backend/.gitlab-ci.yml'

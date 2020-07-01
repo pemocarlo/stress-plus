@@ -1,0 +1,15 @@
+backend:lint:
+  stage: test
+  needs: []
+  script: 
+    - cd Code/backend
+    - npm ci
+    - npm run lint
+
+backend:build:
+  stage: build
+  needs: ["backend:lint"]
+  script:
+    - cd Code/backend
+    - npm ci
+    - npm run build
