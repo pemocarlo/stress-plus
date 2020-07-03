@@ -18,15 +18,9 @@
   "levelBar": {
     "you": "You",
     "average": "Average",
-    "BAD": "BAD",
+    "bad": "BAD",
     "ok": "ok",
     "good": "good"
-  },
-  "end": {
-    "message": "Test Finished!",
-    "button": "Back to Settings",
-    "headline": "Test is over!",
-    "stress": "stress"
   },
   "editor": {
     "title": "Editor",
@@ -52,12 +46,13 @@
           "wait_time": "Wait Time (sec)"
         },
         "start": {
-          "name": "Default Start",
+          "name": "Start",
           "message": "Welcome Message"
         },
         "end": {
-          "name": "End Screen",
-          "message": "End Message"
+          "name": "End",
+          "message": "End Message",
+          "headline": "Test is over!"
         }
       }
     },
