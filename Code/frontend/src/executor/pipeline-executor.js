@@ -1,6 +1,6 @@
 import qs from "qs";
 import React, {useState, useCallback, useMemo} from "react";
-import {useLocation, useHistory} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 import overlayRegistry from "overlays/overlay-registry";
 import screenRegistry from "screens/screen-registry";
@@ -30,7 +30,6 @@ export default function PipelineExecutor() {
   const [screenIndex, setScreenIndex] = useState(0);
 
   const location = useLocation();
-  const history = useHistory();
   const settings = useMemo(() => parseQueryString(location.search), [location.search]);
   const {screens, overlays} = settings;
   const screenCount = screens.length;
@@ -39,9 +38,9 @@ export default function PipelineExecutor() {
     if (screenCount > screenIndex + 1) {
       setScreenIndex((i) => i + 1);
     } else {
-      history.push("/end");
+      window.location.href = "about:blank";
     }
-  }, [setScreenIndex, screenIndex, screenCount, history]);
+  }, [setScreenIndex, screenIndex, screenCount]);
 
   const currentScreen = screens[screenIndex];
 

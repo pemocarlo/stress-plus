@@ -15,7 +15,7 @@ export default function End(props) {
           <Card className="card">
             <Card.Header id="endtext">
               <div className="row">
-                <h1>{t("end.headline")}</h1>
+                <h1>{t("editor.screen.items.end.headline")}</h1>
               </div>
               <div className="row">
                 <h3 className="message">{settings.message}</h3>

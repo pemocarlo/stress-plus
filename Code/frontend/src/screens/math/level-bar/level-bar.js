@@ -19,7 +19,7 @@ export default function Levelbar(props) {
 
         <div className="row p-0">
           <div className="col-12 p-0">
-            <div className="meter_red bg-danger">{t("levelBar.BAD")}</div>
+            <div className="meter_red bg-danger">{t("levelBar.bad")}</div>
             <div className="meter_yellow bg-warning">{t("levelBar.ok")}</div>
             <div className="meter_green bg-success">{t("levelBar.good")}</div>
           </div>
