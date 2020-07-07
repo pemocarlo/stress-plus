@@ -15,15 +15,15 @@ export function getInitialState(settings) {
     correctAnswers: 0,
     totalAnswers: 0,
     finalQuestionTime: 0,
-    seconds: parseInt(settings.answerTimeout),
-    waitTime: parseInt(settings.waitTime),
+    seconds: settings.answerTimeout,
+    waitTime: settings.waitTime,
     averageScore: 50,
     yourScore: 0,
     waiting: true,
-    enableSound: settings.enableSound === "true",
-    isControl: settings.isControl === "true",
-    testTotalTime: parseInt(settings.testTotalTime),
-    difficulty: parseInt(settings.difficulty),
+    enableSound: settings.enableSound,
+    isControl: settings.isControl,
+    testTotalTime: settings.testTotalTime,
+    difficulty: settings.difficulty,
   };
 }
 

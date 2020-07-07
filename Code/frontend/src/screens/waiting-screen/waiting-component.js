@@ -11,7 +11,7 @@ export default function WaitingComponent(props) {
   useEffect(() => {
     const id = setTimeout(() => {
       onFinished();
-    }, parseInt(waitTime) * 1000);
+    }, waitTime * 1000);
     return () => clearTimeout(id);
   }, [onFinished, waitTime]);
 

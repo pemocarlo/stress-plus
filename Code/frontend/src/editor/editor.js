@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import qs from "qs";
+import axios from "axios";
 import React, {useState, useCallback, useRef, useEffect} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import Button from "react-bootstrap/Button";
@@ -8,6 +8,7 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
 import {v4 as uuid} from "uuid";
 
+import ErrorComponent from "components/error-component/error-component";
 import MainLayout from "components/main-layout/main-layout";
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
@@ -81,6 +82,7 @@ export default function Editor() {
   const {t} = useTranslation();
   const [isValid, setIsValid] = useState(true);
   const [link, setLink] = useState("");
+  const [error, setError] = useState(null);
   const [pipelineScreen, setPipelineScreen] = useState([]);
   const [pipelineOverlay, setPipelineOverlay] = useState([]);
   const [toolbarScreenItems] = useState(() => createToolbarItems(screenRegistry));
@@ -143,9 +145,17 @@ export default function Editor() {
   );
 
   const onGenerateLink = useCallback(() => {
-    const link = qs.stringify({screens: pipelineScreen, overlays: pipelineOverlay}, {allowDots: true});
-    console.log(`Link length: ${link.length}`);
-    setLink(`${window.location.protocol}//${window.location.host}/executor?${link}`);
+    const data = {screens: pipelineScreen, overlays: pipelineOverlay};
+    axios
+      .post("/api/stress-test", data)
+      .then((response) => {
+        const id = response.data._id;
+        setLink(`${window.location.protocol}//${window.location.host}/executor/${id}`);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, [pipelineScreen, pipelineOverlay]);
 
   const updateScreenSettings = useCallback(
@@ -218,6 +228,7 @@ export default function Editor() {
             <input type="text" value={link} className="link-box" readOnly></input>
           </div>
         </div>
+        {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
       </Form>
     </MainLayout>
   );

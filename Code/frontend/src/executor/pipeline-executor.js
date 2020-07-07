@@ -1,14 +1,12 @@
-import qs from "qs";
-import React, {useState, useCallback, useMemo} from "react";
-import {useLocation} from "react-router-dom";
+import axios from "axios";
+import React, {useState, useCallback, useEffect} from "react";
+import {useParams} from "react-router-dom";
 
+import ErrorComponent from "components/error-component/error-component";
+import LoadingComponent from "components/loading/loading";
 import overlayRegistry from "overlays/overlay-registry";
 import screenRegistry from "screens/screen-registry";
 import "./pipeline-executor.scss";
-
-function parseQueryString(queryString) {
-  return qs.parse(queryString, {allowDots: true, ignoreQueryPrefix: true});
-}
 
 function getScreenComponent(screen) {
   return screenRegistry[screen.type].component;
@@ -28,20 +26,40 @@ function getOverlayCssClass(overlay) {
 
 export default function PipelineExecutor() {
   const [screenIndex, setScreenIndex] = useState(0);
+  const [settings, setSettings] = useState(null);
+  const [error, setError] = useState(null);
 
-  const location = useLocation();
-  const settings = useMemo(() => parseQueryString(location.search), [location.search]);
-  const {screens, overlays} = settings;
-  const screenCount = screens.length;
+  const {testId} = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`/api/stress-test/${testId}`)
+      .then((response) => {
+        setSettings(response.data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, [testId]);
 
   const onScreenFinished = useCallback(() => {
-    if (screenCount > screenIndex + 1) {
+    if (settings.screens.length > screenIndex + 1) {
       setScreenIndex((i) => i + 1);
     } else {
       window.location.href = "about:blank";
     }
-  }, [setScreenIndex, screenIndex, screenCount]);
+  }, [setScreenIndex, screenIndex, settings]);
 
+  if (error !== null) {
+    return <ErrorComponent>{error.message}</ErrorComponent>;
+  }
+
+  if (settings === null) {
+    return <LoadingComponent />;
+  }
+
+  const {screens, overlays} = settings;
   const currentScreen = screens[screenIndex];
 
   const ScreenComponent = getScreenComponent(currentScreen);

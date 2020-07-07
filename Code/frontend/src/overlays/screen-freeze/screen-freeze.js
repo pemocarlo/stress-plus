@@ -5,8 +5,8 @@ import "./screen-freeze.scss";
 export default function ScreenFreeze(props) {
   const [showLoading, setShowLoading] = useState(false);
 
-  const [timeToStart] = useState(parseInt(props.freezeStart));
-  const [timeDisplay] = useState(parseInt(props.freezeDisplay));
+  const [timeToStart] = useState(props.freezeStart);
+  const [timeDisplay] = useState(props.freezeDisplay);
 
   useEffect(() => {
     const start = setTimeout(() => setShowLoading(true), timeToStart * 1000);
