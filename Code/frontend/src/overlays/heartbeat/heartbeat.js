@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import "./heartbeat.scss";
 
 export default function Heartbeat(props) {
-  const [timeToStart] = useState(parseInt(props.heartbeatStart));
+  const [timeToStart] = useState(props.heartbeatStart);
   const [showLoading, setShowLoading] = useState(false);
   const [counter, setCounter] = useState(70);
 

@@ -1,7 +1,7 @@
 (function () {
   const fs = require("fs");
   const dotenv = require("dotenv");
-  [".env", ".env.local"].forEach((file) => {
+  [".env.local", ".env"].forEach((file) => {
     if (fs.existsSync(file)) {
       dotenv.config({path: file});
     }

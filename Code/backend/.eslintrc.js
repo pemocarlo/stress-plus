@@ -23,7 +23,7 @@ module.exports = {
 
   rules: {
     "eol-last": ["warn", "always"],
-    "max-len": ["warn", {code: 100}],
+    "max-len": ["warn", {code: 100, ignoreUrls: true}],
     "no-duplicate-imports": "warn",
     "no-useless-concat": "warn",
     "no-var": "error",

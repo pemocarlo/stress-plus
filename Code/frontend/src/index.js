@@ -4,14 +4,12 @@ import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 
-import "./index.scss";
+import LoadingComponent from "components/loading/loading";
+
 import * as serviceWorker from "./service-worker";
 import StressApp from "./stress-app";
 import "./i18n";
-
-function LoadingComponent() {
-  return <div>Loading...</div>;
-}
+import "./index.scss";
 
 // The Suspense component is needed to wait for the languages being loaded in the background
 ReactDOM.render(

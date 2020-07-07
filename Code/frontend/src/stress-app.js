@@ -19,8 +19,11 @@ export default function StressApp() {
       <Route path="/editor">
         <Editor />
       </Route>
-      <Route path="/executor">
+      <Route path="/executor/:testId">
         <PipelineExecutor />
+      </Route>
+      <Route path="*">
+        <div>Unknown route</div>
       </Route>
     </Switch>
   );

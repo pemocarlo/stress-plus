@@ -1,5 +1,10 @@
-export default function sendErrorResponse(res, status, message) {
-  res.json(getErrorObject(status, message));
+/**
+ * @param {import("express").Response} res response
+ * @param {number} status http status code
+ * @param {string} message custom error message
+ */
+export function sendErrorResponse(res, status, message) {
+  res.status(status).json(getErrorObject(status, message));
 }
 
 function getErrorObject(status, message) {
