@@ -1,4 +1,4 @@
-# Backend for stress+
+# Stress+ Backend
 
 The backend for stress+ is programmed as a REST API. Its written in JavaScript and uses the [express](http://expressjs.com) web framework.
 
