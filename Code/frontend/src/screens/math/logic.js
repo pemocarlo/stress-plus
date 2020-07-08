@@ -67,11 +67,14 @@ export function mainReducer(state, action) {
         yourScore: Math.floor((state.correctAnswers / (state.totalAnswers + 1)) * 100),
       };
     }
-    case "newQuestion": {
+
+    case "firstQuestion": {
       const finalQuestionTime = new Date();
       finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.seconds);
-      const [expression, result] = mathGenerator(state.difficulty);
-
+      const mathQuestions = mathGenerator(state.difficulty);
+      const expression = mathQuestions[0][0];
+      const result = mathQuestions[0][1];
+      let counter = 1;
       return {
         ...state,
         waiting: false,
@@ -80,6 +83,25 @@ export function mainReducer(state, action) {
         progressPercentage: 0,
         finalQuestionTime: finalQuestionTime,
         result: RESULT_NONE,
+        mathQuestions: mathQuestions,
+        counter: counter,
+      };
+    }
+
+    case "newQuestion": {
+      const finalQuestionTime = new Date();
+      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.seconds);
+      const expression = state.mathQuestions[state.counter][0];
+      const result = state.mathQuestions[state.counter][1];
+      return {
+        ...state,
+        waiting: false,
+        expression: expression,
+        mathResult: result,
+        progressPercentage: 0,
+        finalQuestionTime: finalQuestionTime,
+        result: RESULT_NONE,
+        counter: state.counter + 1,
       };
     }
     case "updateProgressPercentage": {
