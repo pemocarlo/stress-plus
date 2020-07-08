@@ -39,7 +39,7 @@ export default function ArithmeticTest(props) {
 
   //if componnet is loaded start the test by showing the first question
   useEffect(() => {
-    dispatch({type: "newQuestion"});
+    dispatch({type: "firstQuestion"});
   }, []);
 
   // Pushes end of test page when time is over
