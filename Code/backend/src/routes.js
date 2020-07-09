@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 
 import enforceHttps from "./enforce-https";
 import {sendErrorResponse} from "./error-response";
+import statsRoutes from "./stress-test/stats-routes";
 import stressTestRoutes from "./stress-test/stress-test-routes";
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === "development";
@@ -13,6 +14,7 @@ export async function initRoutes(app) {
   }
 
   app.use("/api/stress-test", stressTestRoutes);
+  app.use("/api/stats", statsRoutes);
 
   // eslint-disable-next-line no-unused-vars
   app.use((err, _, res, next) => sendErrorResponse(res, 500, err.message));

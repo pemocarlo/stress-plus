@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useRef} from "react";
+import React, {useEffect, useReducer, useRef, useCallback} from "react";
 import {useTranslation} from "react-i18next";
 
 import Dialpad from "./dialpad/dialpad";
@@ -29,6 +29,27 @@ function displayResult(result, t) {
   }
 }
 
+function getStatisticsRecordTimeout(state) {
+  return {
+    timestamp: new Date(),
+    statisticType: "response",
+    result: "timeout",
+    question: state.expression,
+    expectedAnswer: state.mathResult,
+  };
+}
+
+function getStatisticsRecordUserInput(state, answer) {
+  return {
+    timestamp: new Date(),
+    statisticType: "response",
+    result: answer === state.mathResult ? "correct" : "incorrect",
+    question: state.expression,
+    expectedAnswer: state.mathResult,
+    givenAnswer: answer,
+  };
+}
+
 export default function ArithmeticTest(props) {
   const {t} = useTranslation();
 
@@ -36,6 +57,7 @@ export default function ArithmeticTest(props) {
   const soundCorrectAnswer = useRef(null);
   const soundWrongAnswer = useRef(null);
   const soundBackground = useRef(null);
+  const {onFinished, saveRecord} = props;
 
   //if componnet is loaded start the test by showing the first question
   useEffect(() => {
@@ -45,10 +67,10 @@ export default function ArithmeticTest(props) {
   // Pushes end of test page when time is over
   useEffect(() => {
     const id = setTimeout(() => {
-      props.onFinished();
+      onFinished();
     }, state.testTotalTime * 1000);
     return () => clearTimeout(id);
-  }, [state.testTotalTime, props]);
+  }, [state.testTotalTime, onFinished]);
 
   //Handles the periodic update for the progress bar and fires the timeout action
   useEffect(() => {
@@ -56,6 +78,7 @@ export default function ArithmeticTest(props) {
       return;
     }
     if (state.progressPercentage >= 100) {
+      saveRecord(getStatisticsRecordTimeout(state));
       dispatch({type: "timeout"});
       return;
     }
@@ -64,7 +87,7 @@ export default function ArithmeticTest(props) {
       dispatch({type: "updateProgressPercentage"});
     }, renderStepProgressms);
     return () => clearTimeout(id);
-  }, [state.progressPercentage, state.waiting]);
+  }, [state, saveRecord]);
 
   //Handles the waiting between two math questions
   useEffect(() => {
@@ -114,9 +137,13 @@ export default function ArithmeticTest(props) {
     }
   }, [state.enableSound, state.waiting, state.result, state.isControl]);
 
-  const onButtonClick = (num) => {
-    dispatch({type: "userInput", input: num});
-  };
+  const onButtonClick = useCallback(
+    (num) => {
+      saveRecord(getStatisticsRecordUserInput(state, num));
+      dispatch({type: "userInput", input: num});
+    },
+    [state, saveRecord]
+  );
 
   return (
     <div className="StressApp">

@@ -14,8 +14,9 @@ export function getInitialState(settings) {
     progressPercentage: 0,
     correctAnswers: 0,
     totalAnswers: 0,
+    initialQuestionTime: new Date(),
     finalQuestionTime: 0,
-    seconds: parseInt(settings.answerTimeout),
+    answerTimeout: parseInt(settings.answerTimeout),
     waitTime: parseInt(settings.waitTime),
     averageScore: 70,
     yourScore: 0,
@@ -70,7 +71,7 @@ export function mainReducer(state, action) {
 
     case "firstQuestion": {
       const finalQuestionTime = new Date();
-      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.seconds);
+      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.answerTimeout);
       const mathQuestions = mathGenerator(state.difficulty);
       const expression = mathQuestions[0][0];
       const result = mathQuestions[0][1];
@@ -90,11 +91,12 @@ export function mainReducer(state, action) {
 
     case "newQuestion": {
       const finalQuestionTime = new Date();
-      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.seconds);
+      finalQuestionTime.setSeconds(finalQuestionTime.getSeconds() + state.answerTimeout);
       const expression = state.mathQuestions[state.counter][0];
       const result = state.mathQuestions[state.counter][1];
       return {
         ...state,
+        initialQuestionTime: new Date(),
         waiting: false,
         expression: expression,
         mathResult: result,
@@ -107,7 +109,7 @@ export function mainReducer(state, action) {
     case "updateProgressPercentage": {
       return {
         ...state,
-        progressPercentage: 100 - ((state.finalQuestionTime - new Date()) / (state.seconds * 1000)) * 100,
+        progressPercentage: 100 - ((state.finalQuestionTime - new Date()) / (state.answerTimeout * 1000)) * 100,
       };
     }
     default: {

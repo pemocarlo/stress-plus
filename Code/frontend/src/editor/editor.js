@@ -78,6 +78,21 @@ const newSettings = (id, name, value, setPipeline) => {
   });
 };
 
+// const addTypeCounter = (registry, pipeline) => {
+//   let typeCounter = {};
+
+//   for (const id of Object.keys(registry)) {
+//     Object.assign(typeCounter, {[id]: 0});
+//   }
+
+//   for (const item of pipeline) {
+//     Object.assign(item, {typeCount: typeCounter[item.type]});
+//     typeCounter[item.type] += 1;
+//   }
+//   console.log(typeCounter);
+//   console.log(pipeline);
+// };
+
 export default function Editor() {
   const {t} = useTranslation();
   const [isValid, setIsValid] = useState(true);
