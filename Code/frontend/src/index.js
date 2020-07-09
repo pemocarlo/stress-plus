@@ -1,5 +1,14 @@
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCog, faTrashAlt, faLink, faEdit, faTools, faCopy, faPlay} from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faTrashAlt,
+  faLink,
+  faEdit,
+  faTools,
+  faCopy,
+  faPlay,
+  faClipboardList,
+} from "@fortawesome/free-solid-svg-icons";
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
@@ -23,7 +32,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-library.add(faCog, faTrashAlt, faLink, faEdit, faTools, faCopy, faPlay);
+library.add(faCog, faTrashAlt, faLink, faEdit, faTools, faCopy, faPlay, faClipboardList);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

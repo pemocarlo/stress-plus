@@ -5,11 +5,29 @@
   width: 100vw;
 
   .header {
-    background-color: var(--info);
+    background-color: var(--primary);
+    color: var(--light);
     display: flex;
+    align-items: center;
+    font-size: larger;
+    padding: 8px 0 8px 25px;
 
-    .buttonSurvey {
-      margin: 8px 0;
+    .col-10 {
+      padding: 0;
+      .fa-clipboard-list {
+        margin-right: 5px;
+      }
+    }
+    .col-2 {
+      padding: 0;
+      display: flex;
+      justify-content: flex-end;
+      .buttonSurvey {
+        margin: 0 25px 0 0;
+        background-color: var(--info);
+        color: var(--primary);
+        padding: 4px 10px;
+      }
     }
   }
 
