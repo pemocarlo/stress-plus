@@ -6,6 +6,8 @@ import ErrorComponent from "components/error-component/error-component";
 import LoadingComponent from "components/loading/loading";
 import overlayRegistry from "overlays/overlay-registry";
 import screenRegistry from "screens/screen-registry";
+
+import {useStatsCollector} from "./stats-collector";
 import "./pipeline-executor.scss";
 
 function getScreenComponent(screen) {
@@ -28,28 +30,30 @@ export default function PipelineExecutor() {
   const [screenIndex, setScreenIndex] = useState(0);
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState(null);
-
   const {testId} = useParams();
+  const statsCollector = useStatsCollector(testId);
 
   useEffect(() => {
     axios
       .get(`/api/stress-test/${testId}`)
       .then((response) => {
         setSettings(response.data);
+        statsCollector.current.initStats();
         setError(null);
       })
       .catch((err) => {
         setError(err);
       });
-  }, [testId]);
+  }, [testId, statsCollector]);
 
   const onScreenFinished = useCallback(() => {
     if (settings.screens.length > screenIndex + 1) {
+      statsCollector.current.saveStats(settings.screens[screenIndex].id);
       setScreenIndex((i) => i + 1);
     } else {
       window.location.href = "about:blank";
     }
-  }, [setScreenIndex, screenIndex, settings]);
+  }, [screenIndex, settings, statsCollector]);
 
   if (error !== null) {
     return <ErrorComponent>{error.message}</ErrorComponent>;
@@ -66,7 +70,13 @@ export default function PipelineExecutor() {
 
   return (
     <div className="pipeline-executor">
-      <ScreenComponent key={screenIndex} settings={currentScreen} onFinished={onScreenFinished} />
+      <ScreenComponent
+        key={screenIndex}
+        settings={currentScreen}
+        onFinished={onScreenFinished}
+        saveRecord={statsCollector.current.addRecord}
+      />
+
       {overlays && overlays.map((overlay) => <OverlayContainer key={overlay.id} {...overlay} />)}
     </div>
   );
