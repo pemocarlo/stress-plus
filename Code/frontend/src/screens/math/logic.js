@@ -15,9 +15,9 @@ export function getInitialState(settings) {
     correctAnswers: 0,
     totalAnswers: 0,
     finalQuestionTime: 0,
-    seconds: settings.answerTimeout,
-    waitTime: settings.waitTime,
-    averageScore: 50,
+    seconds: parseInt(settings.answerTimeout),
+    waitTime: parseInt(settings.waitTime),
+    averageScore: 70,
     yourScore: 0,
     waiting: true,
     enableSound: settings.enableSound,
@@ -41,7 +41,7 @@ export function mainReducer(state, action) {
           result: RESULT_CORRECT,
           correctAnswers: state.correctAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
-          averageScore: Math.floor(Math.random() * 50 + 25),
+          averageScore: state.averageScore + Math.exp(-0.075 * state.correctAnswers),
           yourScore: Math.floor(((state.correctAnswers + 1) / (state.totalAnswers + 1)) * 100),
         };
       } else {
@@ -51,7 +51,7 @@ export function mainReducer(state, action) {
           result: RESULT_WRONG,
           incorrectAnswers: state.incorrectAnswers + 1,
           totalAnswers: state.totalAnswers + 1,
-          averageScore: Math.floor(Math.random() * 50 + 25),
+          averageScore: state.averageScore - 1,
           yourScore: Math.floor((state.correctAnswers / (state.totalAnswers + 1)) * 100),
         };
       }
@@ -63,7 +63,7 @@ export function mainReducer(state, action) {
         result: RESULT_TIMEOUT,
         incorrectAnswers: state.incorrectAnswers + 1,
         totalAnswers: state.totalAnswers + 1,
-        averageScore: Math.floor(Math.random() * 50 + 25),
+        averageScore: state.averageScore - 1,
         yourScore: Math.floor((state.correctAnswers / (state.totalAnswers + 1)) * 100),
       };
     }
