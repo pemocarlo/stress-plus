@@ -1,3 +1,5 @@
+import MyChatBot from "./chatbot/chatbot";
+import MyChatBotSettings from "./chatbot/chatbot-settings";
 import DefaultStart from "./default-start/default-start";
 import DefaultStartSettings from "./default-start/default-start-settings";
 import End from "./end/end";
@@ -42,6 +44,15 @@ export default {
       wait_time: 5,
     },
     settingsComponent: WaitingSettings,
+  },
+
+  chatbot: {
+    component: MyChatBot,
+    initialSettings: {
+      messageCount: 1,
+      message1: "Welcome to Stress+",
+    },
+    settingsComponent: MyChatBotSettings,
   },
 
   start: {

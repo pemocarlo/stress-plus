@@ -45,6 +45,11 @@
           "message": "Wait Message",
           "wait_time": "Wait Time (sec)"
         },
+        "chatbot": {
+          "name": "Chatbot",
+          "startTime": "Start Time (sec)",
+          "message_1": "Chat Message"
+        },
         "start": {
           "name": "Start",
           "message": "Welcome Message"
