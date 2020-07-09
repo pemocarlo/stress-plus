@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useCallback} from "react";
 import ChatBot from "react-simple-chatbot";
-import {ThemeProvider} from "styled-components";
-
 import "./chatbot.scss";
+import {ThemeProvider} from "styled-components";
 
 import logo from "./user_avatar.svg";
 
@@ -15,7 +14,7 @@ const config = {
 
 export default function MyChatBot(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [startTime] = useState(props.startTime);
+  const [startTime] = useState(parseInt(props.startTime));
 
   const toggle = useCallback(() => setIsOpen((state) => !state), [setIsOpen]);
 
