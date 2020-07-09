@@ -58,6 +58,11 @@
           "name": "End",
           "message": "End Message",
           "headline": "Test is over!"
+        },
+        "survey": {
+          "name": "Survey",
+          "title": "Webpage",
+          "buttonText": "Button Text"
         }
       }
     },
