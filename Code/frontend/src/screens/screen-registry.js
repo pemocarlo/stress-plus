@@ -8,6 +8,8 @@ import ArithmeticTest from "./math/arithmetic-test";
 import MathSettings from "./math/math-settings";
 import MessageComponent from "./message/message-component";
 import MessageSettings from "./message/message-settings";
+import iFrameSurveySettings from "./survey/survey-settings.js";
+import iFrameSurvey from "./survey/survey.js";
 import WaitingComponent from "./waiting-screen/waiting-component";
 import WaitingSettings from "./waiting-screen/waiting-settings";
 
@@ -69,5 +71,14 @@ export default {
       message: "We will now analyze your results",
     },
     settingsComponent: EndSettings,
+  },
+
+  survey: {
+    component: iFrameSurvey,
+    initialSettings: {
+      title: "https://www.mad.tf.fau.de/teaching/innolab/",
+      buttonText: "Next",
+    },
+    settingsComponent: iFrameSurveySettings,
   },
 };
