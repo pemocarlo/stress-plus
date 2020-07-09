@@ -1,14 +1,10 @@
 .toolbar {
-  margin: 8px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0px var(--info);
   background-color: var(--info);
-
-  display: inline-flex;
-  flex-direction: row;
+  padding: 4px;
 
   .items {
-    padding: 8px;
     display: flex;
   }
 
