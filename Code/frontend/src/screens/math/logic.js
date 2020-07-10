@@ -75,7 +75,7 @@ export function mainReducer(state, action) {
       const mathQuestions = mathGenerator(state.difficulty);
       const expression = mathQuestions[0][0];
       const result = mathQuestions[0][1];
-      let counter = 1;
+      const counter = 1;
       return {
         ...state,
         waiting: false,

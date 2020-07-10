@@ -16,10 +16,10 @@ export default function StressApp() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/editor">
+      <Route exact path={["/editor/:testId", "/editor"]}>
         <Editor />
       </Route>
-      <Route path="/executor/:testId">
+      <Route exact path="/executor/:testId">
         <PipelineExecutor />
       </Route>
       <Route path="*">
