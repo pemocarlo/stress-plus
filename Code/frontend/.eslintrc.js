@@ -50,6 +50,7 @@ module.exports = {
     "no-duplicate-imports": "warn",
     "no-useless-concat": "warn",
     "no-var": "error",
+    "prefer-const": "error",
     "prefer-template": "warn",
 
     "import/newline-after-import": ["warn", {"count": 1}],

@@ -2,7 +2,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {
   faCog,
   faTrashAlt,
-  faLink,
+  faSave,
   faEdit,
   faTools,
   faCopy,
@@ -32,7 +32,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-library.add(faCog, faTrashAlt, faLink, faEdit, faTools, faCopy, faPlay, faClipboardList);
+library.add(faCog, faTrashAlt, faSave, faEdit, faTools, faCopy, faPlay, faClipboardList);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

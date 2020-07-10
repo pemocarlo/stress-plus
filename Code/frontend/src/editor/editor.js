@@ -6,9 +6,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
+import {useParams, useHistory} from "react-router-dom";
 import {v4 as uuid} from "uuid";
 
 import ErrorComponent from "components/error-component/error-component";
+import LoadingComponent from "components/loading/loading";
 import MainLayout from "components/main-layout/main-layout";
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
@@ -78,25 +80,18 @@ const newSettings = (id, name, value, setPipeline) => {
   });
 };
 
-// const addTypeCounter = (registry, pipeline) => {
-//   let typeCounter = {};
-
-//   for (const id of Object.keys(registry)) {
-//     Object.assign(typeCounter, {[id]: 0});
-//   }
-
-//   for (const item of pipeline) {
-//     Object.assign(item, {typeCount: typeCounter[item.type]});
-//     typeCounter[item.type] += 1;
-//   }
-//   console.log(typeCounter);
-//   console.log(pipeline);
-// };
+const getLink = (id) => {
+  return id === null ? "" : `${window.location.protocol}//${window.location.host}/executor/${id}`;
+};
 
 export default function Editor() {
   const {t} = useTranslation();
+  const history = useHistory();
+  const params = useParams();
   const [isValid, setIsValid] = useState(true);
-  const [link, setLink] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [testId, setTestId] = useState(params.testId ?? null);
+  const [isLoading, setIsLoading] = useState(params.testId !== undefined);
   const [error, setError] = useState(null);
   const [pipelineScreen, setPipelineScreen] = useState([]);
   const [pipelineOverlay, setPipelineOverlay] = useState([]);
@@ -104,9 +99,31 @@ export default function Editor() {
   const [toolbarOverlayItems] = useState(() => createToolbarItems(overlayRegistry));
   const formRef = useRef(null);
 
+  //This effect checks if the pipelines are valid and sets the isValid state
   useEffect(() => {
-    setIsValid(formRef.current.checkValidity() && pipelineScreen.length > 0);
-  }, [pipelineScreen, setIsValid]);
+    if (formRef.current) {
+      setIsValid(formRef.current.checkValidity() && pipelineScreen.length > 0);
+    }
+  }, [pipelineScreen, pipelineOverlay]);
+
+  //This effect is responsible for loading a stress test configuration from the backend
+  useEffect(() => {
+    if (!isLoading) {
+      return;
+    }
+    axios
+      .get(`/api/stress-test/${testId}`)
+      .then((response) => {
+        const {screens, overlays} = response.data;
+        setPipelineScreen(screens);
+        setPipelineOverlay(overlays);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setIsLoading(false);
+      });
+  }, [isLoading, testId]);
 
   const onDragEnd = useCallback(
     (result) => {
@@ -142,50 +159,48 @@ export default function Editor() {
         );
       }
     },
-    [setPipelineScreen, setPipelineOverlay, toolbarScreenItems, toolbarOverlayItems]
+    [toolbarScreenItems, toolbarOverlayItems]
   );
 
-  const removeScreenPipelineItem = useCallback(
-    (index) => {
-      setPipelineScreen((pipeline) => remove(pipeline, index));
-    },
-    [setPipelineScreen]
-  );
-
-  const removeOverlayPipelineItem = useCallback(
-    (index) => {
-      setPipelineOverlay((pipeline) => remove(pipeline, index));
-    },
-    [setPipelineOverlay]
-  );
-
-  const onGenerateLink = useCallback(() => {
+  const onSave = useCallback(() => {
     const data = {screens: pipelineScreen, overlays: pipelineOverlay};
-    axios
-      .post("/api/stress-test", data)
-      .then((response) => {
-        const id = response.data._id;
-        setLink(`${window.location.protocol}//${window.location.host}/executor/${id}`);
-        setError(null);
-      })
-      .catch((err) => {
-        setError(err);
-      });
-  }, [pipelineScreen, pipelineOverlay]);
+    setIsSaving(true);
+    if (testId === null) {
+      axios
+        .post("/api/stress-test", data)
+        .then((response) => {
+          setTestId(response.data._id);
+          history.replace(`/editor/${response.data._id}`);
+          setError(null);
+          setIsSaving(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setIsSaving(false);
+        });
+    } else {
+      axios
+        .put(`/api/stress-test/${testId}`, data)
+        .then(() => {
+          setError(null);
+          setIsSaving(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setIsSaving(false);
+        });
+    }
+  }, [pipelineScreen, pipelineOverlay, testId, history]);
 
-  const updateScreenSettings = useCallback(
-    (id, name, value) => {
-      newSettings(id, name, value, setPipelineScreen);
-    },
-    [setPipelineScreen]
-  );
+  const removeScreenPipelineItem = useCallback((idx) => setPipelineScreen((pipeline) => remove(pipeline, idx)), []);
+  const removeOverlayPipelineItem = useCallback((idx) => setPipelineOverlay((pipeline) => remove(pipeline, idx)), []);
 
-  const updateOverlaySettings = useCallback(
-    (id, name, value) => {
-      newSettings(id, name, value, setPipelineOverlay);
-    },
-    [setPipelineOverlay]
-  );
+  const updateScreenSettings = useCallback((id, name, value) => newSettings(id, name, value, setPipelineScreen), []);
+  const updateOverlaySettings = useCallback((id, name, value) => newSettings(id, name, value, setPipelineOverlay), []);
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <MainLayout>
@@ -228,19 +243,19 @@ export default function Editor() {
         </DragDropContext>
         <div className="row">
           <div className="col-3">
-            <Button id="generateLinkButton" onClick={onGenerateLink} disabled={!isValid}>
-              {t("editor.generateLink")}
-              <FontAwesomeIcon icon="link" />
+            <Button id="saveButton" onClick={onSave} disabled={!isValid || isSaving}>
+              {t("editor.saveButton")}
+              <FontAwesomeIcon icon="save" />
             </Button>
-            <CopyToClipboard text={link}>
-              <Button id="copyLinkButton" disabled={link === ""}>
+            <CopyToClipboard text={getLink(testId)}>
+              <Button id="copyLinkButton" disabled={testId === null}>
                 {t("editor.copyLink")}
                 <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
               </Button>
             </CopyToClipboard>
           </div>
           <div className="col-9">
-            <input type="text" value={link} className="link-box" readOnly></input>
+            <input type="text" value={getLink(testId)} className="link-box" readOnly></input>
           </div>
         </div>
         {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}

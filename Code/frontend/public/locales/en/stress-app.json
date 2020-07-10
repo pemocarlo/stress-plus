@@ -24,7 +24,7 @@
   },
   "editor": {
     "title": "Editor",
-    "generateLink": "Generate Link",
+    "saveButton": "Save",
     "copyLink": "Copy Link",
     "screen": {
       "toolbar": "Toolbar Screens",
