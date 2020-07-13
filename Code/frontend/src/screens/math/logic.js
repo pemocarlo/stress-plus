@@ -75,7 +75,6 @@ export function mainReducer(state, action) {
       const mathQuestions = mathGenerator(state.difficulty);
       const expression = mathQuestions[0][0];
       const result = mathQuestions[0][1];
-      const counter = 1;
       return {
         ...state,
         waiting: false,
@@ -85,7 +84,7 @@ export function mainReducer(state, action) {
         finalQuestionTime: finalQuestionTime,
         result: RESULT_NONE,
         mathQuestions: mathQuestions,
-        counter: counter,
+        counter: 1,
       };
     }
 
@@ -103,7 +102,7 @@ export function mainReducer(state, action) {
         progressPercentage: 0,
         finalQuestionTime: finalQuestionTime,
         result: RESULT_NONE,
-        counter: state.counter + 1,
+        counter: (state.counter + 1) % state.mathQuestions.length,
       };
     }
     case "updateProgressPercentage": {
