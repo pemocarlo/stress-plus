@@ -183,7 +183,7 @@ export default function ArithmeticTest(props) {
 
           <div className="col-6">
             <div className="dial">
-              <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} />
+              <Dialpad className={`dialpad`} callback={(c) => onButtonClick(c)} disabled={state.waiting} />
             </div>
           </div>
         </div>
