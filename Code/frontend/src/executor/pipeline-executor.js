@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, {useState, useCallback, useEffect} from "react";
+import React, {useState, useCallback, useEffect, useRef} from "react";
 import {useParams} from "react-router-dom";
 
 import ErrorComponent from "components/error-component/error-component";
 import LoadingComponent from "components/loading/loading";
 import overlayRegistry from "overlays/overlay-registry";
 import screenRegistry from "screens/screen-registry";
+import useInterval from "services/use-interval";
 
 import {useStatsCollector} from "./stats-collector";
 import "./pipeline-executor.scss";
@@ -26,10 +27,19 @@ function getOverlayCssClass(overlay) {
   }
 }
 
+function getRecordCursorPosition(coord) {
+  return {
+    timestamp: new Date(),
+    statisticType: "cursor",
+    position: coord,
+  };
+}
+
 export default function PipelineExecutor() {
   const [screenIndex, setScreenIndex] = useState(0);
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState(null);
+  const cursorCoords = useRef({x: 0, y: 0});
   const {testId} = useParams();
   const statsCollector = useStatsCollector(testId);
 
@@ -45,6 +55,14 @@ export default function PipelineExecutor() {
         setError(err);
       });
   }, [testId, statsCollector]);
+
+  const handler = useCallback(({clientX, clientY}) => {
+    cursorCoords.current = {x: clientX, y: clientY};
+  }, []);
+
+  useInterval(() => {
+    statsCollector.current.addRecord(getRecordCursorPosition(cursorCoords.current));
+  }, 1000);
 
   const onScreenFinished = useCallback(() => {
     if (settings.screens.length > screenIndex + 1) {
@@ -69,7 +87,7 @@ export default function PipelineExecutor() {
   const ScreenComponent = getScreenComponent(currentScreen);
 
   return (
-    <div className="pipeline-executor">
+    <div className="pipeline-executor" onMouseMove={handler}>
       <ScreenComponent
         key={screenIndex}
         settings={currentScreen}
