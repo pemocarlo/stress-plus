@@ -5,11 +5,11 @@ import {asyncHandler} from "../async-handler";
 import {db} from "../database";
 import {sendErrorResponse} from "../error-response";
 
-const COLLECTTION_NAME = "stats";
+export const COLLECTTION_NAME = "stats";
 const router = Router();
 
-router.route("/").post(asyncHandler(saveRecords));
-router.route("/:id").put(asyncHandler(updateRecord)).get(asyncHandler(getRecord));
+router.route("/").post(asyncHandler(saveRecords)).get(asyncHandler(getAllRecords));
+router.route("/:id").put(asyncHandler(updateRecord)).get(asyncHandler(getRecordbyId));
 
 /**
  * @param {import("express").Request} req request
@@ -45,7 +45,7 @@ async function updateRecord(req, res) {
  * @param {import("express").Request} req request
  * @param {import("express").Response} res response
  */
-async function getRecord(req, res) {
+async function getRecordbyId(req, res) {
   if (!ObjectID.isValid(req.params.id)) {
     sendErrorResponse(res, 400, "Invalid id");
     return;
@@ -59,6 +59,16 @@ async function getRecord(req, res) {
     res.attachment("result.json");
     res.json(result);
   }
+}
+
+/**
+ * @param {import("express").Request} req request
+ * @param {import("express").Response} res response
+ */
+async function getAllRecords(req, res) {
+  const result = await db().collection(COLLECTTION_NAME).find().toArray();
+  res.attachment("all-stats.json");
+  res.json(result);
 }
 
 export default router;

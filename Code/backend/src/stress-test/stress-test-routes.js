@@ -5,6 +5,8 @@ import {asyncHandler} from "../async-handler";
 import {db} from "../database";
 import {sendErrorResponse} from "../error-response";
 
+import {COLLECTTION_NAME as STATS_COLLECTTION_NAME} from "./stats-routes";
+
 const COLLECTTION_NAME = "stress-test";
 const router = Router();
 
@@ -15,6 +17,8 @@ router
   .get(asyncHandler(getStressTest))
   .put(asyncHandler(updateStressTest))
   .delete(asyncHandler(deleteStressTest));
+
+router.route("/:id/stats").get(asyncHandler(getTestStats));
 
 /**
  * @param {import("express").Request} req request
@@ -86,6 +90,25 @@ async function deleteStressTest(req, res) {
 async function createStressTest(req, res) {
   const result = await db().collection(COLLECTTION_NAME).insertOne(req.body);
   res.json({_id: result.insertedId});
+}
+
+/**
+ * @param {import("express").Request} req request
+ * @param {import("express").Response} res response
+ */
+async function getTestStats(req, res) {
+  if (!ObjectID.isValid(req.params.id)) {
+    sendErrorResponse(res, 400, "Invalid id");
+    return;
+  }
+
+  const result = await db()
+    .collection(STATS_COLLECTTION_NAME)
+    .find({stressTestId: req.params.id})
+    .toArray();
+
+  res.attachment("all-stats.json");
+  res.json(result);
 }
 
 export default router;
