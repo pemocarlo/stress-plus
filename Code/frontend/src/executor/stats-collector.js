@@ -27,13 +27,16 @@ export function useStatsCollector(testId) {
   }, []);
 
   const saveStats = useCallback(
-    (screenId) => {
+    (screenId, callback) => {
       const statsForScreen = {screenId: screenId, records: records};
       setRecords([]);
-      axios.put(`/api/stats/${statsId}`, statsForScreen).catch((err) => {
-        //TODO: What should we do with an error? Fail whole stress test?
-        console.log(err);
-      });
+      axios
+        .put(`/api/stats/${statsId}`, statsForScreen)
+        .then(callback)
+        .catch((err) => {
+          //TODO: What should we do with an error? Fail whole stress test?
+          console.log(err);
+        });
     },
     [records, statsId]
   );

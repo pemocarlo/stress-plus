@@ -51,7 +51,9 @@ export default function PipelineExecutor() {
       statsCollector.current.saveStats(settings.screens[screenIndex].id);
       setScreenIndex((i) => i + 1);
     } else {
-      window.location.href = "about:blank";
+      statsCollector.current.saveStats(settings.screens[screenIndex].id, () => {
+        window.location.href = "about:blank";
+      });
     }
   }, [screenIndex, settings, statsCollector]);
 
