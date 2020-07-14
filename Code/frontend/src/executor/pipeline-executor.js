@@ -1,6 +1,7 @@
 import axios from "axios";
+import qs from "qs";
 import React, {useState, useCallback, useEffect, useRef} from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import ErrorComponent from "components/error-component/error-component";
 import LoadingComponent from "components/loading/loading";
@@ -10,6 +11,10 @@ import useInterval from "services/use-interval";
 
 import {useStatsCollector} from "./stats-collector";
 import "./pipeline-executor.scss";
+
+function parseQueryString(queryString) {
+  return qs.parse(queryString, {ignoreQueryPrefix: true});
+}
 
 function getScreenComponent(screen) {
   return screenRegistry[screen.type].component;
@@ -40,6 +45,7 @@ export default function PipelineExecutor() {
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState(null);
   const cursorCoords = useRef({x: 0, y: 0});
+  const location = useLocation();
   const {testId} = useParams();
   const statsCollector = useStatsCollector(testId);
 
@@ -48,13 +54,13 @@ export default function PipelineExecutor() {
       .get(`/api/stress-test/${testId}`)
       .then((response) => {
         setSettings(response.data);
-        statsCollector.current.initStats();
+        statsCollector.current.initStats(parseQueryString(location.search));
         setError(null);
       })
       .catch((err) => {
         setError(err);
       });
-  }, [testId, statsCollector]);
+  }, [location, testId, statsCollector]);
 
   const handler = useCallback(({clientX, clientY}) => {
     cursorCoords.current = {x: clientX, y: clientY};

@@ -9,18 +9,23 @@ export function useStatsCollector(testId) {
   // saveStats) via the current property.
   const statsCollector = useRef(null);
 
-  const initStats = useCallback(() => {
-    const info = {stressTestId: testId, startTime: new Date(), screens: []};
-    axios
-      .post("/api/stats", info)
-      .then((response) => {
-        setStatsId(response.data._id);
-      })
-      .catch((err) => {
-        //TODO: What should we do with an error? Fail whole stress test?
-        console.log(err);
-      });
-  }, [testId]);
+  const initStats = useCallback(
+    (participantInfo) => {
+      delete participantInfo._id; //Delete _id property as this is the primary key in MongoDB
+
+      const info = {...participantInfo, stressTestId: testId, startTime: new Date(), screens: []};
+      axios
+        .post("/api/stats", info)
+        .then((response) => {
+          setStatsId(response.data._id);
+        })
+        .catch((err) => {
+          //TODO: What should we do with an error? Fail whole stress test?
+          console.log(err);
+        });
+    },
+    [testId]
+  );
 
   const addRecord = useCallback((newRecord) => {
     setRecords((records) => [...records, newRecord]);
