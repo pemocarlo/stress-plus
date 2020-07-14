@@ -4,7 +4,7 @@ import {terser} from "rollup-plugin-terser";
 
 const dev = process.env.ROLLUP_WATCH === "true";
 
-const myExternals = ["body-parser", "express", "mongodb"];
+const myExternals = ["body-parser", "express", "express-static-gzip", "mongodb"];
 
 export default {
   input: "src/server.js",

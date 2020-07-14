@@ -1,31 +1,19 @@
-# Deploying to Heroku
-Currently this project is setup to be deployed to [Heroku](https://www.heroku.com/home).
+# Deploying
+
+The easiest way to deploy Stress+ is using a Docker container. Do build the Docker image a Dockerfile is present in the root directory. The Dockerfile will build the frontend and configure the backend to also serve the frontend. By default the backend will listen on Port 80. If you want to change the port set the `PORT` environment variable. The backend requires a running MongoDB database, therefore set the `MONGODB_URI` environment variable. The value should have the following schema `mongodb://<username>:<password>@<host>:<port>/<database-name>`.
+
+## Deploying to [Heroku](https://www.heroku.com/home)
+Deploying to Heroku is supported out of the box. It is configured in the `heroku.yml` file and also uses the above mentioned Dockerfile.
 To deploy to Heroku the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) must be installed and you must have an account for Heroku.
-Unfortunatly Heroku has no monorepo support out of the box, as one deployment is linked to one heroku git repository. By default heroku provides a new git remote to which you can push your code and then it will start to deploy a new version of your app. The current setup uses two separate heroku apps (one for the frontend and one for the backend). Therefore we have two new git remotes `heroku-frontend` and `heroku-backend` to which we must push in order to start the respective deployment.
+When creating a Heroku App, a new git remote `heroku` is added to which you can push your code and then Heroku will start to deploy the new version of your app.
 
-All following commands assume you have installed the Heroku CLI and have logged in successfully with `heroku login`. Note as we have multiple heroku apps we always need to specify the app name with the `-a app-name` option.
-
-## Frontend
-The frontend uses the default Heroku Stack with two [buildpacks](https://devcenter.heroku.com/articles/buildpacks) to simplify the deployment.
+All following commands assume you have installed the Heroku CLI and have logged in successfully with `heroku login`.
 
 ### Setup
-- `heroku create --remote heroku-frontend --region eu stress-plus` Create a new heroku app with the name `stress-plus`
-- `heroku buildpacks:add -a stress-plus --index 1 https://github.com/lstoll/heroku-buildpack-monorepo.git` Add a buildpack to support monorepo
-- `heroku buildpacks:add -a stress-plus--index 2 mars/create-react-app` Add a buildpack to deploy a create-react-app
-- `heroku config:set -a stress-plus APP_BASE=Code/frontend/` Tell the heroku-buildpack-monorepo where the frontend code is
-- `heroku config:set -a stress-plus API_URL=https://stress-plus-backend.herokuapp.com` Tell the frontend reverse proxy where to forward the api calls to
-
-### Deploy
-To deploy your code from master branch run `git push heroku-frontend master`. If you want to deploy the branch `branch-name`, run `git push heroku-frontend branch-name:master`
-
-## Backend
-The backend uses the Heroku container stack to deploy a docker container. Here the `heroku.yml` file specifies the Dockerfile from which the container is creates.
-
-### Setup
-- `heroku create --remote heroku-frontend --region eu --stack container stress-plus-backend` Create a new heroku app with the name `stress-plus-backend`
-- `heroku addons:create mongolab:sandbox -a stress-plus-backend --name database-name` Add a MongoDB database with name `database-name` to the backend
-- The MongoDB URI to connect to the database using a driver is automatically added in the Config Var `MONGODB_URI` to the Heroku backend app.
+- `heroku create --region eu --stack container stress-plus` Create a new heroku app with the name `stress-plus`
+- `heroku addons:create mongolab:sandbox -a stress-plus --name database-name` Add a MongoDB database with name `database-name` to the `stress-plus` App. This command will automatically set the environment variable `MONGODB_URI` on the `stress-plus` App.
 - For local development the `MONGODB_URI` must be set manually in the `.env` or `.env.local` file. The `.env` file is commited to git therefore do not specifiy the production database here. But you can create a second database with the command above and use it for development. 
+- The `PORT` environment variable is set by Heroku automatically
 
 ### Deploy
-To deploy your code from master branch run `git push heroku-backend master`. If you want to deploy the branch `branch-name`, run `git push heroku-backend branch-name:master`
+To deploy your code from master branch run `git push heroku master`. If you want to deploy from the branch `branch-name`, run `git push heroku branch-name:master`
