@@ -259,6 +259,9 @@ export default function Editor() {
           </div>
         </div>
         {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
+        <Button href={`/api/stress-test/${testId}/stats`} disabled={testId === null}>
+          {t("editor.downloadStatsButton")}
+        </Button>
       </Form>
     </MainLayout>
   );
