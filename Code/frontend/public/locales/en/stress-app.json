@@ -26,6 +26,7 @@
     "title": "Editor",
     "saveButton": "Save",
     "copyLink": "Copy Link",
+    "downloadStatsButton": "Get records for this test",
     "screen": {
       "toolbar": "Toolbar Screens",
       "pipeline": "Pipeline Screens",
