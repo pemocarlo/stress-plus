@@ -10,6 +10,7 @@ import {useParams, useHistory} from "react-router-dom";
 import {v4 as uuid} from "uuid";
 
 import ErrorComponent from "components/error-component/error-component";
+import Help from "components/help/help";
 import LoadingComponent from "components/loading/loading";
 import MainLayout from "components/main-layout/main-layout";
 import Pipeline from "editor/pipeline";
@@ -205,8 +206,13 @@ export default function Editor() {
   return (
     <MainLayout>
       <div id="editor-header">
-        <FontAwesomeIcon icon="edit" />
-        {t("editor.title")}
+        <div className="col-2">
+          <FontAwesomeIcon icon="edit" />
+          {t("editor.title")}
+        </div>
+        <div className="col-10">
+          <Help></Help>
+        </div>
       </div>
       <Form className="container-fluid" id="editor-content" ref={formRef}>
         <DragDropContext onDragEnd={onDragEnd}>

@@ -8,6 +8,8 @@ import {
   faCopy,
   faPlay,
   faClipboardList,
+  faQuestion,
+  faLink,
 } from "@fortawesome/free-solid-svg-icons";
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
@@ -32,7 +34,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-library.add(faCog, faTrashAlt, faSave, faEdit, faTools, faCopy, faPlay, faClipboardList);
+library.add(faCog, faTrashAlt, faSave, faEdit, faTools, faCopy, faPlay, faClipboardList, faQuestion, faLink);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
