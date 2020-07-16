@@ -6,6 +6,8 @@ import {initRoutes} from "./routes";
 const PORT = process.env.PORT || 80;
 
 const app = express();
+app.disable("x-powered-by");
+app.set("json spaces", 2); //Enables pretty printing json responses
 
 Promise.all([initDatabase(), initRoutes(app)])
   .then(() => {

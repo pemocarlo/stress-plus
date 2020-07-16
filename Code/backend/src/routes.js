@@ -1,6 +1,7 @@
 import path from "path";
 
 import bodyParser from "body-parser";
+import compression from "compression";
 import staticCompression from "express-static-gzip";
 
 import enforceHttps from "./enforce-https";
@@ -19,6 +20,8 @@ export async function initRoutes(app) {
   if (IS_PRODUCTION) {
     app.use(enforceHttps);
   }
+
+  app.use("/api", compression({level: 2}));
 
   app.use("/api/stress-test", stressTestRoutes);
   app.use("/api/stats", statsRoutes);
@@ -45,4 +48,5 @@ export async function initRoutes(app) {
     })
   );
   app.get("*", (_, res) => res.sendFile(path.resolve(__dirname, "www/index.html")));
+  app.use((_, res) => res.status(404).end());
 }
