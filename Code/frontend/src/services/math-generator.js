@@ -9,7 +9,7 @@ function shuffleArray(array) {
   return array;
 }
 
-export default function mathGenerator(level) {
+export default function mathGenerator() {
   const difficulty0 = [
     ["2-1", 1],
     ["3-0", 3],
@@ -225,22 +225,11 @@ export default function mathGenerator(level) {
     ["1+3*4/6", 3],
   ];
 
-  switch (level) {
-    case 4: {
-      return shuffleArray(difficulty4);
-    }
-    case 3: {
-      return shuffleArray(difficulty3);
-    }
-    case 2: {
-      return shuffleArray(difficulty2);
-    }
-    case 1: {
-      return shuffleArray(difficulty1);
-    }
-    case 0:
-    default: {
-      return shuffleArray(difficulty0);
-    }
-  }
+  return [
+    shuffleArray(difficulty0),
+    shuffleArray(difficulty1),
+    shuffleArray(difficulty2),
+    shuffleArray(difficulty3),
+    shuffleArray(difficulty4),
+  ];
 }
