@@ -1,10 +1,9 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
 
+import IconButton from "components/icon-button/icon-button";
 import "./home.scss";
 
 export default function Home() {
@@ -27,10 +26,9 @@ export default function Home() {
             </Card.Header>
             <Card.Body id="welcomebutton">
               <div className="row">
-                <Button className="btn" onClick={() => history.push("/editor")}>
+                <IconButton endIcon="edit" onClick={() => history.push("/editor")}>
                   {t("home.buttonEditor")}
-                  <FontAwesomeIcon icon="edit" />
-                </Button>
+                </IconButton>
               </div>
             </Card.Body>
           </Card>

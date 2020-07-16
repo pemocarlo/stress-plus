@@ -1,9 +1,8 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {useTranslation} from "react-i18next";
 
+import IconButton from "components/icon-button/icon-button";
 import "./default-start.scss";
 
 export default function DefaultStart(props) {
@@ -30,10 +29,9 @@ export default function DefaultStart(props) {
                 <p className="message">{settings.message}</p>
               </div>
               <div className="row">
-                <Button className="btn" onClick={onFinished}>
+                <IconButton endIcon="play" onClick={onFinished}>
                   {t("home.buttonStart")}
-                  <FontAwesomeIcon icon="play" />
-                </Button>
+                </IconButton>
               </div>
             </Card.Body>
           </Card>

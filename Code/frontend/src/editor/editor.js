@@ -2,7 +2,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, {useState, useCallback, useRef, useEffect} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
@@ -11,6 +10,7 @@ import {v4 as uuid} from "uuid";
 
 import ErrorComponent from "components/error-component/error-component";
 import Help from "components/help/help";
+import IconButton from "components/icon-button/icon-button";
 import LoadingComponent from "components/loading/loading";
 import MainLayout from "components/main-layout/main-layout";
 import Pipeline from "editor/pipeline";
@@ -248,26 +248,31 @@ export default function Editor() {
           </div>
         </DragDropContext>
         <div className="row">
-          <div className="col-3">
-            <Button id="saveButton" onClick={onSave} disabled={!isValid || isSaving}>
+          <div className="col-1">
+            <IconButton startIcon="save" onClick={onSave} disabled={!isValid || isSaving}>
               {t("editor.saveButton")}
-              <FontAwesomeIcon icon="save" />
-            </Button>
+            </IconButton>
+          </div>
+          <div className="col-2">
             <CopyToClipboard text={getLink(testId)}>
-              <Button id="copyLinkButton" disabled={testId === null}>
+              <IconButton startIcon="copy" disabled={testId === null}>
                 {t("editor.copyLink")}
-                <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
-              </Button>
+              </IconButton>
             </CopyToClipboard>
           </div>
+
           <div className="col-9">
             <input type="text" value={getLink(testId)} className="link-box" readOnly></input>
           </div>
         </div>
         {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
-        <Button href={`/api/stress-test/${testId}/stats`} disabled={testId === null}>
-          {t("editor.downloadStatsButton")}
-        </Button>
+        <div className="row">
+          <div className="col-3">
+            <IconButton startIcon="file-download" href={`/api/stress-test/${testId}/stats`} disabled={testId === null}>
+              {t("editor.downloadStatsButton")}
+            </IconButton>
+          </div>
+        </div>
       </Form>
     </MainLayout>
   );
