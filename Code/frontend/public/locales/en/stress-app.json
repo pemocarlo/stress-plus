@@ -102,7 +102,7 @@
     "welcome": "Welcome to ",
     "stress": "stress",
     "tagline": "Push your stress - Push your mind",
-    "buttonEditor": "Go to editor",
+    "buttonManagement": "Go to the management page",
     "buttonStart": "Start"
   },
   "footer": {
@@ -133,5 +133,10 @@
     "download": {
       "title": "Get records for this test", 
       "text": "To download all statistics about the perfomance of the user during the stress test you have to click the download button."}
+  },
+  "management": {
+    "title": "Management",
+    "headline": "Saved Stress Tests",
+    "newButton": "New"
   }
 }

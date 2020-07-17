@@ -76,7 +76,7 @@ function PipelineItem(props) {
         <div className="col-9">{t(`editor.${props.dndType}.items.${props.type}.name`)}</div>
         <div className="col-3">
           <Button className="button" onClick={props.onDelete}>
-            <FontAwesomeIcon icon="trash-alt" />
+            <FontAwesomeIcon icon="trash" />
           </Button>
         </div>
       </Card.Header>

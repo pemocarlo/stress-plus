@@ -26,8 +26,8 @@ export default function Home() {
             </Card.Header>
             <Card.Body id="welcomebutton">
               <div className="row">
-                <IconButton endIcon="edit" onClick={() => history.push("/editor")}>
-                  {t("home.buttonEditor")}
+                <IconButton endIcon="list" onClick={() => history.push("/list")}>
+                  {t("home.buttonManagement")}
                 </IconButton>
               </div>
             </Card.Body>

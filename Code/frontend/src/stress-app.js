@@ -2,6 +2,7 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 
 import Home from "components/home/home";
+import ManagementPage from "components/management-page/management-page";
 import Editor from "editor/editor";
 import PipelineExecutor from "executor/pipeline-executor";
 
@@ -15,6 +16,9 @@ export default function StressApp() {
     <Switch>
       <Route exact path="/">
         <Home />
+      </Route>
+      <Route exact path="/list">
+        <ManagementPage />
       </Route>
       <Route exact path={["/editor/:testId", "/editor"]}>
         <Editor />
