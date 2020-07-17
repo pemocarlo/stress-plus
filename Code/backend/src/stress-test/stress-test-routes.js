@@ -10,7 +10,11 @@ import {COLLECTTION_NAME as STATS_COLLECTTION_NAME} from "./stats-routes";
 const COLLECTTION_NAME = "stress-test";
 const router = Router();
 
-router.route("/").post(asyncHandler(createStressTest)).put(asyncHandler(updateStressTest));
+router
+  .route("/")
+  .get(asyncHandler(getAllStressTest))
+  .post(asyncHandler(createStressTest))
+  .put(asyncHandler(updateStressTest));
 
 router
   .route("/:id")
@@ -108,6 +112,15 @@ async function getTestStats(req, res) {
     .toArray();
 
   res.attachment("all-stats.json");
+  res.json(result);
+}
+
+/**
+ * @param {import("express").Request} req request
+ * @param {import("express").Response} res response
+ */
+async function getAllStressTest(_, res) {
+  const result = await db().collection(COLLECTTION_NAME).find().toArray();
   res.json(result);
 }
 

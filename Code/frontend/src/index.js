@@ -1,17 +1,19 @@
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {
-  faCog,
-  faTrashAlt,
-  faSave,
-  faEdit,
-  faTools,
-  faCopy,
-  faPlay,
   faClipboardList,
-  faQuestion,
-  faLink,
-  faFileDownload,
+  faCog,
+  faCopy,
+  faEdit,
   faEnvelope,
+  faFileDownload,
+  faLink,
+  faList,
+  faPlay,
+  faPlus,
+  faQuestion,
+  faSave,
+  faTools,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
@@ -37,18 +39,20 @@ ReactDOM.render(
 );
 
 library.add(
-  faCog,
-  faTrashAlt,
-  faSave,
-  faEdit,
-  faTools,
-  faCopy,
-  faPlay,
   faClipboardList,
-  faQuestion,
-  faLink,
+  faCog,
+  faCopy,
+  faEdit,
+  faEnvelope,
   faFileDownload,
-  faEnvelope
+  faLink,
+  faList,
+  faPlay,
+  faPlus,
+  faQuestion,
+  faSave,
+  faTools,
+  faTrash
 );
 
 // If you want your app to work offline and load faster, you can change

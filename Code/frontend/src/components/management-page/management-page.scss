@@ -1,0 +1,25 @@
+#management-header {
+  background-color: var(--primary);
+  color: var(--light);
+  font-size: larger;
+  padding: 10px 0 10px 25px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+
+  .fa-list {
+    margin-right: 5px;
+  }
+}
+
+#management-container {
+  .new-button-container {
+    align-self: center;
+  }
+
+  .delete-button {
+    padding: 0;
+    font-size: large;
+    color: var(--primary);
+  }
+}
