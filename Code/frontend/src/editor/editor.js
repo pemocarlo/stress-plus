@@ -13,6 +13,7 @@ import Help from "components/help/help";
 import IconButton from "components/icon-button/icon-button";
 import LoadingComponent from "components/loading/loading";
 import MainLayout from "components/main-layout/main-layout";
+import TextInput from "components/text-input/text-input";
 import Pipeline from "editor/pipeline";
 import Toolbar from "editor/toolbar";
 import overlayRegistry from "overlays/overlay-registry";
@@ -81,8 +82,9 @@ const newSettings = (id, name, value, setPipeline) => {
   });
 };
 
-const getLink = (id) => {
-  return id === null ? "" : `${window.location.protocol}//${window.location.host}/executor/${id}`;
+const getLink = (id, participantId) => {
+  const queryString = participantId !== "" && participantId !== undefined ? `?participantId=${participantId}` : "";
+  return id === null ? "" : `${window.location.protocol}//${window.location.host}/executor/${id}${queryString}`;
 };
 
 export default function Editor() {
@@ -99,6 +101,7 @@ export default function Editor() {
   const [toolbarScreenItems] = useState(() => createToolbarItems(screenRegistry));
   const [toolbarOverlayItems] = useState(() => createToolbarItems(overlayRegistry));
   const formRef = useRef(null);
+  const [participantID, setParticipantID] = useState("");
 
   //This effect checks if the pipelines are valid and sets the isValid state
   useEffect(() => {
@@ -254,7 +257,7 @@ export default function Editor() {
             </IconButton>
           </div>
           <div className="col-2">
-            <CopyToClipboard text={getLink(testId)}>
+            <CopyToClipboard text={getLink(testId, participantID)}>
               <IconButton startIcon="copy" disabled={testId === null}>
                 {t("editor.copyLink")}
               </IconButton>
@@ -262,7 +265,7 @@ export default function Editor() {
           </div>
 
           <div className="col-9">
-            <input type="text" value={getLink(testId)} className="link-box" readOnly></input>
+            <input type="text" value={`${getLink(testId, participantID)}`} className="link-box" readOnly></input>
           </div>
         </div>
         {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
@@ -273,6 +276,13 @@ export default function Editor() {
             </IconButton>
           </div>
         </div>
+        <TextInput
+          name="participantId"
+          label={t("editor.participantIDButton")}
+          value={participantID}
+          onChange={(_, value) => setParticipantID(value)}
+          disabled={testId === null}
+        />
       </Form>
     </MainLayout>
   );

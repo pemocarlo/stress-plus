@@ -27,6 +27,7 @@
     "saveButton": "Save",
     "copyLink": "Copy Link",
     "downloadStatsButton": "Get records for this test",
+    "participantIDButton": "Add participant id",
     "screen": {
       "toolbar": "Toolbar Screens",
       "pipeline": "Pipeline Screens",
@@ -116,22 +117,27 @@
   "help": {
     "buttonHelp": "Help",
     "toolbar": {
-      "title": "Toolbar", 
-      "text": "Inside the toolbar all available screens or overlays are listed. The stress pipelines can be created by dragging and dropping items fro the toolbar to the pipeline."},
+      "title": "Toolbar",
+      "text": "Inside the toolbar all available screens or overlays are listed. The stress pipelines can be created by dragging and dropping items fro the toolbar to the pipeline."
+    },
     "screens": {
-      "title": "Screens", 
-      "text": "Each screen will be displayed fullscreen inside the uses browsers. There are different types of screen available in the toolbar. Each screen has its own settings, which can be adjusted inside the pipeline."},
+      "title": "Screens",
+      "text": "Each screen will be displayed fullscreen inside the uses browsers. There are different types of screen available in the toolbar. Each screen has its own settings, which can be adjusted inside the pipeline."
+    },
     "overlays": {
-      "title": "Overlays", 
-      "text": "Overlays are displayed on top of the current screen. All overlays are displayed simultaneously during the whole stress pipeline execution, therefore they do not have an order. Each overlay has its own settings, which can be adjusted inside the pipeline"},
+      "title": "Overlays",
+      "text": "Overlays are displayed on top of the current screen. All overlays are displayed simultaneously during the whole stress pipeline execution, therefore they do not have an order. Each overlay has its own settings, which can be adjusted inside the pipeline"
+    },
     "pipeline": {
-      "title": "Pipeline", 
-      "text": "The stress pipeline consists of a list of screens that will be displayed successively to the patient. It  can be equipped with overlays that are displayed on top of the current screen. To create it you have to drag an item from the toolbar and drop it into the pipeline. Within each item inside a pipeline the user can adjust the settings of the current item."},
+      "title": "Pipeline",
+      "text": "The stress pipeline consists of a list of screens that will be displayed successively to the patient. It  can be equipped with overlays that are displayed on top of the current screen. To create it you have to drag an item from the toolbar and drop it into the pipeline. Within each item inside a pipeline the user can adjust the settings of the current item."
+    },
     "link": {
-      "title": "Copy Link", 
-      "text": "To use the stress pipeline a link, that contains all information, can be generated. When opening the link, the pipeline Executor will run the stress pipeline."},
+      "title": "Copy Link",
+      "text": "To use the stress pipeline a link, that contains all information, can be generated. When opening the link, the pipeline Executor will run the stress pipeline."
+    },
     "download": {
-      "title": "Get records for this test", 
+      "title": "Get records for this test",
       "text": "To download all statistics about the perfomance of the user during the stress test you have to click the download button."}
   },
   "management": {
