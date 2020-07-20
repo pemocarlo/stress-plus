@@ -11,11 +11,11 @@ export default function SelectInput(props) {
         as="select"
         value={props.value}
         name={props.name}
-        onChange={(e) => props.onChange(props.name, e.target.value)}
+        onChange={(e) => props.onChange(props.name, props.values[e.target.value])}
       >
-        {props.values.map((value) => (
-          <option key={value} value={value}>
-            {value}
+        {props.values.map((value, index) => (
+          <option key={index} value={index}>
+            {value.toString()}
           </option>
         ))}
       </Form.Control>
