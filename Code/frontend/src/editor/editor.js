@@ -251,11 +251,28 @@ export default function Editor() {
           </div>
         </DragDropContext>
         <div className="row">
-          <div className="col-1">
+          <div className="col-2">
             <IconButton startIcon="save" onClick={onSave} disabled={!isValid || isSaving}>
               {t("editor.saveButton")}
             </IconButton>
           </div>
+          <div className="col-10" id="participantID">
+            <TextInput
+              name="participantId"
+              label={
+                <>
+                  <FontAwesomeIcon icon="id-badge" />
+                  {t("editor.participantIDButton")}
+                </>
+              }
+              value={participantID}
+              onChange={(_, value) => setParticipantID(value)}
+              disabled={testId === null}
+            />
+          </div>
+        </div>
+        {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
+        <div className="row">
           <div className="col-2">
             <CopyToClipboard text={getLink(testId, participantID)}>
               <IconButton startIcon="copy" disabled={testId === null}>
@@ -264,11 +281,10 @@ export default function Editor() {
             </CopyToClipboard>
           </div>
 
-          <div className="col-9">
+          <div className="col-10">
             <input type="text" value={`${getLink(testId, participantID)}`} className="link-box" readOnly></input>
           </div>
         </div>
-        {error !== null && <ErrorComponent>{error.message}</ErrorComponent>}
         <div className="row">
           <div className="col-3">
             <IconButton startIcon="file-download" href={`/api/stress-test/${testId}/stats`} disabled={testId === null}>
@@ -276,13 +292,6 @@ export default function Editor() {
             </IconButton>
           </div>
         </div>
-        <TextInput
-          name="participantId"
-          label={t("editor.participantIDButton")}
-          value={participantID}
-          onChange={(_, value) => setParticipantID(value)}
-          disabled={testId === null}
-        />
       </Form>
     </MainLayout>
   );

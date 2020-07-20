@@ -14,6 +14,7 @@ import {
   faSave,
   faTools,
   faTrash,
+  faIdBadge,
 } from "@fortawesome/free-solid-svg-icons";
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
@@ -52,7 +53,8 @@ library.add(
   faQuestion,
   faSave,
   faTools,
-  faTrash
+  faTrash,
+  faIdBadge
 );
 
 // If you want your app to work offline and load faster, you can change
