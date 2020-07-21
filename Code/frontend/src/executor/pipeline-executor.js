@@ -72,10 +72,10 @@ export default function PipelineExecutor() {
 
   const onScreenFinished = useCallback(() => {
     if (settings.screens.length > screenIndex + 1) {
-      statsCollector.current.saveStats(settings.screens[screenIndex].id);
+      statsCollector.current.saveStats(settings.screens[screenIndex]);
       setScreenIndex((i) => i + 1);
     } else {
-      statsCollector.current.saveStats(settings.screens[screenIndex].id, () => {
+      statsCollector.current.saveStats(settings.screens[screenIndex], () => {
         window.location.href = "about:blank";
       });
     }

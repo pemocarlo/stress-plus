@@ -22,10 +22,10 @@ export default function MyChatBot(props) {
     background: "white",
     fontFamily: "'Work Sans', sans-serif",
     headerBgColor: "var(--primary)",
-    headerFontColor: "var(--infoLight)",
+    headerFontColor: "var(--light)",
     botBubbleColor: "var(--secondary)",
-    botFontColor: "var(--infoLight)",
-    userBubbleColor: "var(--infoLight)",
+    botFontColor: "var(--light)",
+    userBubbleColor: "var(--light)",
     userFontColor: "var(--dark)",
   };
 

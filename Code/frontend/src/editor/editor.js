@@ -3,6 +3,8 @@ import axios from "axios";
 import React, {useState, useCallback, useRef, useEffect} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {useTranslation} from "react-i18next";
 import {useParams, useHistory} from "react-router-dom";
@@ -102,6 +104,7 @@ export default function Editor() {
   const [toolbarOverlayItems] = useState(() => createToolbarItems(overlayRegistry));
   const formRef = useRef(null);
   const [participantID, setParticipantID] = useState("");
+  const [testName, setTestName] = useState("Unknown");
 
   //This effect checks if the pipelines are valid and sets the isValid state
   useEffect(() => {
@@ -118,7 +121,8 @@ export default function Editor() {
     axios
       .get(`/api/stress-test/${testId}`)
       .then((response) => {
-        const {screens, overlays} = response.data;
+        const {name, screens, overlays} = response.data;
+        setTestName(name ?? "Unknown");
         setPipelineScreen(screens);
         setPipelineOverlay(overlays);
         setIsLoading(false);
@@ -167,7 +171,7 @@ export default function Editor() {
   );
 
   const onSave = useCallback(() => {
-    const data = {screens: pipelineScreen, overlays: pipelineOverlay};
+    const data = {name: testName === "" ? "Unknown" : testName, screens: pipelineScreen, overlays: pipelineOverlay};
     setIsSaving(true);
     if (testId === null) {
       axios
@@ -194,7 +198,7 @@ export default function Editor() {
           setIsSaving(false);
         });
     }
-  }, [pipelineScreen, pipelineOverlay, testId, history]);
+  }, [pipelineScreen, pipelineOverlay, testId, testName, history]);
 
   const removeScreenPipelineItem = useCallback((idx) => setPipelineScreen((pipeline) => remove(pipeline, idx)), []);
   const removeOverlayPipelineItem = useCallback((idx) => setPipelineOverlay((pipeline) => remove(pipeline, idx)), []);
@@ -208,15 +212,23 @@ export default function Editor() {
 
   return (
     <MainLayout>
-      <div id="editor-header">
-        <div className="col-2">
+      <Navbar bg="primary" variant="dark" id="editor-navbar">
+        <Navbar.Brand>
           <FontAwesomeIcon icon="edit" />
           {t("editor.title")}
-        </div>
-        <div className="col-10">
-          <Help></Help>
-        </div>
-      </div>
+        </Navbar.Brand>
+        <Form inline className="mr-auto text-light">
+          <TextInput
+            name="testName"
+            label={t("editor.testNameInputLabel")}
+            value={testName}
+            onChange={(_, value) => setTestName(value)}
+          />
+        </Form>
+        <Nav>
+          <Help />
+        </Nav>
+      </Navbar>
       <Form className="container-fluid" id="editor-content" ref={formRef}>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="row">
@@ -262,7 +274,7 @@ export default function Editor() {
               label={
                 <>
                   <FontAwesomeIcon icon="id-badge" />
-                  {t("editor.participantIDButton")}
+                  {t("editor.participantIdInputLabel")}
                 </>
               }
               value={participantID}

@@ -52,6 +52,10 @@ module.exports = {
     "no-var": "error",
     "prefer-const": "error",
     "prefer-template": "warn",
+    "no-restricted-imports": ["error", {
+      name: "react-bootstrap", 
+      message: "Please import react-bootstrap components from 'react-bootstrap/<Component>'."
+    }],
 
     "import/newline-after-import": ["warn", {"count": 1}],
     "import/order": ["warn", {
