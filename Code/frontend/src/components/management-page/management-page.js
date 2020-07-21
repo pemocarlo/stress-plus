@@ -46,7 +46,7 @@ export default function ManagementPage() {
           {stressTestConfigs.map((config) => (
             <ListGroup.Item key={config._id} action onClick={() => history.push(`/editor/${config._id}`)}>
               <div className="d-flex flex-row">
-                <span className="flex-grow-1 align-self-center">{config._id}</span>
+                <span className="flex-grow-1 align-self-center">{config.name ?? config._id}</span>
                 <Button as="a" variant="link" className="delete-button" onClick={(e) => onDelete(e, config._id)}>
                   <FontAwesomeIcon icon="trash" />
                 </Button>

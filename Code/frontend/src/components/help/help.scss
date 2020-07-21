@@ -1,22 +1,6 @@
-.buttonHelp {
-  padding: 0;
-  display: inline-flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0 25px 0 0;
-  padding: 4px 10px;
-
+#help-button {
   .fa-question {
     margin-right: 5px;
     font-size: smaller;
-  }
-  .toast {
-    color: var(--primary);
-    margin-left: 4px;
-
-    .toasthead {
-      color: var(--primary);
-      font-weight: bolder;
-    }
   }
 }

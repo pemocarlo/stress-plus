@@ -27,7 +27,8 @@
     "saveButton": "Save settings",
     "copyLink": "Copy test link",
     "downloadStatsButton": "Get records for this test",
-    "participantIDButton": "Add participant ID",
+    "participantIdInputLabel": "Add participant id",
+    "testNameInputLabel": "Test name",
     "screen": {
       "toolbar": "Toolbar Screens",
       "pipeline": "Pipeline Screens",
@@ -116,6 +117,7 @@
   },
   "help": {
     "buttonHelp": "Help",
+    "buttonOk": "Ok",
     "toolbar": {
       "title": "Toolbar",
       "text": "Inside the toolbar all available screens or overlays are listed. The stress pipelines can be created by dragging and dropping items fro the toolbar to the pipeline."

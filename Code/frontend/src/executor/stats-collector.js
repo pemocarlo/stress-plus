@@ -32,8 +32,8 @@ export function useStatsCollector(testId) {
   }, []);
 
   const saveStats = useCallback(
-    (screenId, callback) => {
-      const statsForScreen = {screenId: screenId, records: records};
+    (screen, callback) => {
+      const statsForScreen = {screenId: screen.id, screenType: screen.type, records: records};
       setRecords([]);
       axios
         .put(`/api/stats/${statsId}`, statsForScreen)
