@@ -214,7 +214,7 @@ export default function Editor() {
     <MainLayout>
       <Navbar bg="primary" variant="dark" id="editor-navbar">
         <Navbar.Brand>
-          <FontAwesomeIcon icon="edit" />
+          <FontAwesomeIcon icon="edit" fixedWidth />
           {t("editor.title")}
         </Navbar.Brand>
         <Form inline className="mr-auto text-light">

@@ -1,25 +1,31 @@
-#management-header {
-  background-color: var(--primary);
-  color: var(--light);
-  font-size: larger;
-  padding: 10px 0 10px 25px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-
+#management-navbar {
+  height: 4em;
+  margin-bottom: 25px;
   .fa-list {
     margin-right: 5px;
   }
 }
 
 #management-container {
+  #heading {
+    padding-bottom: 10px;
+  }
+
   .new-button-container {
     align-self: center;
+  }
+
+  .list-group-item:hover {
+    background-color: var(--secondary);
   }
 
   .delete-button {
     padding: 0;
     font-size: large;
     color: var(--primary);
+  }
+
+  .delete-button:hover {
+    font-size: x-large;
   }
 }

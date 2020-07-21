@@ -7,7 +7,17 @@ import {useTranslation} from "react-i18next";
 
 import "./help.scss";
 
-const helpSections = ["toolbar", "screens", "overlays", "pipeline", "link", "download"];
+const helpSections = [
+  "testName",
+  "toolbar",
+  "screens",
+  "overlays",
+  "pipeline",
+  "save",
+  "participantID",
+  "link",
+  "download",
+];
 
 export default function Home() {
   const {t} = useTranslation();
