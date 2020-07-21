@@ -3,6 +3,7 @@ import axios from "axios";
 import React, {useState, useEffect, useCallback} from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import Navbar from "react-bootstrap/Navbar";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
 
@@ -29,13 +30,15 @@ export default function ManagementPage() {
 
   return (
     <MainLayout>
-      <div id="management-header">
-        <FontAwesomeIcon icon="list" />
-        {t("management.title")}
-      </div>
+      <Navbar bg="primary" variant="dark" id="management-navbar">
+        <Navbar.Brand>
+          <FontAwesomeIcon icon="list" fixedWidth />
+          {t("management.title")}
+        </Navbar.Brand>
+      </Navbar>
       <div className="container" id="management-container">
-        <div className="d-flex flex-row">
-          <h1 className="flex-grow-1">{t("management.headline")}</h1>
+        <div className="d-flex flex-row" id="heading">
+          <h2 className="flex-grow-1">{t("management.headline")}</h2>
           <div className="new-button-container">
             <IconButton startIcon="plus" onClick={() => history.push("/editor")}>
               {t("management.newButton")}
