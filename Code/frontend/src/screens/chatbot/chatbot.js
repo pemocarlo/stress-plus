@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React from "react";
 import ChatBot from "react-simple-chatbot";
 import "./chatbot.scss";
 import {ThemeProvider} from "styled-components";
@@ -6,9 +6,8 @@ import {ThemeProvider} from "styled-components";
 import logo from "./user_avatar.svg";
 
 const config = {
-  width: "95%",
-  height: "90%",
-  floating: true,
+  width: "100%",
+  floating: false,
   botAvatar: logo,
 };
 const theme = {
@@ -23,10 +22,6 @@ const theme = {
 };
 
 export default function MyChatBot(props) {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const toggle = useCallback(() => setIsOpen((state) => !state), [setIsOpen]);
-
   const onEnd = () => {
     props.onFinished();
   };
@@ -56,10 +51,10 @@ export default function MyChatBot(props) {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="MyChatBot">
-        <ChatBot steps={steps} {...config} opened={isOpen} toggleFloating={toggle} handleEnd={onEnd} />;
-      </div>
-    </ThemeProvider>
+    <div className="container chatbot-screen">
+      <ThemeProvider theme={theme}>
+        <ChatBot steps={steps} {...config} opened={true} handleEnd={onEnd} />
+      </ThemeProvider>
+    </div>
   );
 }
