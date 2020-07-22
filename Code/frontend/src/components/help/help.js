@@ -50,7 +50,9 @@ export default function Home() {
       </NavDropdown>
 
       <Modal show={showModal} onHide={hideModal}>
-        <Modal.Header closeButton>{t(`help.${currentSection}.title`)}</Modal.Header>
+        <Modal.Header closeButton id="titleModal">
+          {t(`help.${currentSection}.title`)}
+        </Modal.Header>
         <Modal.Body>{t(`help.${currentSection}.text`)}</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={hideModal}>
