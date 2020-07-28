@@ -1,9 +1,11 @@
 \documentclass[12pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
-\newcommand{\reporttitle}{Title of Project}
-\newcommand{\reportauthor}{Name of first student, Name of second student,...}
-\newcommand{\scrummaster}{Name of Scrum master}
-\newcommand{\projectpartner}{Name of partner}
+\newcommand{\reporttitle}{Stress+}
+\newcommand{\reportauthor}{Jonas Schüll}
+\newcommand{\scrummaster}{Michael Nissen, Matthias Zürl}
+\newcommand{\projectpartner}{Lehrstuhl für Gesundheitspsychologie}
 
 % include files that load packages and define macros
 \input{includes} % various packages needed for maths etc.
@@ -14,12 +16,26 @@
 % front page
 \input{titlepage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
-\section{Introduction}
-This is a short introduction to your project.
+\tableofcontents
 
-\include{Student1/Student1}
-\include{Student2/Student2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+\include{content/01-introduction}
+\clearpage
+\include{content/02-architecture}
+\clearpage
+
+\section{Editor}
+
+\section{Executor}
+
+\section{Screens}
+
+\section{Overlays}
+
+\section{Frontend}
+
+\section{Backend}
+
 
 \end{document}
 %%% Local Variables: 
