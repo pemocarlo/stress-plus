@@ -1,0 +1,15 @@
+\section{Overlays}
+\label{sec:overlays}
+
+For easy positioning of the overlays, an overlay can have the optional property \texttt{position} which controls the position of the overlay on the screen.
+
+Overlays must be registered in the overlay registry to be available.
+Following properties must be specified when registering an overlay:
+\begin{itemize}
+  \item The unique name of the overlay
+  \item The React component for displaying the overlay while executing
+  \item The React component for displaying the settings of the overlay inside the editor
+  \item The initial settings of the overlay
+\end{itemize}
+
+When an overlay is displayed during the stress test execution, its React component will receive its settings inside the props.
