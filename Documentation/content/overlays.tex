@@ -1,15 +1,35 @@
 \section{Overlays}
 \label{sec:overlays}
 
+This chapter describes all available screens.
 For easy positioning of the overlays, an overlay can have the optional property \texttt{position} which controls the position of the overlay on the screen.
 
-Overlays must be registered in the overlay registry to be available.
-Following properties must be specified when registering an overlay:
-\begin{itemize}
-  \item The unique name of the overlay
-  \item The React component for displaying the overlay while executing
-  \item The React component for displaying the settings of the overlay inside the editor
-  \item The initial settings of the overlay
-\end{itemize}
+\subsection{Current Time}
+\label{sec:overlays-current-time}
+This overlay just displays the current time with hours, minutes and seconds.
 
-When an overlay is displayed during the stress test execution, its React component will receive its settings inside the props.
+\subsection{Screen Freeze}
+\label{sec:overlays-screen-freeze}
+The screen freeze overlay will block all user input for a configurable amount of time to induce more stress.
+The freeze will start after a configurable amount of time.
+The timer will run as soon as the first screen has started and does not take into account how long a user may wait until he clicks the next button on the \nameref{sec:screens-start} or \nameref{sec:screens-message} screen.
+Therefore it can not be controlled on which screen the freeze happens, if a screen with a next button is in the stress test.
+
+\subsection{Webcam}
+\label{sec:overlays-webcam}
+The Webcam overlay will display the live recordings of the users webcam on the screen.
+To be able to access the webcam the user must give the Stress+ website the permission to do so.
+Some operating systems might also restrict the access to the webcam.
+If the webcam can not be accessed, the stress test will continue without displaying the live recordings of the webcam.
+
+\subsection{Chatbot}
+\label{sec:overlays-chatbot}
+This is an overlay version of the \nameref{sec:screens-chatbot} screen, that can be opened and closed via small button.
+For further details consult the \nameref{sec:screens-chatbot} screen documentation.
+
+
+\subsection{Heartbeat}
+\label{sec:overlays-heartbeat}
+This overlay will display the heartrate next to a heart image with a bumping animation.
+The heartrate is completly faked and will slightly increase over time.
+This overlay can be displayed delayed by specifing a duration in seconds after which it will become visible.

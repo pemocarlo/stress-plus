@@ -1,0 +1,34 @@
+\section{Development}
+\label{sec:development}
+
+\subsection{Adding new Screens}
+\label{sec:development-screens}
+
+Evey screens must be registered in the screen registry to be available.
+Following properties must be specified when registering a screen:
+\begin{itemize}
+  \item The unique name of the screen
+  \item The React component for displaying the screen while executing
+  \item The React component for displaying the settings of the screen inside the editor
+  \item The initial settings of the screen
+\end{itemize}
+
+When a screen is displayed during the stress test execution, its React component will receive two properties. 
+The \texttt{settings} properties will contain the settings.
+The \texttt{onFinished} property is a callback function, which must be called when the current screen is finished and the next screen one should be displayed.
+
+\subsection{Adding new Overlays}
+\label{sec:development-overlays}
+
+For easy positioning of the overlays, an overlay can have the optional property \texttt{position} which controls the position of the overlay on the screen.
+
+Every Overlay must be registered in the overlay registry to be available.
+Following properties must be specified when registering an overlay:
+\begin{itemize}
+  \item The unique name of the overlay
+  \item The React component for displaying the overlay while executing
+  \item The React component for displaying the settings of the overlay inside the editor
+  \item The initial settings of the overlay
+\end{itemize}
+
+When an overlay is displayed during the stress test execution, its React component will receive its settings inside the props.

@@ -1,16 +1,60 @@
 \section{Screens}
 \label{sec:screens}
 
-Screens must be registered in the screen registry to be available.
-Following properties must be specified when registering a screen:
-\begin{itemize}
-  \item The unique name of the screen
-  \item The React component for displaying the screen while executing
-  \item The React component for displaying the settings of the screen inside the editor
-  \item The initial settings of the screen
-\end{itemize}
+This chapter describes all available screens.
 
-When a screen is displayed during the stress test execution, its React component will receive two properties. 
-The \texttt{settings} properties will contain the settings.
-The \texttt{onFinished} property is a callback function, which must be called when the current screen is finished and the next screen one should be displayed.
+\subsection{Math test}
+\label{sec:screens-math-test}
 
+\begin{table}[ht]
+  \begin{tabularx}{\textwidth}{l|l|X}
+    Property & Type & Description \\
+    \hline
+    \texttt{answerTimeout} & \texttt{number} & The duration in seconds for answering one math question \\
+    \texttt{waitTime} & \texttt{number} & The duration inseconds between two math questions \\
+    \texttt{testTotalTime} & \texttt{number} & The total duration of the math test \\
+    \texttt{enableSound} & \texttt{boolean} & Play an anyoing sound during the math test \\
+    \texttt{enableControl} & \texttt{boolean} & Enable control mode \\
+    \texttt{difficulty} & \texttt{number} & The initial difficulty of the math questions (Easy: $0$; Hard: $4$) \\
+  \end{tabularx}
+  \caption{Properties of the Math test screen}
+\end{table}
+
+\subsection{Message}
+\label{sec:screens-message}
+The Message screen shows a simple message to the user.
+The user can go to the next screen by clicking a button on the screen.
+The title, the message and the button text of this screen can be adjusted.
+
+\subsection{Wait Screen}
+\label{sec:screens-wait-screen}
+
+The Wait screen shows a simple message to the user, like the \nameref{sec:screens-message} screen.
+But the user has to wait a specific time until the next screen is displayed.
+The user can not manually go to the next screen.
+The title, the message and the timeout in seconds of this screen can be adjusted.
+
+\subsection{Chatbot}
+\label{sec:screens-chatbot}
+
+\subsection{Start}
+\label{sec:screens-start}
+
+This screen can be used as the first screen.
+It displayes the Stress+ logo and can show a custom message.
+
+\subsection{End}
+\label{sec:screens-end}
+
+This screen can be used as the last screen.
+It displayes the Stress+ logo and can show a custom message.
+
+Note: The end screen has no mechanism to go the next screen if it is placed in the middle of the pipeline.
+If the end screen is not present a blank page will be shown as last screen.
+
+\subsection{Survey}
+\label{sec:screens-survey}
+
+The survey screen can display other websites inside the stress test. 
+This can be usefull to display Google Forms inside a stress test.
+A button will always be displayed on the top of the screen to navigate to the next screen.
