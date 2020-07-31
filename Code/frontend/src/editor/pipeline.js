@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {useTranslation} from "react-i18next";
 
+import IconButton from "components/icon-button/icon-button";
 import overlayRegistry from "overlays/overlay-registry";
 import screenRegistry from "screens/screen-registry";
 
@@ -71,8 +72,8 @@ function PipelineItem(props) {
   const SettingsComponent = getSettingsComponent(props);
 
   return (
-    <Card className="card">
-      <Card.Header className="cardHead-1">
+    <Card>
+      <Card.Header className="pipeline-item-header">
         <div className="col-9">{t(`editor.${props.dndType}.items.${props.type}.name`)}</div>
         <div className="col-3">
           <Button className="button" onClick={props.onDelete}>
@@ -80,17 +81,16 @@ function PipelineItem(props) {
           </Button>
         </div>
       </Card.Header>
-      <Card.Body className="cardBody">
+      <Card.Body className="pipeline-item-body">
         <Accordion defaultActiveKey="0">
-          <Card className="card">
-            <Card.Header className="cardHead">
-              <Accordion.Toggle as={Button} eventKey="1" className="cardLink">
-                Settings
-                <FontAwesomeIcon icon="cog" />
+          <Card>
+            <Card.Header className="settings-button">
+              <Accordion.Toggle as={IconButton} eventKey="1" startIcon="cog">
+                {t("editor.settings")}
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
-              <Card.Body className="cardBodyCollapse">
+              <Card.Body className="settings-body">
                 <SettingsComponent {...props} />
               </Card.Body>
             </Accordion.Collapse>

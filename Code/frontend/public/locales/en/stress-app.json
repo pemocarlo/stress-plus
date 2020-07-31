@@ -24,6 +24,7 @@
   },
   "editor": {
     "title": "Editor",
+    "settings": "Settings",
     "saveButton": "Save settings",
     "copyLink": "Copy test link",
     "downloadStatsButton": "Get records for this test",
