@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import ChatBot from "react-simple-chatbot";
 import "./chatbot.scss";
 import {ThemeProvider} from "styled-components";
@@ -21,15 +21,20 @@ const theme = {
   userFontColor: "var(--dark)",
 };
 
-export default function MyChatBot(props) {
-  const onEnd = () => {
-    props.onFinished();
-  };
+export default function MyChatBot({onFinished, saveRecord, settings}) {
+  const onEnd = useCallback(({_, values}) => {
+    saveRecord({
+      timestamp: new Date(),
+      statisticType: "chatbot",
+      answers: values,
+    });
+    setTimeout(onFinished, 10);// Wait so records can be saved
+  }, [onFinished, saveRecord]);
 
-  const messageSteps = [...new Array(parseInt(props.settings.messageCount))].map((_, i) => [
+  const messageSteps = [...new Array(parseInt(settings.messageCount))].map((_, i) => [
     {
       id: `${2 * i + 1}`,
-      message: props.settings[`message${i + 1}`],
+      message: settings[`message${i + 1}`],
       delay: 2000,
       trigger: `${2 * i + 2}`,
     },
@@ -43,8 +48,7 @@ export default function MyChatBot(props) {
   const steps = [
     ...messageSteps.flat().slice(0, -1),
     {
-      id: `${2 * parseInt(props.settings.messageCount)}`,
-      delay: 3000,
+      id: `${2 * parseInt(settings.messageCount)}`,
       options: [{value: "continue", label: "Click to Continue"}],
       end: true,
     },
