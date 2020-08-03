@@ -1,12 +1,12 @@
 \section{Screens}
 \label{sec:screens}
 
-This chapter describes all available screens.
+This chapter describes all the available screens.
 
 \subsection{Math test}
 \label{sec:screens-math-test}
 
-The math test screen is the main stress inducing factor of the stress test.
+The math test screen is the main stress-inducing factor of the stress test.
 The stress is induced by mathematic questions. 
 For each question, the user has only a limited time to answer the question. 
 If the time is over or the has given the wrong answer, a negative feedback message is displayed. 
@@ -14,7 +14,7 @@ If the user has answered the math question correctly a positive feedback message
 The feedback message is visible for a short amount of time. 
 After this short pause, a new question is displayed.
 Math questions are taken out of a pool of 40 arithmetic expressions. 
-Befor every math test, the array of questions is mixed randomly.
+Before every math test, the array of questions is mixed randomly.
 
 \begin{figure}[htb]
   \centering
@@ -24,13 +24,13 @@ Befor every math test, the array of questions is mixed randomly.
 \end{figure}
 
 Figure \ref{fig:screenshot-math-test-screen} shows a screenshot of the math test screen.
-At the top the level bar is displayed, which shows two indicators "You" and "Average".
+At the top, the level bar is displayed, which shows two indicators "You" and "Average".
 The "You" indicator shows the real performance of the participants.
 The "Average" indicator is faked.
 It is increasing if the participant has given a correct answer and is decreasing if the participant has given an incorrect answer.
-Below the math questions the progress bar is displayed.
+Below the math questions, the progress bar is displayed.
 It shows how long the participant has time for the current time.
-The user must give their answers with the dailpad at the right bottom of the screen.
+The user must give their answers with the dail pad at the right bottom of the screen.
 The feedback is given in the blue box on the left of the screen.
 Now all settings of the math screen are described.
 
@@ -41,7 +41,7 @@ Note: users can turn their volume down, so do not rely on the sound to be heard.
 
 \paragraph{Activate Control}
 This option enables the control mode.
-During control mode the level bar and progress bar are hidden.
+During control mode, the level bar and progress bar are hidden.
 
 \paragraph{Total test time}
 The total duration in seconds of the math test.
@@ -55,8 +55,8 @@ The duration in seconds of the short pause after the feedback of the current que
 \paragraph{Difficulty}
 The initial difficulty of the math questions.
 The table \ref{tab:math-test-difficulty} lists all possible difficulty levels.
-The difficulty level is increased one level if the participant has answered three question correctly.
-The level is decreased by one level if the participant has answered three question incorrectly.
+The difficulty level is increased one level if the participant has answered three questions correctly.
+The level is decreased by one level if the participant has answered three questions incorrectly.
 
 \begin{table}[ht]
   \begin{tabularx}{\textwidth}{l|l|l|l}
@@ -89,17 +89,17 @@ The title, the message and the timeout in seconds of this screen can be adjusted
 \subsection{Chatbot}
 \label{sec:screens-chatbot}
 
-This screens provides a very basic chatbot functionality.
+This screen provides a very basic chatbot functionality.
 Stress test creators can define the chat messages the chatbot will show to the participant.
-After the chatbot has send a message to the participant, he can send his answer to the chatbot.
+After the chatbot has sent a message to the participant, he can send his answer to the chatbot.
 After the last message from the chatbot, a "Click to continue" button will be displayed, which will take the participant to the next screen.
-The answer a participant has given, will be added to the statistics of this test execution.
+The answer a participant has given will be added to the statistics of this test execution.
 
 \subsection{Start}
 \label{sec:screens-start}
 
 This screen can be used as the first screen.
-It displayes the Stress+ logo and can show a custom message.
+It displays the Stress+ logo and can show a custom message.
 
 \subsection{End}
 \label{sec:screens-end}
@@ -107,12 +107,12 @@ It displayes the Stress+ logo and can show a custom message.
 This screen can be used as the last screen.
 It displayes the Stress+ logo and can show a custom message.
 
-Note: The end screen has no mechanism to go the next screen. Therefore it should not be placed in the middle of the pipeline.
-If the end screen is not present a blank page will be shown as last screen.
+Note: The end screen has no mechanism to go to the next screen. Therefore it should not be placed in the middle of the pipeline.
+If the end screen is not present a blank page will be shown as the last screen.
 
 \subsection{Survey}
 \label{sec:screens-survey}
 
 The survey screen can display other websites inside the stress test. 
-This can be usefull to display Google Forms inside a stress test.
+This can be useful to display Google Forms inside a stress test.
 A button will always be displayed at the top of the screen to navigate to the next screen.
