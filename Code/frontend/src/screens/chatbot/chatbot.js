@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, {useCallback} from "react";
 import ChatBot from "react-simple-chatbot";
 import "./chatbot.scss";
 import {ThemeProvider} from "styled-components";
@@ -22,14 +22,17 @@ const theme = {
 };
 
 export default function MyChatBot({onFinished, saveRecord, settings}) {
-  const onEnd = useCallback(({_, values}) => {
-    saveRecord({
-      timestamp: new Date(),
-      statisticType: "chatbot",
-      answers: values,
-    });
-    setTimeout(onFinished, 10);// Wait so records can be saved
-  }, [onFinished, saveRecord]);
+  const onEnd = useCallback(
+    ({values}) => {
+      saveRecord({
+        timestamp: new Date(),
+        statisticType: "chatbot",
+        answers: values,
+      });
+      setTimeout(onFinished, 10); // Wait so records can be saved
+    },
+    [onFinished, saveRecord]
+  );
 
   const messageSteps = [...new Array(parseInt(settings.messageCount))].map((_, i) => [
     {
