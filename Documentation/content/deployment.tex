@@ -1,2 +1,28 @@
 \section{Deployment}
 \label{sec:deployment}
+
+The easiest way to deploy Stress+ is using a Docker container.
+To build the docker image a \texttt{Dockerfile} is present in the root directory. 
+The \texttt{Dockerfile} will build the frontend and configure the backend to also serve the frontend. 
+Run the following command in the root directory of this repository to build the docker image with the name \texttt{stress-plus}.
+\begin{verbatim}
+    docker build -t stress-plus .
+\end{verbatim}
+After the docker image is built it can be started with:
+\begin{verbatim}
+    docker run 
+      --detach 
+      --name stress-plus 
+      --publish 80:80 
+      --env MONGODB_URI=<mongodb-uri> 
+      stress-plus
+\end{verbatim}
+Stress+ is now running on port $80$ of the host machine.
+By default the backend will listen on port $80$ of the container, but this can be changed by setting the \texttt{PORT} environment variable.
+The backend requires a running MongoDB database, therefore you must set the \texttt{MONGODB\_URI} environment variable. 
+The value should have the following schema:
+\begin{verbatim}
+    mongodb://<username>:<password>@<host>:<port>/<database-name>
+\end{verbatim}
+
+For more information on how to run docker containers refer to the \href{https://docs.docker.com/engine/reference/commandline/run}{docker documentation}.

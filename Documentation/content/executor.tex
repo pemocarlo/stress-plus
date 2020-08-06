@@ -10,10 +10,10 @@ All Overlays are displayed simultaneously and each overlay's React component get
 
 The executor is also responsible for collecting and saving all records for the statistics.
 The records are batched together for each screen.
-They are all sent together to the server when the screen changes to the next one.
+They are all sent together to the backend when the screen changes to the next one.
 Therefore, records for the end screen will not be sent and saved in the database.
 
 Currently, there are three types of records.
 The math test screen will add records for each answer of the participant.
-The chatbot screen will also add a record containing the messages from the participant.
+The chatbot screen will add a record containing the messages from the participant.
 Thirdly, the mouse cursor position will be added to the records once per second.
