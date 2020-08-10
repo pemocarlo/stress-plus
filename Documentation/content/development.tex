@@ -1,34 +1,179 @@
 \section{Development}
 \label{sec:development}
 
-\subsection{Adding new Screens}
+This section describes how to develop new screen and overlay modules.
+All modules have a unique name, a React component that displays the module during the execution of the stress test and a React component to adjust the settings of the module in the editor. 
+Every module must be registered in the corresponding registry and has its own folder inside the \texttt{src/overlays} or \texttt{src/screens} directory.
+
+\subsection{Screen Component}
 \label{sec:development-screens}
 
-Evey screens must be registered in the screen registry to be available.
-Following properties must be specified when registering a screen:
-\begin{itemize}
-  \item The unique name of the screen
-  \item The React component for displaying the screen while executing
-  \item The React component for displaying the settings of the screen inside the editor
-  \item The initial settings of the screen
-\end{itemize}
+Now, you will learn how to code a screen's main component. 
+This React component is responsible for displaying the screen during the execution of the stress test.
+This component will receive its \texttt{settings} and an \texttt{onFinished} callback inside its props. 
+The \texttt{settings} object contains the settings configured for this screen. 
+The \texttt{onFinished} callback must be called when the screen is finished performing its task, so the pipeline executor can show the next screen. 
+This callback must only be called once. 
+A very simple screen component might look like this:
 
-When a screen is displayed during the stress test execution, its React component will receive two properties. 
-The \texttt{settings} properties will contain the settings.
-The \texttt{onFinished} property is a callback function, which must be called when the current screen is finished and the next screen one should be displayed.
+\begin{verbatim}
+export default function ScreenComponent(props) {
+  const {settings, onFinished} = props;
+  return (<Button onClick={onFinished}>{settings.text}</Button>);
+}
+\end{verbatim}
 
-\subsection{Adding new Overlays}
+\subsection{Overlay Component}
 \label{sec:development-overlays}
+In this section, you will learn how to code an overlay's main component. 
+This React component is responsible for displaying the overlay during the execution of the stress test. 
+It will receive only its settings inside the props. 
+A very simple overlay that displays a message might look like this:
+\begin{verbatim}
+export default function OverlayComponent(props) {
+  return (<div>{props.message}</div>);
+}
+\end{verbatim}
 
-For easy positioning of the overlays, an overlay can have the optional property \texttt{position} which controls the position of the overlay on the screen.
+By default, an overlay is configured to not receive any click events, because the current screen must handle them. 
+If an overlay component wants to receive click events it can enable them by adding the \texttt{pointer-events: all;} CSS property to an overlay HTML element. 
+But be careful to not make the underlying screen unclickable.
 
-Every Overlay must be registered in the overlay registry to be available.
-Following properties must be specified when registering an overlay:
+\subsubsection{Position of overlays}
+Overlays can be positioned on the whole screen. 
+For easier positioning of overlays, overlays can define an optional \texttt{position} property in its settings. 
+This property accepts the following values: 
+\texttt{center}, \texttt{top}, \texttt{bottom}, \texttt{right}, \texttt{left}, \texttt{top-left}, \texttt{top-right}, \texttt{bottom-left}, \texttt{bottom-right}.
+To make the position property adjustable a \nameref{sec:component-overlay-position-input} component exists. 
+Please refer to the \nameref{sec:settings-component} and \nameref{sec:input-components} section for further information.
+
+\subsection{Settings Component}
+\label{sec:settings-component}
+In this section you will learn how to create the settings component for screen and overlay modules.
+The settings component for screen and overlay modules are working the same way. 
+The settings component will receive the following properties in its props.
 \begin{itemize}
-  \item The unique name of the overlay
-  \item The React component for displaying the overlay while executing
-  \item The React component for displaying the settings of the overlay inside the editor
-  \item The initial settings of the overlay
+  \item \texttt{id}: The unique id of this pipeline element
+  \item \texttt{dndType}: The drag and drop type (either \texttt{screen} or \texttt{overlay})
+  \item \texttt{type}: The name of this module
+  \item \texttt{updateSettings} callback: This function must be called to update a settings value. 
+    It takes the id of the pipeline element, the name of the settings value and the new value
+  \item all current settings
 \end{itemize}
 
-When an overlay is displayed during the stress test execution, its React component will receive its settings inside the props.
+There are many predefined input components available. 
+For details about them refer to the \nameref{sec:input-components} section. 
+An example settings component with an number input might look like this:
+\begin{verbatim}
+export default function SettingsComponent(props) {
+  const onChange = 
+    (name, value) => props.updateSettings(props.id, name, value);
+  return (
+    <NumberInput 
+      name="test" 
+      label="..." 
+      value={props.test} 
+      onChange={onChange} 
+    />
+  );
+}
+\end{verbatim}
+
+\subsection{How to register a module}
+Each module must be registered in the corresponding registry so it can be used. 
+Screen modules must be registered in the \texttt{screen-registry.js} file and overlay modules in the \texttt{overlay-registry.js}. 
+Each registry exports a map of modules where the key is the unique module name and the value is the definition of the module. 
+This definition has the following properties:
+\begin{itemize}
+  \item \texttt{component}: The overlay's or screen's main React component
+  \item \texttt{settingsComponent}: The overlay's or screen's settings React component
+  \item \texttt{initialSettings}: An object containing the initial/default settings
+\end{itemize}
+
+Here is an example registry file with one module named \texttt{moduleName}:
+\begin{verbatim}
+export default {
+  moduleName: {
+    component: ModuleMainComponent,
+    initialSettings: {
+      test: "Foo"
+    },
+    settingsComponent: ModuleSettingsComponent,
+  },
+};
+\end{verbatim}
+
+\subsection{Input Components}
+\label{sec:input-components}
+Input component can be used to create settings components for the modules.
+One input component can be used to change one settings property.
+There are some input components already defined and they all have the following properties:
+\begin{itemize}
+  \item \texttt{name}: the name of the settings property this input component controls
+  \item \texttt{value}: the current value of the settings property
+  \item \texttt{onChange}: callback that is called when the value changed. 
+    The callback will be called with two arguments.
+    The first is the name of teh property (passed via the \texttt{name} property) and the second is the new value.
+  \item \texttt{label}: The description of the settings property controlled by this input component.
+\end{itemize}
+
+In the following example for a \nameref{sec:component-number-input}, you can see that the name \texttt{testTotalTime} matches the corresponding setting name read from \texttt{props.testTotalTime}:
+\begin{verbatim}
+<NumberInput
+  name="testTotalTime"
+  label={t("settings.totalTime")}
+  value={props.testTotalTime}
+  onChange={onChange}
+/> 
+\end{verbatim}
+
+\subsubsection*{Input validation}
+To validate the input of the users, validation attributes can be added to the input component. 
+If the value of the input is not valid an error message will be displayed and the input component will get surrounded by a red box. 
+The following validation attributes are available:
+\begin{itemize}
+  \item \texttt{required}: The value can not be empty.
+  \item \texttt{minLength}: Only for text values: The text length must be greater or equal to the attribute's value.
+  \item \texttt{maxLength}: Only for text values: The text length must be lower or equal to the attribute's value.
+  \item \texttt{pattern}: Only for text values: The text must match the given regular expression.
+  \item \texttt{min}: Only for number values: The number must be greater or equal to the attribute's value.
+  \item \texttt{max}: Only for number values: The number must be lower or equal to the attribute's value.
+\end{itemize}
+
+The following example shows the usage of the input validation attributes. 
+This \nameref{sec:component-number-input} can not be empty and only integers between $-5$ and $5$ (both inclusive) are considered as valid.
+Other attributes of the input component are omitted for brevity.
+\begin{verbatim}
+<NumberInput required min={-5} max={5} />
+\end{verbatim}
+
+\subsubsection*{Available input components}
+\paragraph{Checkbox}
+\label{sec:component-checkbox}
+Input component for a boolean value.
+
+\paragraph{MultilineTextInput}
+\label{sec:component-multiline-text-input}
+Input component for a multiline text value. 
+There also exists the \nameref{sec:component-text-input} component which accepts only single line text.
+
+\paragraph{NumberInput}
+\label{sec:component-number-input}
+Input component for an integer value. 
+It will also accept negative integers.
+
+\paragraph{SelectInput}
+\label{sec:component-select-input}
+Input component to select one value from a list of given values. 
+The array of possible values must be passed to the select input via the values property.
+
+\paragraph{TextInput}
+\label{sec:component-text-input}
+Input component for a single-line text value. 
+It will not accept newline characters. 
+There also exists the \nameref{sec:component-multiline-text-input} component, which accepts multiline text values.
+
+\paragraph{OverlayPositionInput}
+\label{sec:component-overlay-position-input}
+Input component to adjust the position property for overlays. 
+This component acts as a \nameref{sec:component-select-input} with the list of position values already configured.
