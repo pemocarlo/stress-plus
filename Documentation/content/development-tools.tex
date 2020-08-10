@@ -1,0 +1,119 @@
+\section{Development Tools}
+\label{sec:development-tools}
+
+This section describes all used third party tools and libraries.
+First all common tools, then the frontend libraries and finally all backend libraries are listed.
+Currently, the project uses the \href{https://mad-srv.informatik.uni-erlangen.de/}{GitLab Server} of the \href{https://www.mad.tf.fau.de/}{MaD Lab}.
+
+\subsection{Common tools}
+
+\paragraph{Git repository}
+Currently, the project uses the \href{https://mad-srv.informatik.uni-erlangen.de/}{GitLab Server} of the \href{https://www.mad.tf.fau.de/}{MaD Lab}.
+
+\paragraph{NodeJS}
+\href{https://nodejs.org}{NodeJS} is a JavaScript runtime that must be installed to develop, test and build the project.
+It is also required for running the backend.
+
+\paragraph{Linter}
+\href{https://eslint.org}{ESLint} statically analyzes our code to find common problems (for example accessing an undefined variable). 
+ESLint is configured with the \texttt{.eslintrc.js} file. 
+More rules can be added to ESLint via plugins. 
+The following plugins are used in the Stress App
+\begin{itemize}
+    \item \href{https://www.npmjs.com/package/eslint-plugin-import}{eslint-plugin-import}: 
+      This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, and prevent issues with misspelling of file paths and import names. 
+      It also enforces the ordering of import statements.
+    \item \href{https://www.npmjs.com/package/eslint-plugin-prettier}{eslint-plugin-prettier}:
+      This plugin runs our \nameref{sec:code-formatter} prettier inside of ESLint. 
+      It also uses the \href{https://www.npmjs.com/package/eslint-config-prettier}{eslint-config-prettier} configuration to disable rules of ESLint which conflict with prettier.
+    \item \href{https://www.npmjs.com/package/eslint-plugin-jsx-a11y}{eslint-plugin-jsx-a11y}: This plugin adds rules for \href{https://reactjs.org/docs/introducing-jsx.html}{React's JSX} syntax.
+    \item \href{https://www.npmjs.com/package/eslint-plugin-react}{eslint-plugin-react}: This plugin adds react specific rules.
+    \item \href{https://www.npmjs.com/package/eslint-plugin-react-hooks}{eslint-plugin-react-hooks}: This plugin enforces React's \href{https://reactjs.org/docs/hooks-rules.html}{Rules of Hooks}.
+\end{itemize}
+
+\paragraph{Code Formatter}
+\label{sec:code-formatter}
+\href{https://prettier.io}{Prettier} is a code formatter to have a consistent code formatting in your code. 
+To format the code run the \texttt{npm run lint-fix} command.
+
+\paragraph{Continous Integration (CI)}
+We are using \href{https://mad-srv.informatik.uni-erlangen.de/help/ci/README.md}{GitLab CI} to run the linter, the tests and the build on every push onto the GitLab Server. 
+The jobs are configured inside the \texttt{.gitlab-ci.yml} file. 
+Every job must have the tag \texttt{docker} to be executed.
+
+\subsection{Frontend libraries}
+
+\paragraph{Frontend Javascript framework}
+The frontend is writting in Javascript and uses the \href{https://reactjs.org}{React} framework.
+The project was initially created with the \href{https://create-react-app.dev}{Create React App} tool.
+
+\paragraph{CSS framework}
+\href{https://getbootstrap.com}{Bootstrap} is used as a CSS library for nice UI Elements. 
+To use the bootstrap components like normal React components the library \href{https://react-bootstrap.github.io}{react-bootstrap} is used.
+
+\paragraph{Router}
+\href{https://reacttraining.com/react-router/web/guides/quick-start}{React-router-dom} is used to provide support for handling different routes in our frontend (e.g. \texttt{/} and \texttt{/editor}).
+
+\paragraph{Icons}
+\href{https://fontawesome.com}{Fontawesome} provides lots of free icons.
+
+\paragraph{HTTP client}
+We use \href{https://github.com/axios/axios}{Axios} as our HTTP client.
+It is used to access our REST Api of the backend, to save and load stress test configurations.
+
+\paragraph{Drag and drop}
+\href{https://github.com/atlassian/react-beautiful-dnd}{react-beautiful-dnd} provides beautiful and accessible drag and drop for lists.
+It is used extensively in our editor.
+
+\paragraph{Translation}
+\href{https://www.i18next.com}{I18next} is an internationalization-framework written in and for JavaScript, which we use to provide translations. 
+The \href{https://react.i18next.com}{react-i18next} library adds React specific components like React Hooks for i18next. 
+Currently, only English is configured as language. 
+The translations are specified inside \texttt{public/locales/en/stress-app.json} and are loaded via HTTP with the \href{https://github.com/i18next/i18next-http-backend}{i18next-http-backend} library.
+
+The following example shows the usage of \texttt{useTranslation()} hook from react-i18next. 
+This hook returns a \texttt{t} function, which takes a translation key as an argument and returns the translation.
+\begin{verbatim}
+import {useTranslation} from "react-i18next";
+function Component() {
+  const {t} = useTranslation();
+  return <span>{t("title")}</span>;
+}
+\end{verbatim}
+
+\paragraph{Copy to clipboard}
+The library \href{https://github.com/nkbt/react-copy-to-clipboard}{react-copy-to-clipboard} is used to easily copy content to the clipboard.
+
+\paragraph{Generating IDs}
+The library \href{https://github.com/uuidjs/uuid}{uuid} is used to create \href{https://www.ietf.org/rfc/rfc4122.txt}{RFC4122} UUIDs. 
+These unique ids are used for identifying each screen and overlay in a stress pipeline.
+
+\paragraph{Tests}
+For frontend tests, we use the tools that are preconfigured by create-react-app. 
+It uses \href{https://jestjs.io/}{jest} as a javascript testing framework and the \href{https://testing-library.com}{testing library} as a testing utility. 
+\href{https://www.npmjs.com/package/@testing-library/react}{@testing-library/react} adds support for testing react components, 
+\href{https://www.npmjs.com/package/@testing-library/jest-dom}{@testing-library/jest-dom} adds custom DOM element matchers for jest and 
+\href{https://www.npmjs.com/package/@testing-library/user-event}{@testing-library/user-event} adds advanced browser interactions such as clicking and typing.
+
+Tests should be placed in the same folder as the file to test and the file extension for tests must be \texttt{.test.js}.
+
+\paragraph{precompress}
+The \href{https://www.npmjs.com/package/precompress}{precompress} tool generates pre-compressed \texttt{.gz} and \texttt{.br} file for static web servers.
+
+\subsection{Backend libraries}
+
+\paragraph{Web framework}
+The backend uses \href{https://expressjs.com}{Express} as the web framework to host the REST Api.
+The REST Api uses JSON to exchange data.
+The \href{https://www.npmjs.com/package/body-parser}{body-parser} library is used parse the JSON body of HTTP requests.
+The \href{https://www.npmjs.com/package/compression}{compression} library is used to add gzip compression to responses to save bandwith.
+To be able to serve the pre-compressed static files of the frontend the \href{https://www.npmjs.com/package/express-static-gzip}{express-static-gzip} library is used.
+
+\paragraph{Database}
+To access the database the official \href{https://www.npmjs.com/package/mongodb}{mongodb} driver for NodeJS is used.
+Also the \href{https://www.npmjs.com/package/mongodb-client-encryption}{mongodb-client-encryption} library must be added.
+
+\paragraph{Bundler}
+The JavaScript module bundler \href{https://rollupjs.org}{rollup} is used to create a single file, that can be executed.
+In development the \href{https://www.npmjs.com/package/@rollup/plugin-run}{@rollup/plugin-run} is used to start a development server.
+In production the \href{https://www.npmjs.com/package/rollup-plugin-terser}{rollup-plugin-terser} is used to execute the JavaScript mangler and compressor \href{https://terser.org}{terser}.
