@@ -18,7 +18,7 @@ It is also required for running the backend.
 \href{https://eslint.org}{ESLint} statically analyzes our code to find common problems (for example accessing an undefined variable). 
 ESLint is configured with the \texttt{.eslintrc.js} file. 
 More rules can be added to ESLint via plugins. 
-The following plugins are used in the Stress App
+The following plugins are used:
 \begin{itemize}
     \item \href{https://www.npmjs.com/package/eslint-plugin-import}{eslint-plugin-import}: 
       This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, and prevent issues with misspelling of file paths and import names. 
@@ -33,7 +33,7 @@ The following plugins are used in the Stress App
 
 \paragraph{Code Formatter}
 \label{sec:code-formatter}
-\href{https://prettier.io}{Prettier} is a code formatter to have a consistent code formatting in your code. 
+\href{https://prettier.io}{Prettier} is used to have a consistent code formatting in your code. 
 To format the code run the \texttt{npm run lint-fix} command.
 
 \paragraph{Continous Integration (CI)}
@@ -59,7 +59,7 @@ To use the bootstrap components like normal React components the library \href{h
 
 \paragraph{HTTP client}
 We use \href{https://github.com/axios/axios}{Axios} as our HTTP client.
-It is used to access our REST Api of the backend, to save and load stress test configurations.
+It is used to access our REST API of the backend, to save and load stress test configurations.
 
 \paragraph{Drag and drop}
 \href{https://github.com/atlassian/react-beautiful-dnd}{react-beautiful-dnd} provides beautiful and accessible drag and drop for lists.
@@ -68,7 +68,7 @@ It is used extensively in our editor.
 \paragraph{Translation}
 \href{https://www.i18next.com}{I18next} is an internationalization-framework written in and for JavaScript, which we use to provide translations. 
 The \href{https://react.i18next.com}{react-i18next} library adds React specific components like React Hooks for i18next. 
-Currently, only English is configured as language. 
+Currently, only English is available as language. 
 The translations are specified inside \texttt{public/locales/en/stress-app.json} and are loaded via HTTP with the \href{https://github.com/i18next/i18next-http-backend}{i18next-http-backend} library.
 
 The following example shows the usage of \texttt{useTranslation()} hook from react-i18next. 
@@ -84,7 +84,7 @@ function Component() {
 \paragraph{Copy to clipboard}
 The library \href{https://github.com/nkbt/react-copy-to-clipboard}{react-copy-to-clipboard} is used to easily copy content to the clipboard.
 
-\paragraph{Generating IDs}
+\paragraph{Generating ids}
 The library \href{https://github.com/uuidjs/uuid}{uuid} is used to create \href{https://www.ietf.org/rfc/rfc4122.txt}{RFC4122} UUIDs. 
 These unique ids are used for identifying each screen and overlay in a stress pipeline.
 
@@ -98,13 +98,13 @@ It uses \href{https://jestjs.io/}{jest} as a javascript testing framework and th
 Tests should be placed in the same folder as the file to test and the file extension for tests must be \texttt{.test.js}.
 
 \paragraph{precompress}
-The \href{https://www.npmjs.com/package/precompress}{precompress} tool generates pre-compressed \texttt{.gz} and \texttt{.br} file for static web servers.
+The \href{https://www.npmjs.com/package/precompress}{precompress} tool generates gzip and brotli compressed file for static web servers.
 
 \subsection{Backend libraries}
 
 \paragraph{Web framework}
-The backend uses \href{https://expressjs.com}{Express} as the web framework to host the REST Api.
-The REST Api uses JSON to exchange data.
+The backend uses \href{https://expressjs.com}{Express} as the web framework for the REST API.
+The REST API uses JSON to exchange data.
 The \href{https://www.npmjs.com/package/body-parser}{body-parser} library is used parse the JSON body of HTTP requests.
 The \href{https://www.npmjs.com/package/compression}{compression} library is used to add gzip compression to responses to save bandwith.
 To be able to serve the pre-compressed static files of the frontend the \href{https://www.npmjs.com/package/express-static-gzip}{express-static-gzip} library is used.

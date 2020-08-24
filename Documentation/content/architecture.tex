@@ -25,12 +25,12 @@ The backend is responsible for saving the stress test configurations and the sta
 Therefore it consists of a REST API, through which the database can be accessed.
 
 \subsection{Frontend}
-The frontend is a Single-page application written in JavaScript with the React framework. 
-The following sections describe the different frontend components in more detail
+The frontend is a single-page application written in JavaScript utilizing the React framework. 
+The following sections describe the different frontend components in more detail.
 
 \subsubsection*{Screen}
 The stress test consists of a list of screens that will be displayed successively to the patient. 
-A screen will be displayed fullscreen inside the uses browsers. 
+A screen will be displayed fullscreen inside the user's browser. 
 Each screen has its own settings, which can be adjusted inside the editor. 
 All available screens can be found in chapter \ref{sec:screens}.
 
@@ -43,21 +43,20 @@ All available overlays can be found in chapter \ref{sec:overlays}.
 \subsubsection*{Management page}
 On the management page, all available stress test are displayed.
 From there you can open a stress test in the editor, delete one or create a new test.
-Further details can be found in chapter \ref{sec:management-page}.
+Further details about the management page can be found in chapter \ref{sec:management-page}.
 
 \subsubsection*{Editor}
 The stress tests can be created and edited in the editor.
 Also, every setting of the screens and overlays can be adjusted within the editor.
-Each stress test has a unique ID that is generated when it is saved for the first time.
-With this ID a link is generated that can be sent to patients so they can execute the stress test.
+Each stress test has a unique id that is generated when it is saved for the first time.
+With this id a link is generated that can be sent to patients so they can execute the stress test.
 From the editor, users can also download all recorded statistics for the current stress test.
-Further details can be found in chapter \ref{sec:editor}.
+Further details about the editor can be found in chapter \ref{sec:editor}.
 
 \subsubsection*{Executor}
-The executor extracts the unique stress test id from the link and loads the stress test configuration from the backend.
-Then the executor will display each screen successively to the patient. 
-All Overlays are displayed simultaneously during the whole stress test run.
-The executor is also responsible to collect records from the screens and persist them in the database.
+The executor is responsible for executing the stress test specified by the link.
+It will display each screen successively to the patient and show all overlays simultaneously during the whole stress test run.
+The executor also collects records from the screens and persist them in the database.
 Further details can be found in chapter \ref{sec:executor}.
 
 \subsection{Backend}
@@ -65,10 +64,10 @@ The backend consists of the Database and the REST API
 
 \subsubsection*{Database}
 To save the stress test configurations and the results of a stress test executions a database is used.
-The data does not have a clear structure, as arbitrary modules can be composed in a stress test.
-Therefore, the document-oriented NO-SQL database MongoDB is used instead of a relational database.
+The data does not have a clear structure, as arbitrary modules can be composed together in a stress test.
+Therefore, the document-oriented NoSQL database MongoDB is used instead of a relational database.
 
 \subsubsection*{REST API}
 The REST API acts as the connection between the frontend and the database.
-The REST API can be accessed via HTTP and uses JSON documents for transferring the data.
-The REST API is written in JavaScript on the NodeJS platform and uses the express HTTP framework.
+It can be accessed via HTTP and uses JSON documents for transferring the data.
+The REST API endpoints are written in JavaScript on the NodeJS platform.

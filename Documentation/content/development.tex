@@ -3,7 +3,7 @@
 
 This section describes how to develop new screen and overlay modules.
 All modules have a unique name, a React component that displays the module during the execution of the stress test and a React component to adjust the settings of the module in the editor. 
-Every module must be registered in the corresponding registry and has its own folder inside the \texttt{src/overlays} or \texttt{src/screens} directory.
+Every module must be registered in the corresponding registry and should have its own folder inside the \texttt{src/overlays} or \texttt{src/screens} directory.
 
 \subsection{Screen Component}
 \label{sec:development-screens}
@@ -37,7 +37,7 @@ export default function OverlayComponent(props) {
 
 By default, an overlay is configured to not receive any click events, because the current screen must handle them. 
 If an overlay component wants to receive click events it can enable them by adding the \texttt{pointer-events: all;} CSS property to an overlay HTML element. 
-But be careful to not make the underlying screen unclickable.
+But be careful as this can make the underlying screen components unclickable.
 
 \subsubsection{Position of overlays}
 Overlays can be positioned on the whole screen. 
@@ -49,7 +49,7 @@ Please refer to the \nameref{sec:settings-component} and \nameref{sec:input-comp
 
 \subsection{Settings Component}
 \label{sec:settings-component}
-In this section you will learn how to create the settings component for screen and overlay modules.
+In this section you will learn how to create the settings React component for screen and overlay modules.
 The settings component for screen and overlay modules are working the same way. 
 The settings component will receive the following properties in its props.
 \begin{itemize}
@@ -113,7 +113,7 @@ There are some input components already defined and they all have the following 
   \item \texttt{value}: the current value of the settings property
   \item \texttt{onChange}: callback that is called when the value changed. 
     The callback will be called with two arguments.
-    The first is the name of teh property (passed via the \texttt{name} property) and the second is the new value.
+    The first is the name of the property (passed via the \texttt{name} property) and the second is the new value.
   \item \texttt{label}: The description of the settings property controlled by this input component.
 \end{itemize}
 
@@ -160,17 +160,17 @@ There also exists the \nameref{sec:component-text-input} component which accepts
 \paragraph{NumberInput}
 \label{sec:component-number-input}
 Input component for an integer value. 
-It will also accept negative integers.
+It also accepts negative integers.
 
 \paragraph{SelectInput}
 \label{sec:component-select-input}
 Input component to select one value from a list of given values. 
-The array of possible values must be passed to the select input via the values property.
+The array of possible values must be passed to the select input via the \texttt{values} property.
 
 \paragraph{TextInput}
 \label{sec:component-text-input}
 Input component for a single-line text value. 
-It will not accept newline characters. 
+It does not accept the newline character. 
 There also exists the \nameref{sec:component-multiline-text-input} component, which accepts multiline text values.
 
 \paragraph{OverlayPositionInput}
