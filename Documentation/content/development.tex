@@ -15,7 +15,7 @@ Run \texttt{npm run start} in the backend directory to start the backend on port
 
 To start the frontend run \texttt{npm run start} in the frontend directory.
 Your browser should now be opened automatically and show the start page of Stress+.
-If thats not happening, navigate to \texttt{localhost:3000} in your browser to open Stress+.
+If that's not happening, navigate to \texttt{localhost:3000} in your browser to open Stress+.
 You can now start developing or play around with Stress+.
 
 \subsection{Screen Component}
@@ -57,7 +57,7 @@ Overlays can be positioned on the whole screen.
 For easier positioning of overlays, overlays can define an optional \texttt{position} property in its settings. 
 This property accepts the following values: 
 \texttt{center}, \texttt{top}, \texttt{bottom}, \texttt{right}, \texttt{left}, \texttt{top-left}, \texttt{top-right}, \texttt{bottom-left}, \texttt{bottom-right}.
-To make the position property adjustable a \nameref{sec:component-overlay-position-input} component exists. 
+To make the position property adjustable an \nameref{sec:component-overlay-position-input} component exists. 
 Please refer to the \nameref{sec:settings-component} and \nameref{sec:input-components} section for further information.
 
 \subsection{Settings Component}
@@ -76,7 +76,7 @@ The settings component will receive the following properties in its props.
 
 There are many predefined input components available. 
 For details about them refer to the \nameref{sec:input-components} section. 
-An example settings component with an number input might look like this:
+An example settings component with a number input might look like this:
 \begin{verbatim}
 export default function SettingsComponent(props) {
   const onChange = 
@@ -142,10 +142,10 @@ In the following example for a \nameref{sec:component-number-input}, you can see
 
 \subsubsection*{Input validation}
 To validate the input of the users, validation attributes can be added to the input component. 
-If the value of the input is not valid an error message will be displayed and the input component will get surrounded by a red box. 
+If the value of the input is not valid, an error message will be displayed and the input component will get surrounded by a red box. 
 The following validation attributes are available:
 \begin{itemize}
-  \item \texttt{required}: The value can not be empty.
+  \item \texttt{required}: The value cannot be empty.
   \item \texttt{minLength}: Only for text values: The text length must be greater or equal to the attribute's value.
   \item \texttt{maxLength}: Only for text values: The text length must be lower or equal to the attribute's value.
   \item \texttt{pattern}: Only for text values: The text must match the given regular expression.
@@ -154,7 +154,7 @@ The following validation attributes are available:
 \end{itemize}
 
 The following example shows the usage of the input validation attributes. 
-This \nameref{sec:component-number-input} can not be empty and only integers between $-5$ and $5$ (both inclusive) are considered as valid.
+This \nameref{sec:component-number-input} cannot be empty and only integers between $-5$ and $5$ (both inclusive) are considered as valid.
 Other attributes of the input component are omitted for brevity.
 \begin{verbatim}
 <NumberInput required min={-5} max={5} />

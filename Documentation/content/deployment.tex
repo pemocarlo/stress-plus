@@ -18,8 +18,8 @@ After the docker image is built it can be started with:
       stress-plus
 \end{verbatim}
 Stress+ is now running on port $80$ of the host machine.
-By default the backend will listen on port $80$ of the container, but this can be changed by setting the \texttt{PORT} environment variable.
-The backend requires a running MongoDB database, therefore you must set the \texttt{MONGODB\_URI} environment variable. 
+By default, the backend will listen on port $80$ of the container, but this can be changed by setting the \texttt{PORT} environment variable.
+Because the backend requires a running MongoDB database, you must set the \texttt{MONGODB\_URI} environment variable. 
 The value should have the following schema:
 \begin{verbatim}
     mongodb://<username>:<password>@<host>:<port>/<database-name>
