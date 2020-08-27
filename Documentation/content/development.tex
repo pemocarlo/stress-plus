@@ -5,6 +5,19 @@ This section describes how to develop new screen and overlay modules.
 All modules have a unique name, a React component that displays the module during the execution of the stress test and a React component to adjust the settings of the module in the editor. 
 Every module must be registered in the corresponding registry and should have its own folder inside the \texttt{src/overlays} or \texttt{src/screens} directory.
 
+\subsection{Setup development environment}
+Both backend and frontend can be started on your local machine in development mode.
+Before starting them, make sure that you have installed \href{https://nodejs.org}{NodeJS} and have executed \texttt{npm install} in the \texttt{Code/frontend} and the \texttt{Code/backend} directory.
+
+In development mode the backend uses the MongoDB database referenced by the \texttt{MONGODB\_URI} variable in the \texttt{.env} file in the backend directory.
+Please make sure this database is up and running or change the variable to a running MongoDB database.
+Run \texttt{npm run start} in the backend directory to start the backend on port $4000$.
+
+To start the frontend run \texttt{npm run start} in the frontend directory.
+Your browser should now be opened automatically and show the start page of Stress+.
+If thats not happening, navigate to \texttt{localhost:3000} in your browser to open Stress+.
+You can now start developing or play around with Stress+.
+
 \subsection{Screen Component}
 \label{sec:development-screens}
 
@@ -39,7 +52,7 @@ By default, an overlay is configured to not receive any click events, because th
 If an overlay component wants to receive click events it can enable them by adding the \texttt{pointer-events: all;} CSS property to an overlay HTML element. 
 But be careful as this can make the underlying screen components unclickable.
 
-\subsubsection{Position of overlays}
+\subsubsection*{Position of overlays}
 Overlays can be positioned on the whole screen. 
 For easier positioning of overlays, overlays can define an optional \texttt{position} property in its settings. 
 This property accepts the following values: 
