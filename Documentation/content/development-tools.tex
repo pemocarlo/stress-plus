@@ -21,11 +21,11 @@ More rules can be added to ESLint via plugins.
 The following plugins are used:
 \begin{itemize}
     \item \href{https://www.npmjs.com/package/eslint-plugin-import}{eslint-plugin-import}: 
-      This plugin intends to support linting of ES2015+ (ES6+) import/export syntax and prevent issues with misspelling of file paths and import names. 
+      This plugin intends to support linting of the import/export syntax and prevent issues with misspelling of file paths and import names. 
       It also enforces the ordering of import statements.
     \item \href{https://www.npmjs.com/package/eslint-plugin-prettier}{eslint-plugin-prettier}:
       This plugin runs our \nameref{sec:code-formatter} prettier inside of ESLint. 
-      It also uses the \href{https://www.npmjs.com/package/eslint-config-prettier}{eslint-config-prettier} configuration to disable rules of ESLint which conflict with prettier.
+      It uses the \href{https://www.npmjs.com/package/eslint-config-prettier}{eslint-config-prettier} configuration to disable rules of ESLint which conflict with prettier.
     \item \href{https://www.npmjs.com/package/eslint-plugin-jsx-a11y}{eslint-plugin-jsx-a11y}: This plugin adds rules for \href{https://reactjs.org/docs/introducing-jsx.html}{React's JSX} syntax.
     \item \href{https://www.npmjs.com/package/eslint-plugin-react}{eslint-plugin-react}: This plugin adds react specific rules.
     \item \href{https://www.npmjs.com/package/eslint-plugin-react-hooks}{eslint-plugin-react-hooks}: This plugin enforces React's \href{https://reactjs.org/docs/hooks-rules.html}{Rules of Hooks}.
@@ -38,8 +38,7 @@ To format the code run the \texttt{npm run lint-fix} command.
 
 \paragraph{Continous Integration (CI)}
 We are using \href{https://mad-srv.informatik.uni-erlangen.de/help/ci/README.md}{GitLab CI} to run the linter, the tests and the build on every push onto the GitLab Server. 
-The jobs are configured inside the \texttt{.gitlab-ci.yml} file. 
-Every job must have the tag \texttt{docker} to be executed.
+The jobs are configured inside the \texttt{.gitlab-ci.yml} file.
 
 \subsection{Frontend libraries}
 
@@ -59,7 +58,7 @@ To use the bootstrap components like normal React components the library \href{h
 
 \paragraph{HTTP client}
 We use \href{https://github.com/axios/axios}{Axios} as our HTTP client.
-It is used to access our REST API of the backend, to save and load stress test configurations.
+It is used to access the backend to save and load stress test configurations.
 
 \paragraph{Drag and drop}
 \href{https://github.com/atlassian/react-beautiful-dnd}{react-beautiful-dnd} provides beautiful and accessible drag and drop for lists.
@@ -86,7 +85,7 @@ The library \href{https://github.com/nkbt/react-copy-to-clipboard}{react-copy-to
 
 \paragraph{Generating ids}
 The library \href{https://github.com/uuidjs/uuid}{uuid} is used to create \href{https://www.ietf.org/rfc/rfc4122.txt}{RFC4122} UUIDs. 
-These unique ids are used for identifying each screen and overlay in a stress pipeline.
+These unique ids are used for identifying screens and overlays in a stress pipeline.
 
 \paragraph{Tests}
 For frontend tests, we use the tools that are preconfigured by create-react-app. 
@@ -110,7 +109,7 @@ The \href{https://www.npmjs.com/package/compression}{compression} library is use
 To be able to serve the pre-compressed static files of the frontend the \href{https://www.npmjs.com/package/express-static-gzip}{express-static-gzip} library is used.
 
 \paragraph{Database}
-To access the database the official \href{https://www.npmjs.com/package/mongodb}{mongodb} driver for NodeJS is used.
+To access the MongoDB database the official \href{https://www.npmjs.com/package/mongodb}{mongodb} driver for NodeJS is used.
 Also the \href{https://www.npmjs.com/package/mongodb-client-encryption}{mongodb-client-encryption} library must be added.
 
 \paragraph{Bundler}
