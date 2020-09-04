@@ -15,7 +15,7 @@ Additionally, a stress test can contain overlays which are displayed on top of t
 \end{figure}
 
 The figure \ref{fig:software-architecture} shows the software architecture of Stress+.
-It is a browser-based application and consists of a frontend and a backend.
+It is a browser-based \mbox{application} and consists of a frontend and a backend.
 The main frontend components of Stress+ are the editor for creating and editing stress tests and the executor for executing the stress test.
 The third frontend component is the management page, on which all available stress tests can be managed.
 To be able to easily add new modules in the future all available screens and overlays are registered in the screen registry and overlay registry. 
@@ -34,13 +34,13 @@ The following sections describe the different frontend components in more detail
 The stress test consists of a list of screens that will be displayed successively to the participant. 
 A screen will be displayed full screen inside the user's browser. 
 Each screen has its own settings, which can be adjusted inside the editor. 
-All available screens can be found in chapter \ref{sec:screens}.
+All available screens are listed in chapter \ref{sec:screens}.
 
 \subsubsection*{Overlay}
 The stress test can be equipped with overlays that are displayed on top of the current screen. 
 Because all overlays are displayed simultaneously during the whole stress pipeline execution, they do not have an order. 
 Each overlay has its own settings, which can be adjusted inside the editor.
-All available overlays can be found in chapter \ref{sec:overlays}.
+All available overlays are listed in chapter \ref{sec:overlays}.
 
 \subsubsection*{Management page}
 On the management page, all available stress tests are displayed.
@@ -51,13 +51,13 @@ Further details about the management page can be found in chapter \ref{sec:manag
 The stress tests can be created and edited in the editor.
 Also, every setting of the screens and overlays can be adjusted within the editor.
 Each stress test has a unique id that is generated when it is saved for the first time.
-With this id a link is generated that can be sent to participants so they can execute the stress test.
+With this id a link is generated that can be used by the participants to execute the stress test.
 From the editor, users can also download all recorded statistics for the current stress test.
-Further details about the editor can be found in chapter \ref{sec:editor}.
+Chapter \ref{sec:editor} presents further details about the editor.
 
 \subsubsection*{Executor}
 The executor is responsible for executing the stress test specified by the link.
-It will display each screen successively to the participant and show all overlays simultaneously during the whole stress test run.
+It will display each screen successively to the participant and show all overlays simultaneously during the whole stress test execution.
 The executor also collects records from the screens and persist them in the database.
 Further details can be found in chapter \ref{sec:executor}.
 
@@ -65,8 +65,8 @@ Further details can be found in chapter \ref{sec:executor}.
 The backend consists of the database and the REST API
 
 \subsubsection*{Database}
-To save the stress test configurations and the results of a stress test executions a database is used.
-The data does not have a clear structure, as arbitrary modules can be composed together in a stress test.
+To save the stress test configurations and the results of stress test executions a database is used.
+The data does not have a fixed structure, as arbitrary modules can be composed together in a stress test.
 Therefore, the document-oriented NoSQL database MongoDB is used instead of a relational database.
 
 \subsubsection*{REST API}

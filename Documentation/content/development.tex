@@ -7,16 +7,16 @@ Every module must be registered in the corresponding registry and should have it
 
 \subsection{Setup development environment}
 Both backend and frontend can be started on your local machine in development mode.
-Before starting them, make sure that you have installed \href{https://nodejs.org}{NodeJS} and have executed \texttt{npm install} in the \texttt{Code/frontend} and the \texttt{Code/backend} directory.
+Before starting them, make sure that you have installed \href{https://nodejs.org}{NodeJS 12} and have executed \texttt{npm install} in the \texttt{Code/frontend} and the \texttt{Code/backend} directory.
 
 In development mode the backend uses the MongoDB database referenced by the \texttt{MONGODB\_URI} variable in the \texttt{.env} file in the backend directory.
-Please make sure this database is up and running or change the variable to a running MongoDB database.
+Please make sure this database is up and running or point the variable to a running MongoDB database.
 Run \texttt{npm run start} in the backend directory to start the backend on port $4000$.
 
 To start the frontend run \texttt{npm run start} in the frontend directory.
 Your browser should now be opened automatically and show the start page of Stress+.
 If that's not happening, navigate to \texttt{localhost:3000} in your browser to open Stress+.
-You can now start developing or play around with Stress+.
+You can now start developing or test Stress+.
 
 \subsection{Screen Component}
 \label{sec:development-screens}
@@ -24,7 +24,6 @@ You can now start developing or play around with Stress+.
 Now, you will learn how to code a screen's main component. 
 This React component is responsible for displaying the screen during the execution of the stress test.
 This component will receive its \texttt{settings} and an \texttt{onFinished} callback inside its props. 
-The \texttt{settings} object contains the settings configured for this screen. 
 The \texttt{onFinished} callback must be called when the screen is finished performing its task, so the pipeline executor can show the next screen. 
 This callback must only be called once. 
 A very simple screen component might look like this:
@@ -41,29 +40,29 @@ export default function ScreenComponent(props) {
 In this section, you will learn how to code an overlay's main component. 
 This React component is responsible for displaying the overlay during the execution of the stress test. 
 It will receive only its settings inside the props. 
-A very simple overlay that displays a message might look like this:
+A very simple overlay that displays a message inside a \texttt{<div>} element might look like this:
 \begin{verbatim}
 export default function OverlayComponent(props) {
   return (<div>{props.message}</div>);
 }
 \end{verbatim}
 
-By default, an overlay is configured to not receive any click events, because the current screen must handle them. 
-If an overlay component wants to receive click events it can enable them by adding the \texttt{pointer-events: all;} CSS property to an overlay HTML element. 
+By default, an overlay does not receive any click events, because the current screen must handle them. 
+If an overlay component has to receive click events it can be enabled by adding a \texttt{pointer-events: all;} CSS property to an overlay HTML element. 
 But be careful as this can make the underlying screen components unclickable.
 
 \subsubsection*{Position of overlays}
 Overlays can be positioned on the whole screen. 
-For easier positioning of overlays, overlays can define an optional \texttt{position} property in its settings. 
+For easier positioning of overlays, overlays can define an optional \texttt{position} property. 
 This property accepts the following values: 
 \texttt{center}, \texttt{top}, \texttt{bottom}, \texttt{right}, \texttt{left}, \texttt{top-left}, \texttt{top-right}, \texttt{bottom-left}, \texttt{bottom-right}.
-To make the position property adjustable an \nameref{sec:component-overlay-position-input} component exists. 
+To make the position property adjustable an \texttt{\nameref{sec:component-overlay-position-input}} component exists. 
 Please refer to the \nameref{sec:settings-component} and \nameref{sec:input-components} section for further information.
 
 \subsection{Settings Component}
 \label{sec:settings-component}
 In this section you will learn how to create the settings React component for screen and overlay modules.
-The settings component for screen and overlay modules are working the same way. 
+The settings components for screen and overlay modules are working the same way. 
 The settings component will receive the following properties in its props.
 \begin{itemize}
   \item \texttt{id}: The unique id of this pipeline element
@@ -130,7 +129,7 @@ There are some input components already defined and they all have the following 
   \item \texttt{label}: The description of the settings property controlled by this input component.
 \end{itemize}
 
-In the following example for a \nameref{sec:component-number-input}, you can see that the name \texttt{testTotalTime} matches the corresponding setting name read from \texttt{props.testTotalTime}:
+The following example show the usage of a \nameref{sec:component-number-input}:
 \begin{verbatim}
 <NumberInput
   name="testTotalTime"
@@ -142,7 +141,7 @@ In the following example for a \nameref{sec:component-number-input}, you can see
 
 \subsubsection*{Input validation}
 To validate the input of the users, validation attributes can be added to the input component. 
-If the value of the input is not valid, an error message will be displayed and the input component will get surrounded by a red box. 
+If the value of the input is not valid, an error message will be displayed and the input component will be surrounded by a red box. 
 The following validation attributes are available:
 \begin{itemize}
   \item \texttt{required}: The value cannot be empty.
@@ -165,6 +164,12 @@ Other attributes of the input component are omitted for brevity.
 \label{sec:component-checkbox}
 Input component for a boolean value.
 
+\paragraph{TextInput}
+\label{sec:component-text-input}
+Input component for a single-line text value. 
+It does not accept the newline character. 
+There also exists the \nameref{sec:component-multiline-text-input} component, which accepts multiline text values.
+
 \paragraph{MultilineTextInput}
 \label{sec:component-multiline-text-input}
 Input component for a multiline text value. 
@@ -179,12 +184,6 @@ It also accepts negative integers.
 \label{sec:component-select-input}
 Input component to select one value from a list of given values. 
 The array of possible values must be passed to the select input via the \texttt{values} property.
-
-\paragraph{TextInput}
-\label{sec:component-text-input}
-Input component for a single-line text value. 
-It does not accept the newline character. 
-There also exists the \nameref{sec:component-multiline-text-input} component, which accepts multiline text values.
 
 \paragraph{OverlayPositionInput}
 \label{sec:component-overlay-position-input}
