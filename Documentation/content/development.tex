@@ -23,7 +23,7 @@ You can now start developing or test Stress+.
 
 Now, you will learn how to code a screen's main component. 
 This React component is responsible for displaying the screen during the execution of the stress test.
-This component will receive its \texttt{settings} and an \texttt{onFinished} callback inside its props. 
+This component will receive its \texttt{settings} and an \texttt{onFinished} callback inside its \texttt{props}. 
 The \texttt{onFinished} callback must be called when the screen is finished performing its task, so the pipeline executor can show the next screen. 
 This callback must only be called once. 
 A very simple screen component might look like this:
@@ -53,7 +53,7 @@ But be careful as this can make the underlying screen components unclickable.
 
 \subsubsection*{Position of overlays}
 Overlays can be positioned on the whole screen. 
-For easier positioning of overlays, overlays can define an optional \texttt{position} property. 
+For easier positioning, overlays can define an optional \texttt{position} property. 
 This property accepts the following values: 
 \texttt{center}, \texttt{top}, \texttt{bottom}, \texttt{right}, \texttt{left}, \texttt{top-left}, \texttt{top-right}, \texttt{bottom-left}, \texttt{bottom-right}.
 To make the position property adjustable an \texttt{\nameref{sec:component-overlay-position-input}} component exists. 
@@ -63,7 +63,7 @@ Please refer to the \nameref{sec:settings-component} and \nameref{sec:input-comp
 \label{sec:settings-component}
 In this section you will learn how to create the settings React component for screen and overlay modules.
 The settings components for screen and overlay modules are working the same way. 
-The settings component will receive the following properties in its props.
+The settings component will receive the following properties in its \texttt{props}:
 \begin{itemize}
   \item \texttt{id}: The unique id of this pipeline element
   \item \texttt{dndType}: The drag and drop type (either \texttt{screen} or \texttt{overlay})
