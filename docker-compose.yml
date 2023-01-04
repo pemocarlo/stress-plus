@@ -1,0 +1,30 @@
+services:
+  stressplus:
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    # image: "stressplus"
+    container_name: stressplusapp
+    hostname: stressplus
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - 8083:$PORT
+    environment:
+      - PORT=$PORT
+      - MONGODB_URI=$MONGODB_URI
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - './data/db:/data/db'
+    restart: "unless-stopped"
+
+# networks:
+#   default:
+#     name: stress
