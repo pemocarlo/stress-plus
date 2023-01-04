@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import staticCompression from "express-static-gzip";
 
-import enforceHttps from "./enforce-https";
+// import enforceHttps from "./enforce-https";
 import {sendErrorResponse} from "./error-response";
 import securityHeaders from "./security-headers";
 import statsRoutes from "./stress-test/stats-routes";
@@ -17,9 +17,9 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
  */
 export async function initRoutes(app) {
   app.use(bodyParser.json());
-  if (IS_PRODUCTION) {
-    app.use(enforceHttps);
-  }
+  // if (IS_PRODUCTION) {
+  //   app.use(enforceHttps);
+  // }
 
   app.use("/api", compression({level: 2}));
 
